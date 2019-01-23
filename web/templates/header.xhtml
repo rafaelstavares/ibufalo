@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:sec="http://www.springframework.org/security/facelets/tags">
@@ -21,9 +21,15 @@
                     <li class="logo hidden-xs">
                         <a href="../publico/principal.jsf">iBufalo - Gerenciamento de Bubalino</a>
                     </li>
-
+                
                     <li class="pull-right">
                         <ul class="top-menu">
+                            
+                            <li>
+                                <span class="hidden-xs p-static c-white p-20" >Olá #{contextoBean.usuarioLogado.nome}</span>
+                                
+                            </li>
+                            
                             <li id="toggle-width">
                                 <div class="toggle-switch">
                                     <input id="tw-switch" type="checkbox" hidden="hidden"/>
@@ -113,7 +119,7 @@
                                 </div>
                             </li>
                             <li>
-                                <button onclick="location.href='../publico/inicio.jsf'" title="" class="btn bgm-teal btn-icon btn-float waves-effect waves-circle waves-float" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-original-title="Trocar Fazenda"><i class="zmdi zmdi-refresh"></i></button>
+                                <button onclick="location.href = '../publico/inicio.jsf'" title="" class="btn bgm-teal btn-icon btn-float waves-effect waves-circle waves-float" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-original-title="Trocar Fazenda"><i class="zmdi zmdi-refresh"></i></button>
 
                             </li>
 
