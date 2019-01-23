@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../templates/internal3.xhtml">
+    
+        <ui:define name="titulo">
+            Animal
+        </ui:define>    
+     
+        <ui:define name="conteudo">
+            
+                <div class="span12 well">
+	
+                        <p class="lead">Você está gerenciando a fazenda <strong style="color: yellowgreen">#{contextoBean.fazendaAtiva.nome}</strong>.</p>
+			</div>
+         
+            
+			
+           
+             <div class="sortable row-fluid">
+                 <a data-rel="tooltip" title="#{animalBean.totalAnimal()} Animais." class="well span3 top-block" href="../animal/total_animais.jsf">
+                    <span class="icon32 icon-red icon-user"></span>
+                    <div>Total Animais Ativos</div>
+                    <div>#{animalBean.totalAnimal()}</div>
+                    <span class="notification">#{animalBean.totalAnimal()}</span>
+                </a>
+
+                <a data-rel="tooltip" title="#{animalBean.listaNegativa.size()}  Baixas." class="well span3 top-block" href="../animal/total_animais.jsf">
+                    <span class="icon32 active icon-user"></span>
+                    <div>Total de baixas</div>
+                    <div>#{animalBean.listaNegativa.size()}</div>
+                    <span class="notification green">#{animalBean.listaNegativa.size()}</span>
+                </a>
+<!-- 
+                <a data-rel="tooltip" title="34 não vacinadas." class="well span3 top-block" href="#">
+                    <span class="icon32 icon-color icon-cart"></span>
+                    <div>Vacina Total</div>
+                    <div>13320</div>
+                    <span class="notification yellow">34</span>
+                </a>
+
+                <a data-rel="tooltip" title="12 novas mensagens" class="well span3 top-block" href="#">
+                    <span class="icon32 icon-color icon-envelope-closed"></span>
+                    <div>Mensagem</div>
+                    <div>25</div>
+                    <span class="notification red">10</span>
+                </a>--></div>
+                   <div class="row-fluid">
+            <div class="span12 well">
+                <div class="span2"><h:form><p:commandButton ajax="false" action="../baixas/baixas_procura.jsf" icon="ui-icon-plusthick" value="Cadastro" title="Cadastrar Reprodução" /></h:form>
+                </div>
+            </div>
+             </div>
+            <div class="fluid-row">
+            <div class="span12 well" >
+	   <h:form prependId="false">  
+  
+               <p:dataTable id="dataTable" var="car" value="#{animalBean.listaNegativa}"  
+                 paginator="true" rows="10"  
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                 rowsPerPageTemplate="5,10,20" emptyMessage="Nenhum Animal Cadastrado">  
+        <f:facet name="header">  
+            Lista Animais  
+        </f:facet>  
+  
+                      <p:column filterBy="#{car.nome}">  
+            <f:facet name="header">  
+                <h:outputText value="Nome" />  
+            </f:facet>  
+            <h:outputText value="#{car.nome}" />  
+        </p:column>  
+  
+        <p:column>  
+            <f:facet name="header">  
+                <h:outputText value="Peso" />  
+            </f:facet>  
+            <h:outputText value="#{car.peso}" />  
+        </p:column>  
+  
+                      <p:column filterBy="#{car.local.nome}">  
+            <f:facet name="header">  
+                <h:outputText value="Local" />  
+            </f:facet>  
+            <h:outputText value="#{car.local.nome}" />  
+        </p:column>  
+  
+                      <p:column filterBy="#{car.fazenda.nome}">  
+            <f:facet name="header">  
+                <h:outputText value="Fazenda" />  
+            </f:facet>  
+            <h:outputText value="#{car.fazenda.nome}" />  
+        </p:column>  
+    </p:dataTable>  
+  
+</h:form>  
+                       			</div>
+                                </div>
+        </ui:define>
+    </ui:composition>
+</html>

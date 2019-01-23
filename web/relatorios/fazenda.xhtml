@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../templates/internal3.xhtml">
+
+        <ui:define name="titulo">
+            Página em Branco
+        </ui:define>    
+
+        <ui:define name="conteudo">
+                  <div class="span12 well">
+
+                <h1>Bem vindo, <strong style="color: yellowgreen">#{contextoBean.usuarioLogado.nome}</strong>.</h1>
+                <p class="lead">Você está gerenciando a fazenda <strong style="color: yellowgreen">#{contextoBean.fazendaAtiva.nome}</strong>.</p>
+                <p><h:outputText escape="false" value="#{localBean.avisoPirquete()}"/></p>
+            </div>
+
+
+            <div class="sortable row-fluid">
+                <a data-rel="tooltip" title="#{animalBean.totalMacho()} Machos." class="well span3 top-block" href="../animal/total_animais.jsf">
+                    <span class="icon32 icon-red icon-user"></span>
+                    <div>Total Macho</div>
+                    <div>#{animalBean.totalMacho()}</div>
+                    <span class="notification">#{animalBean.totalMacho()}</span>
+                </a>
+
+                <a data-rel="tooltip" title="2 Femeas Ativas." class="well span3 top-block" href="../animal/total_animais.jsf">
+                    <span class="icon32 active icon-user"></span>
+                    <div>Total Femeas</div>
+                    <div>#{animalBean.totalFemea()}</div>
+                    <span class="notification green">2</span>
+                </a>
+
+                <a data-rel="tooltip" title="#{animalBean.listaNegativa.size()} baixas." class="well span3 top-block" href="../baixas/baixas.jsf">
+                    <span class="icon32 icon-color icon-cart"></span>
+                    <div>Baixas Total</div>
+                    <div>#{animalBean.listaNegativa.size()}</div>
+                    <span class="notification yellow">#{animalBean.listaNegativa.size()}</span>
+                </a>
+
+                <a data-rel="tooltip" title="#{reproducaoBean.lista.size()} Concepção" class="well span3 top-block" href="../reproducao/reproducao.jsf">
+                    <span class="icon32 icon-color icon-envelope-closed"></span>
+                    <div>Reprodução</div>
+                    <div>#{reproducaoBean.lista.size()}</div>
+                    <span class="notification red">#{reproducaoBean.lista.size()}</span>
+                </a>
+
+            </div><!--/row-->
+            <div class="row-fluid">
+<div class="span12 well">
+    <div class="span2"><h:form id="fazenda01" target="_blank">
+            <p:commandButton ajax="false" action="#{relatorioBeans.imprimeRelatorio()}" icon="ui-icon-plusthick" value="Todas Fazendas" title="Fazendas cadastradas" />
+        </h:form>
+                </div>
+            </div>
+             </div>
+
+        </ui:define>
+
+
+    </ui:composition>
+</html>

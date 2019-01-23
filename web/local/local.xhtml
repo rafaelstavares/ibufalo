@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/templates/internal3.xhtml">
+        <ui:define name="titulo">
+            Cadastro Piquete
+        </ui:define>    
+ 
+        <ui:define name="conteudo">
+            <div class="span12 well">
+	
+                        <p class="lead">Você está gerenciando a fazenda <strong style="color: yellowgreen">#{contextoBean.fazendaAtiva.nome}</strong>.</p>
+			</div>
+            <p:fieldset legend="Cadastro Piquete" style="padding-right: 55px">
+ 
+           <h:form  prependId="false" acceptcharset="ISO-8859-1">
+            <h:inputHidden value="#{localBean.local.idlocal}"/>
+            <h:inputHidden value="#{localBean.destinoSalvar}"/>
+          <p:messages/>
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+              <p:panelGrid columns="2">
+                   <h:outputLabel value="Numero" for="numero"/>
+                   <h:inputText id="numero" label="Numero" value="#{localBean.local.numeroLocal}" >
+                    
+                   </h:inputText>
+         <h:outputLabel value="Nome" for="nome"/>
+         <h:inputText id="nome" label="Nome" value="#{localBean.local.nome}" required="true" requiredMessage="insira um nome">
+                     </h:inputText>
+          <h:outputLabel value="Tamanho" for="tamanho"/>
+          <h:inputText id="tamanho" label="Tamanho" value="#{localBean.local.tamanho}">
+              <f:convertNumber maxIntegerDigits="1"/>
+                </h:inputText>
+         <h:outputLabel value="Forragem" for="forragem"/>
+         <h:inputText id="forragem" label="forragem" value="#{localBean.local.forragem}" >
+                     </h:inputText>
+        </p:panelGrid>
+        
+                    <p:commandButton  ajax="false" action="#{localBean.salvar}" value="Salvar" update="growl" />
+          <a href="../local/local.jsf">
+                        <div  class="btn btn-small btn-danger" style="margin-left: 10px"  >Cancelar</div>
+                    </a>
+        </h:form>
+            </p:fieldset>
+            <br/>
+            <hr/>
+            <h:form prependId="false">  
+
+                <p:dataTable  id="dataTable" var="piq" value="#{localBean.lista}"  
+                             paginator="true" rows="10"  
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                             rowsPerPageTemplate="5,10" emptyMessage="Nenhum Local Cadastrado">  
+                    <f:facet name="header">  
+                        Lista Local  
+                    </f:facet>  
+                    <p:column style="text-align: center" filterBy="#{piq.numeroLocal}">  
+                        <f:facet name="header">  
+                            <h:outputText value="Numero" />  
+                        </f:facet>  
+                        <h:outputText value="#{piq.numeroLocal}" />  
+                    </p:column>
+                    <p:column style="text-align: center" filterBy="#{piq.nome}">
+                        <f:facet name="header">  
+                            <h:outputText value="Nome" />  
+                        </f:facet>  
+                        <h:outputText value="#{piq.nome}" />  
+                    </p:column>  
+                    <p:column style="text-align: center" >  
+                        <f:facet name="header">  
+                            <h:outputText value="Tamanho" />  
+                        </f:facet>  
+                        <h:outputText value="#{piq.tamanho}" />  
+                    </p:column>  
+
+          
+                    <p:column style="text-align: center" >  
+                        <f:facet name="header">  
+                            <h:outputText value="Fazenda" />  
+                        </f:facet>  
+                         <h:outputText  value="#{piq.fazenda.nome}" />  
+                    </p:column>
+                     <p:column style="text-align: center" >  
+                        <f:facet name="header">  
+                            <h:outputText value="Forragem" />  
+                        </f:facet>  
+                         <h:outputText value="#{piq.forragem}" />  
+                    </p:column>
+                 
+                    <p:column style="text-align: center" > 
+                         <f:facet name="header">  
+                            <h:outputText value="Excluir" />  
+                        </f:facet>  
+                        <p:commandButton action="#{localBean.excluir}" onclick="if (! confirm('Deseja deletar o piquete #{piq.nome}?') ) { return false;}; return true;" icon="ui-icon-circle-close"  title="excluir">
+                            <f:setPropertyActionListener  target="#{localBean.local}" value="#{piq}"/> 
+                       </p:commandButton>
+                      </p:column >
+                      <p:column style="text-align: center"   > 
+                               <f:facet name="header">  
+                            <h:outputText value="Editar" />  
+                        </f:facet>  
+                          <p:commandButton   action="#{localBean.editar}"  icon="ui-icon-pencil" ajax="false"  title="editar">
+                                         <f:setPropertyActionListener value="#{piq}" 
+                                                                      target="#{localBean.local}"/>
+                                    </p:commandButton>
+                          </p:column>
+                </p:dataTable>  
+            </h:form>  
+            <br/><br/>
+             <h:form prependId="false">  
+
+                <p:dataTable  id="dataTable" var="piq" value="#{localBean.lista}"  
+                             paginator="true" rows="10"  
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                             rowsPerPageTemplate="5,10" emptyMessage="Nenhum Local Cadastrado">  
+                    <f:facet name="header">  
+                        Lista Local  
+                    </f:facet>  
+                    <p:column style="text-align: center" filterBy="#{piq.numeroLocal}">  
+                        <f:facet name="header">  
+                            <h:outputText value="Numero" />  
+                        </f:facet>  
+                        <h:outputText value="#{piq.numeroLocal}" />  
+                    </p:column>
+                    <p:column style="text-align: center" filterBy="#{piq.nome}">
+                        <f:facet name="header">  
+                            <h:outputText value="Nome" />  
+                        </f:facet>  
+                        <h:outputText value="#{piq.nome}" />  
+                    </p:column>  
+                    <p:column style="text-align: center" >  
+                        <f:facet name="header">  
+                            <h:outputText value="Tamanho" />  
+                        </f:facet>  
+                        <h:outputText value="#{piq.tamanho}" />  
+                    </p:column>  
+
+          
+                    <p:column style="text-align: center" >  
+                        <f:facet name="header">  
+                            <h:outputText value="Fazenda" />  
+                        </f:facet>  
+                         <h:outputText  value="#{piq.fazenda.nome}" />  
+                    </p:column>
+                     <p:column style="text-align: center" >  
+                        <f:facet name="header">  
+                            <h:outputText value="Forragem" />  
+                        </f:facet>  
+                         <h:outputText value="#{piq.forragem}" />  
+                    </p:column>
+                 
+                    <p:column style="text-align: center" > 
+                         <f:facet name="header">  
+                            <h:outputText value="Excluir" />  
+                        </f:facet>  
+                        <p:commandButton action="#{localBean.excluir}" onclick="if (! confirm('Deseja deletar o piquete #{piq.nome}?') ) { return false;}; return true;" icon="ui-icon-circle-close"  title="excluir">
+                            <f:setPropertyActionListener  target="#{localBean.local}" value="#{piq}"/> 
+                       </p:commandButton>
+                      </p:column >
+                      <p:column style="text-align: center"   > 
+                               <f:facet name="header">  
+                            <h:outputText value="Editar" />  
+                        </f:facet>  
+                          <p:commandButton   action="#{localBean.editar}"  icon="ui-icon-pencil" ajax="false"  title="editar">
+                                         <f:setPropertyActionListener value="#{piq}" 
+                                                                      target="#{localBean.local}"/>
+                                    </p:commandButton>
+                          </p:column>
+                </p:dataTable>  
+            </h:form> 
+        </ui:define>
+        <ui:define name="rigth"/>
+        <ui:define name="sul"/>
+    </ui:composition>
+</html>
+
+

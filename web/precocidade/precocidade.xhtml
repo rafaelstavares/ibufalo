@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="titulo">
+            Cadastro Precocidade
+        </ui:define>    
+
+        <ui:define name="pagina"/>
+        <ui:define name="norte"/>
+        <ui:define name="centro">
+            <p:fieldset legend="Cadastro Precocidade">
+       <h:form >
+            <h:inputHidden value="#{precocidadeBean.precocidade.idPrecocidade}"/>
+            <h:inputHidden value="#{precocidadeBean.destinoSalvar}"/>
+                <p:messages/>
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+              <p:panelGrid columns="2">
+     
+            <h:outputLabel value="Bezerro" for="bezerro" />
+            <p:selectOneMenu  value="#{precocidadeBean.precocidade.bezerro}" converter="IndexedConverter" required="true" requiredMessage="Escolha um Bezerro"> 
+             <f:selectItem itemValue="" itemLabel="Selecione Bezerro"/>
+             <f:selectItems  var="pb" itemValue="#{pb}" value="#{bezerroBean.lista}" itemLabel="#{pb.nome}"/> 
+           
+         </p:selectOneMenu>
+     
+        <h:outputLabel value="Data Precocidade" for="data"/>
+        <p:calendar pattern="dd/MM/yy" size="10" label="Data Precocidade" effect="fade" value="#{precocidadeBean.precocidade.data_precocidade}" id="popupCal" >  
+                              
+            <f:convertDateTime dateStyle="medium" pattern="dd/MM/yyyy"/>
+                </p:calendar>
+       
+        </p:panelGrid>
+        
+              <p:commandButton ajax="false" action="#{precocidadeBean.salvar}" value="Salvar" update="growl"/>
+        
+        </h:form>
+            </p:fieldset>
+        </ui:define>
+        <ui:define name="rigth"/>
+        <ui:define name="sul"/>
+    </ui:composition>
+</html>
+

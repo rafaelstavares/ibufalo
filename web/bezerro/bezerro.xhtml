@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../templates/internal3.xhtml">
+        <ui:define name="titulo">
+            Cadastro Bezerro
+        </ui:define>    
+
+
+        <ui:define name="conteudo">
+            <p:fieldset legend="Cadastro bezerro" style="padding-right: 55px">
+                <h:form >
+                    <h:inputHidden value="#{bezerroBean.bezerro.idBezerro}"/>
+                    <h:inputHidden value="#{bezerroBean.destinoSalvar}"/>
+                    <p:messages/>
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+                    <p:panelGrid columns="2">
+
+                        <h:outputLabel value="Pai" for="pai" />
+                        <p:selectOneMenu  value="#{bezerroBean.bezerro.paiAnimal}" converter="IndexedConverter" required="true" requiredMessage="Selecione um pai"> 
+                            <f:selectItem itemValue="" itemLabel="Selecione Pai"/>
+                            <f:selectItems  var="bpai" itemValue="#{bpai}" value="#{animalBean.lista}" itemLabel="#{bpai.nome}"/> 
+
+                        </p:selectOneMenu>
+
+                        <h:outputLabel value="Mãe" for="mae" />
+                        <p:selectOneMenu  value="#{bezerroBean.bezerro.maeAnimal}" converter="IndexedConverter" required="true" requiredMessage="Selecione uma Mãe"> 
+                            <f:selectItem itemValue="" itemLabel="Selecione Mãe"/>
+                            <f:selectItems  var="bma" itemValue="#{bma}" value="#{animalBean.lista}" itemLabel="#{bma.nome}"/> 
+                        </p:selectOneMenu>
+                        <h:outputLabel value="Nome" for="nome"/>
+                        <p:inputText id="nome" label="Nome" value="#{bezerroBean.bezerro.nome}" required="true" requiredMessage="Insira um Nome">       
+                        </p:inputText>
+
+                        <h:outputLabel value="Data Nascimento" for="data"/>
+
+                        <p:calendar pattern="dd/MM/yy" id="data" label="Data Nascimento" value="#{bezerroBean.bezerro.datanascimento}" required="true" requiredMessage="escola uma data">
+                            <f:convertDateTime pattern="dd/MM/yy" dateStyle="medium"/>
+                        </p:calendar>
+
+                        <h:outputLabel value="Peso" for="peso"/>
+                        <p:inputText id="peso" label="Peso" value="#{bezerroBean.bezerro.peso}" converterMessage="Campo Peso é Numérico." >   
+                            <f:convertNumber integerOnly="true" minIntegerDigits="1" minFractionDigits="2" currencySymbol="$"/>
+                        </p:inputText>
+                    </p:panelGrid>
+
+                    <p:commandButton ajax="false" action="#{bezerroBean.salvar}" value="Salvar" update="growl" />
+
+                </h:form>
+            </p:fieldset>
+        </ui:define>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../templates/internal3.xhtml">
+        <ui:define name="titulo">
+            Cadastro Produção
+        </ui:define>    
+
+
+        <ui:define name="conteudo">
+             <div class="span12 well">
+	
+                        <p class="lead">Você está gerenciando a fazenda <strong style="color: yellowgreen">#{contextoBean.fazendaAtiva.nome}</strong>.</p>
+			</div>
+            <p:fieldset legend="Cadastro Produção" style="padding-right: 55px">
+ <h:form acceptcharset="ISO-8859-1">
+                    <h:inputHidden value="#{producaoBean.producao.idProducao}"/>
+                    <h:inputHidden value="#{producaoBean.destinoSalvar}"/>
+                    <p:messages/>
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+                    <p:panelGrid columns="2">
+
+                        <h:outputLabel value="Animal" for="animal" />
+                        <p:selectOneMenu  value="#{producaoBean.animal}" converter="IndexedConverter" required="true" requiredMessage="Escolha uma Fazenda"> 
+                            <f:selectItem itemValue="" itemLabel="Selecione Animal"/>
+                            <f:selectItems  var="an" itemValue="#{an}" value="#{animalBean.listaF}" itemLabel="#{an.nome}"/> 
+
+                        </p:selectOneMenu>
+                        
+                    </p:panelGrid>
+
+                    <h:commandLink action="#{producaoBean.teste()}" title="entrar"   >
+                           <img class="mybutton"  style="border: none" />
+                                                
+                       <br/>Acessar
+                       </h:commandLink>
+ </h:form></p:fieldset>
+                
+                
+        
+        </ui:define>
+ 
+    </ui:composition>
+</html>

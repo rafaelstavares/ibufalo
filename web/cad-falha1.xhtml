@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ph="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+ <title>Gerenciamento &middot; Bubalino</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+ <!-- Vendor CSS -->
+        <link href="resources/app/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet"/>
+        <link href="resources/app/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet"/>
+
+        <!-- CSS -->
+        <link href="resources/app/css/app.min.1.css" rel="stylesheet"/>
+        <link href="resources/app/css/app.min.2.css" rel="stylesheet"/>
+        <style>
+            .oi{
+                top: 50%;
+  margin-top: 150px;
+  right: -25px;
+            } 
+        </style>
+  </h:head>
+    <h:body class="login-content"  >
+        <f:view  >
+
+        <!-- Register -->
+        <h:form  >
+            <h:inputHidden value="#{usuarioBean.usuario.idUsuario}"/>
+                <h:inputHidden value="#{usuarioBean.usuario.ativo}"/>
+                <h:inputHidden value="#{usuarioBean.destinoSalvar}"/>
+        <div class="lc-block toggled" id="l-register">
+            
+            
+              <div class="testealert">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close"  data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    Email já Cadastrado!
+                </div>
+          
+            </div>
+             <div class="input-group fg-float  m-b-20">
+                 
+                 
+                <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                <div class="fg-line">
+                    <h:inputText id="nome" required="true"   label="Nome" value="#{usuarioBean.usuario.nome}"  class="form-control" ph:placeholder="Insira seu Nome"/>
+                <label class="fg-label">Insira Nome</label>
+                </div>
+            </div>
+            <div class="input-group fg-float  m-b-20">
+                <span class="input-group-addon"><i class="zmdi zmdi-account-o"></i></span>
+                <div class="fg-line">
+                    <h:inputText id="login" required="true"   label="Login" class="form-control" value="#{usuarioBean.usuario.login}" ph:placeholder="Escolha um Usuário"/>
+                <label class="fg-label">Insira Login</label>
+                </div>
+            </div>
+            
+            <div class="input-group fg-float m-b-20">
+                <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+                <div class="fg-line">
+                    <h:inputText id="email" required="true"  label="E-Mail" value="#{usuarioBean.usuario.email}" class="form-control" ph:placeholder="Insira seu Correio Eletrônico"/>
+                <label class="fg-label">Insira Email</label>
+                </div>
+            </div>
+            
+            <div class="input-group fg-float  m-b-20">
+                <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
+                <div class="fg-line">
+                    <h:inputSecret id="senha" required="true"  label="Senha"  value="#{usuarioBean.usuario.senha}" class="form-control input-sm" />
+                    <label class="fg-label">Insira Senha</label>
+                </div>
+            </div>
+            
+            <div class="clearfix"></div>
+            
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value=""/>
+                    <i class="input-helper"></i>
+                    Aceitar o contrato de licença
+                </label>
+            </div>
+            
+            <h:commandLink   action="#{usuarioBean.salvar()}"   >
+                <button type="button" class="btn btn-login btn-danger btn-float" ><i class="zmdi zmdi-arrow-forward"></i></button>
+            </h:commandLink>
+            
+            <ul class="login-navigation">
+                <li ><button type="button" onclick="location.href='login.jsf'" class="btn btn-success btn--icon-text"><i class="zmdi zmdi-account"></i> Login</button></li>
+                <li data-block="#l-forget-password" ><a class="btn btn-primary btn--icon-text"><i class="zmdi zmdi-mood-bad"></i> Recuperar</a></li>
+            </ul>
+        </div>
+            </h:form>
+       <h:form id="recuperar" acceptcharset="ISO-8859-1" prependId="false" >
+        <!-- Forgot Password -->
+        <div class="lc-block" id="l-forget-password">
+            <p class="text-left">Insira o endereço eletrônico cadastro no sistema ufrabull, será enviado um email para recuperar sua senha de acesso ao sistema</p>
+            
+            <div class="input-group fg-float m-b-20">
+                <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+                <div class="fg-line">
+                    <h:inputText id="email" value="#{recuperarEmail.emailRecuperar}"  styleClass="form-control input-sm" />
+                    <label class="fg-label">Email Cadastrado</label>
+                </div>
+            </div>
+            <h:commandLink id="recuperarCadastro"  action="#{recuperarEmail.recuperarEmail()}">
+            <button class="btn btn-login btn-danger btn-float" type="submit" onclick="trecuperarCadastro()"  ><i class="zmdi zmdi-arrow-forward"></i></button>
+            </h:commandLink>
+            <ul class="login-navigation">
+                <li ><button type="button" onclick="location.href='cadastro.jsf'" class="btn btn-success btn--icon-text"><i class="zmdi zmdi-account-add"></i> Cadastrar</button></li>
+                <li  ><a href="login.jsf" class="btn btn-primary btn--icon-text"><i class="zmdi zmdi-account-add"></i> Login</a></li>
+            </ul>
+        </div>
+        </h:form>
+        <!-- Older IE warning message -->
+        <!--[if lt IE 9]>
+            <div class="ie-warning">
+                <h1 class="c-white">Warning!!</h1>
+                <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+                <div class="iew-container">
+                    <ul class="iew-download">
+                        <li>
+                            <a href="http://www.google.com/chrome/">
+                                <img src="img/browsers/chrome.png" alt="">
+                                <div>Chrome</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.mozilla.org/en-US/firefox/new/">
+                                <img src="img/browsers/firefox.png" alt="">
+                                <div>Firefox</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.opera.com">
+                                <img src="img/browsers/opera.png" alt="">
+                                <div>Opera</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.apple.com/safari/">
+                                <img src="img/browsers/safari.png" alt="">
+                                <div>Safari</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                                <img src="img/browsers/ie.png" alt="">
+                                <div>IE (New)</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <p>Sorry for the inconvenience!</p>
+            </div>   
+        <![endif]-->
+    </f:view>
+         <!-- Javascript Libraries -->
+        <script src="resources/app/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="resources/app/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        
+        <script src="resources/app/vendors/bower_components/Waves/dist/waves.min.js"></script>
+        
+        <!-- Placeholder for IE9 -->
+        <!--[if IE 9 ]>
+            <script src="vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
+        <![endif]-->
+        
+        <script src="resources/app/js/functions.js"></script>
+        
+    </h:body>
+</html>

@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <title>Material AdminErro login</title>
+        <link href="../resources/app/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>        
+
+        <!-- CSS -->
+        <link href="../resources/app/css/app.min.1.css" rel="stylesheet"/>
+        <link href="../resources/app/css/app.min.2.css" rel="stylesheet"/>
+        <style type="text/css">
+            .bs-item {
+                background: #fff;
+                margin-bottom: 30px;
+                height: 100px;
+                text-align: center;
+                padding: 10px;
+                font-size: 14px;
+                border-radius: 2px;
+            }
+        </style>
+
+    </h:head>
+
+    <h:body >
+
+        <!-- Vendor CSS -->
+        <f:view>'
+<header id="header" class="clearfix" data-current-skin="blue">
+                <ul class="header-inner">
+                    <li class="logo hidden-xs">
+                        <a href="inicio.jsf">Buffalo Manager</a>
+                    </li>
+                    <li class="pull-right">
+                        <ul class="top-menu">
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" href=""><span class="text-uppercase p-10">#{contextoBean.usuarioLogado.nome}</span><i class="tm-icon zmdi zmdi-settings"></i></a>
+                                <ul class="dropdown-menu dm-icon pull-right">
+                                    <li class="skin-switch hidden-xs">
+                                        <span class="ss-skin bgm-lightblue" data-skin="lightblue"></span>
+                                        <span class="ss-skin bgm-bluegray" data-skin="bluegray"></span>
+                                        <span class="ss-skin bgm-cyan" data-skin="cyan"></span>
+                                        <span class="ss-skin bgm-teal" data-skin="teal"></span>
+                                        <span class="ss-skin bgm-orange" data-skin="orange"></span>
+                                        <span class="ss-skin bgm-blue" data-skin="blue"></span>
+                                    </li>
+                                    <li class="divider hidden-xs"></li>
+                                    <li class="hidden-xs">
+                                        <a data-action="fullscreen" href=""><i class="zmdi zmdi-fullscreen"></i> Toggle Fullscreen</a>
+                                    </li>
+                                    <li>
+                                        <a href="../logout"><i class="zmdi zmdi-power-off"></i> Sair</a>
+                                    </li>
+                                </ul>
+                            </li>   
+
+
+                        </ul>
+
+                    </li>
+
+                </ul>
+            </header>
+
+            <section id="main">
+
+
+                <div id="container">
+                    <div class="row">
+                            
+                            
+                            <div class="col-sm-4 col-xs-6" >
+                                
+                            </div>
+                            
+                            <div class="col-sm-4 col-xs-6">
+                                <div class="bs-item z-depth-5 bgm-amber c-white">
+                                    <h2 class="c-lightblue"><i class="zmdi zmdi-lock c-white"></i> Desculpe! <i class="zmdi zmdi-lock c-white"></i></h2>
+                                    <p>Você excedeu o numero de cadastro de fazendo por conta.</p>
+                                    <a href="../publico/inicio.jsf"><div  title="Voltar Inicio" class="btn bgm-deeppurple btn-float waves-effect"><i class="zmdi zmdi-home"></i>
+                                        </div></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                
+            </section>
+
+            <fooder id="fooder">
+                <center>Copyright &copy; 2016  -  <a href="http://www.ufra.edu.br" target="_blank">UFRA</a> - <i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Bacharelado em Sistema de Informação</center>
+            </fooder>
+
+            <p:commandLink/>
+
+
+
+
+            <!-- Javascript Libraries -->
+            <script src="../resources/app/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+            <script src="../resources/app/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+            <script src="../resources/app/vendors/bower_components/Waves/dist/waves.min.js"></script>
+            <script src="../resources/app/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+            <script src="../resources/app/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js"></script>
+
+            <!-- Placeholder for IE9 -->
+            <!--[if IE 9 ]>
+                <script src="../resources/app/vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
+            <![endif]-->
+
+            <script src="../resources/app/js/functions.js"></script>
+ 
+
+            <script type="text/javascript">
+
+
+
+            </script>
+        </f:view>
+    </h:body>
+</html>

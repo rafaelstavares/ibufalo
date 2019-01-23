@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="../templates/template.xhtml">
+            <ui:define name="titulo">inicio Funcionarios</ui:define>'
+            <ui:define name="conteudo">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Selection Example <small>Ensure that the data attribute [data-identifier="true"] is set on one column header.</small></h2>
+                        </div>
+                        <h:form prependId="false">  
+                            <h:inputHidden value="#{funcionariosBean.funcionarios.idFuncionarios}"/>
+                            <h:inputHidden value="#{funcionariosBean.destinoSalvar}"/>
+                            <p:dataTable id="listLocal"   var="piq" styleClass="table table-striped" value="#{funcionariosBean.lista}"  
+                                           paginator="true" rows="10"  
+                                           paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                           rowsPerPageTemplate="5,10" emptyMessage="Nenhum Funcionario Cadastrado">  
+                                <f:facet name="header">  
+                                    Lista Funcionario  
+                                </f:facet>  
+                              
+                                <p:column styleClass="text-align: center" filterBy="#{piq.nome}">
+                                    <f:facet name="header">  
+                                        <h:outputText value="Nome" />  
+                                    </f:facet>  
+                                    <h:outputText value="#{piq.nome}" />  
+                                </p:column>  
+                                <p:column styleClass="text-align: center" >  
+                                    <f:facet name="header">  
+                                        <h:outputText value="Genero" />  
+                                    </f:facet>  
+                                    <h:outputText value="#{piq.estadoCivil}" />  
+                                </p:column>  
+
+
+                                <p:column styleClass="text-align: center" >  
+                                    <f:facet name="header">  
+                                        <h:outputText value="Fazenda" />  
+                                    </f:facet>  
+                                    <h:outputText  value="#{piq.fazenda.nome}" />  
+                                </p:column>
+                                <p:column styleClass="text-align: center" >  
+                                    <f:facet name="header">  
+                                        <h:outputText value="Rg" />  
+                                    </f:facet>  
+                                    <h:outputText value="#{piq.rg}" />  
+                                </p:column>
+
+                                <p:column styleClass="text-align: center" > 
+                                    <f:facet name="header">  
+                                        <h:outputText value="Excluir" />  
+                                    </f:facet>  
+                                    <p:commandLink id="btnDel" action="#{funcionariosBean.excluir}" onclick=""   title="excluir">
+                                        <f:setPropertyActionListener  target="#{funcionariosBean.funcionarios}" value="#{piq}"/> 
+                                    </p:commandLink>
+                                    <div id="btn123" title="Excluir #{piq.nome}" class="btn btn-danger btn-small btn-icon-text waves-effect" onclick="myFunctionDel()" ><center><i class="zmdi zmdi-delete c-white"/></center></div>
+                                </p:column >
+                                <p:column style="text-align: center"   > 
+                                    <f:facet name="header">  
+                                        <h:outputText value="Editar" />  
+                                    </f:facet>  
+                                    <p:commandButton   action="#{funcionariosBean.editar}"  icon="ui-icon-pencil" ajax="false"  title="Editar #{piq.nome}">
+                                        <f:setPropertyActionListener value="#{piq}" 
+                                                                     target="#{funcionariosBean.funcionarios}"/>
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>  
+
+                        </h:form>  
+
+
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        document.getElementById("menu-funcionario").className = "sub-menu active";
+                    });
+
+                    function salvarPiquete() {
+
+
+                        var jsfCommandLink = document.getElementById("btn-salvarPiquete");
+                        jsfCommandLink.click();
+                    }
+                    $(document).ready(function () {
+                        //Basic Example
+                        $("#data-table-basic").bootgrid({
+                            css: {
+                                icon: 'zmdi icon',
+                                iconColumns: 'zmdi-view-module',
+                                iconDown: 'zmdi-expand-more',
+                                iconRefresh: 'zmdi-refresh',
+                                iconUp: 'zmdi-expand-less'
+                            },
+                        });
+
+                        //Selection
+
+
+                        //Command Buttons
+                        $("#data-table-command").bootgrid({
+                            css: {
+                                icon: 'zmdi icon',
+                                iconColumns: 'zmdi-view-module',
+                                iconDown: 'zmdi-expand-more',
+                                iconRefresh: 'zmdi-refresh',
+                                iconUp: 'zmdi-expand-less'
+                            },
+                        });
+
+                    });
+                    function myFunctionDel() {
+                        $('td').click(function () {
+                            var col = $(this).parent().children().index($(this));
+                            var row = $(this).parent().parent().children().index($(this).parent());
+                            //$('listFazenda:'+(row)+':btnDel').click();
+                            var oi = document.getElementById('listLocal:' + (row) + ':btnDel');
+                            swal({title: "O que você deseja fazer",
+                                text: "Ao confirmar clicando sim, você irá apagar todos os dados da Fazenda!",
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                cancelButtonColor: "#03A9F4",
+                                confirmButtonText: "Sim, Deletar Fazenda!",
+                                cancelButtonText: "Não, Cancelar ação!",
+                                closeOnConfirm: false,
+                                closeOnCancel: false},
+                                    function (isConfirm) {
+                                        if (isConfirm === true) {
+                                            swal("Deletados!", "Seus dados foram deletados.", "success");
+                                            oi.click();
+
+                                            addTable();
+
+                                        } else {
+                                            swal("Ufa, Cancelado", "Você ainda tem seus dados :)", "error");
+                                        }
+
+                                    });
+
+                        });
+
+                    }
+                    function addTable() {
+
+                                                                    setTimeout(function () {
+                                                                        location.reload(true);
+
+                                                                    }, 1000);
+
+
+
+                                                                }
+
+                </script>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

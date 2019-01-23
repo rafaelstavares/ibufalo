@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../templates/internal3.xhtml">
+        <ui:define name="titulo">
+            Cadastro Produção
+        </ui:define>    
+
+
+        <ui:define name="conteudo">
+            <div class="span12 well">
+
+                <p class="lead">Você está gerenciando a fazenda <strong style="color: yellowgreen">#{contextoBean.fazendaAtiva.nome}</strong>.</p>
+
+            </div>
+            <p:fieldset legend="Cadastro Produção" style="padding-right: 55px">
+                <h:form acceptcharset="ISO-8859-1">
+
+                    <h:inputHidden value="#{contextoBean.fazendaAtiva.idfazenda}"/>
+                    <h:inputHidden value="#{contextoBean.usuarioLogado.idUsuario}"/>
+                    <h:inputHidden value="#{producaoBean.producao.idProducao}"/>
+                    <h:inputHidden value="#{producaoBean.destinoSalvar}"/>
+                    <p:messages/>
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+                    <p:panelGrid columns="2">
+
+                        <h:outputLabel value="Animal" for="animal" />
+                        <p:selectOneMenu  value="#{producaoBean.producao.animal}" converter="IndexedConverter" required="true" requiredMessage="Escolha uma Fazenda"> 
+                            <f:selectItem itemValue="" itemLabel="Selecione Animal"/>
+                            <f:selectItems  var="an" itemValue="#{an}" value="#{animalBean.listaF}" itemLabel="#{an.nome}"/> 
+
+                        </p:selectOneMenu>
+                        <h:outputLabel value="Funcionário" for="funcionario" />
+                        <p:selectOneMenu  value="#{producaoBean.producao.funcionarios}" converter="IndexedConverter" required="true" requiredMessage="Escolha um Funcionário"> 
+                            <f:selectItem itemValue="" itemLabel="Selecione um Funcionário"/>
+                            <f:selectItems  var="fupro" itemValue="#{fupro}" value="#{funcionariosBean.lista}" itemLabel="#{fupro.nome}"/> 
+                        </p:selectOneMenu>
+
+                        <h:outputLabel value="Data Produção" for="data"/>
+                        <p:calendar pattern="dd/MM/yyyy" size="10" label="Data Produção" effect="fade" value="#{producaoBean.producao.diaProducao}" id="popupCal" >  
+
+                            <f:convertDateTime dateStyle="medium" pattern="dd/MM/yyyy"/>
+                        </p:calendar>
+                        <h:outputLabel value="Quantidade" for="quantidade"/>
+                        <p:inputText id="quantidade" label="Quantidade" value="#{producaoBean.producao.quantidade}">       
+                        </p:inputText>
+                    </p:panelGrid>
+
+                    <p:commandButton ajax="false" action="#{producaoBean.salvar}" value="Salvar" update="growl"/>
+
+                </h:form></p:fieldset>
+
+
+            <h:form prependId="false">  
+
+                <p:dataTable id="dataTable" var="pro" value="#{producaoBean.lista}"  
+                             paginator="true" rows="10"  
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                             rowsPerPageTemplate="5,10" emptyMessage="Nenhuma produção Cadastrada">  
+                    <f:facet name="header">  
+                        Listar Produção  
+                    </f:facet>  
+                    <p:column filterBy="#{pro.animal.nome}">  
+                        <f:facet name="header">  
+                            <h:outputText value="Animal" />  
+                        </f:facet>  
+                        <h:outputText value="#{pro.animal.nome}" />  
+                    </p:column>  
+                    <p:column >  
+                        <f:facet name="header">  
+                            <h:outputText value="Dia Produção" />  
+                        </f:facet>  
+                        <h:outputText value="#{pro.diaProducao}" >  
+                            <f:convertDateTime pattern="dd/MM/yy" dateStyle="medium"/>
+                        </h:outputText>
+                    </p:column> 
+                    <p:column filterBy="#{pro.funcionarios.nome}">  
+                        <f:facet name="header">  
+                            <h:outputText value="Funcionário" />  
+                        </f:facet>  
+                        <h:outputText value="#{pro.funcionarios.nome}" />  
+                    </p:column> 
+                    <p:column >  
+                        <f:facet name="header">  
+                            <h:outputText value="Quantidade" />  
+                        </f:facet>  
+                        <h:outputText value="#{pro.quantidade}" />  
+                    </p:column> 
+                    <p:column style="text-align: center" > 
+                        <f:facet name="header">  
+                            <h:outputText value="Excluir" />  
+                        </f:facet>  
+                        <p:commandButton action="#{producaoBean.excluir}" onclick="if (!confirm('Deseja deletar a produção do dia #{pro.diaProducao}?')) {
+                                    return false;
+                                }
+                                ;
+                                return true;" icon="ui-icon-circle-close"  title="excluir">
+                            <f:setPropertyActionListener  target="#{producaoBean.producao}" value="#{pro}"/> 
+                        </p:commandButton>
+                    </p:column >
+                    <p:column style="text-align: center"   > 
+                        <f:facet name="header">  
+                            <h:outputText value="Editar" />  
+                        </f:facet>  
+                        <p:commandButton   action="#{producaoBean.editar}"  icon="ui-icon-pencil" ajax="false"  title="editar">
+                            <f:setPropertyActionListener value="#{pro}" 
+                                                         target="#{producaoBean.producao}"/>
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>  
+            </h:form>  
+        </ui:define>
+
+    </ui:composition>
+</html>

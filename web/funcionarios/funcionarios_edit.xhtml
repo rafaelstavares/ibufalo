@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../templates/internal3.xhtml">
+        <ui:define name="titulo">
+            Cadastro Funcionário
+        </ui:define>    
+
+     
+        <ui:define name="conteudo">
+            <div class="span12 well">
+	
+                        <p class="lead">Você está gerenciando a fazenda <strong style="color: yellowgreen">#{contextoBean.fazendaAtiva.nome}</strong>.</p>
+			</div>
+            <p:fieldset legend="Cadastro Funcionário" style="padding-right: 55px">
+
+                <h:form id="form" acceptcharset="ISO-8859-1" >
+            <h:inputHidden value="#{funcionariosBean.funcionarios.idFuncionarios}"/>
+            <h:inputHidden value="#{funcionariosBean.destinoSalvar}"/>
+             <p:messages/>
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+              <p:panelGrid columns="2">
+         <h:outputLabel value="Nome" for="nome"/>
+         <p:inputText id="nome" label="Nome" value="#{funcionariosBean.funcionarios.nome}" required="true" requiredMessage="Insira um nome" >
+                     </p:inputText>
+          <h:outputLabel value="Estado Civil" for="civil"/>
+          <p:selectOneMenu id="civil" label="Estado Civil" filter="true" value="#{funcionariosBean.funcionarios.estadoCivil}" filterMatchMode="startsWith"  >
+                            <f:selectItem itemValue="" itemLabel="Selecione um estado civil"/>
+                            <f:selectItem  itemValue="Solteiro" itemLabel="Solteiro" />
+                            <f:selectItem itemValue="Casado" itemLabel="Casado" />
+                            <f:selectItem itemValue="Separado" itemLabel="Separado" />
+                                    
+                        </p:selectOneMenu>
+          <h:outputLabel value="Dependentes" for="dependentes"/>
+          <p:inputText id="dependentes" label="Dependentes" value="#{funcionariosBean.funcionarios.dependentes}"/> 
+          <h:outputLabel value="Endereço" for="endereco"/>
+          <p:inputText id="endereco" label="Endereço" value="#{funcionariosBean.funcionarios.endereco}">       
+                </p:inputText>
+           <h:outputLabel  value="Data Nascimento" for="popupCal"/>
+          <p:calendar autocomplete=""  pattern="dd/MM/yyyy" size="10" label="Data nascimento" effect="fade" value="#{funcionariosBean.funcionarios.dataNascimento}" id="popupCal" required="true" requiredMessage="inserir data do Nascimento" >                     
+            <f:convertDateTime dateStyle="medium" pattern="dd/MM/yyyy"/>
+                </p:calendar>
+          <h:outputLabel value="Telefone" for="telefone"/>
+          <p:inputMask value="#{funcionariosBean.funcionarios.telefone}" mask="(99) 9999-9999"/> 
+          <h:outputLabel value="CPF" for="cpf"/>
+          <p:inputMask value="#{funcionariosBean.funcionarios.cpf}" mask="999.999.999.-99"/> 
+        <h:outputLabel value="Rg" for="rg"/>
+        <p:inputText id="rg" label="Rg" value="#{funcionariosBean.funcionarios.rg}">       
+                </p:inputText>
+         
+          <h:outputLabel value="Função" for="funcao"/>
+          <p:selectOneMenu id="funcao" label="Função" filter="true" value="#{funcionariosBean.funcionarios.funcao}" filterMatchMode="startsWith"  >
+                            <f:selectItem itemValue="" itemLabel="Selecione uma Função"/>
+                            <f:selectItem  itemValue="Vaqueiro" itemLabel="Vaqueiro" />
+                            <f:selectItem itemValue="Ajudante de Vaqueiro" itemLabel="Ajudante de Vaqueiro" />
+                            <f:selectItem itemValue="Ordenhador" itemLabel="Ordenhador" />
+                            <f:selectItem itemValue="Tratador" itemLabel="Tratador" />
+                   <f:selectItem itemValue="Tratorista" itemLabel="Tratorista" />
+                        <f:selectItem itemValue="Tercerizado" itemLabel="Tercerizado" />
+                        <f:selectItem itemValue="Serviços Gerais" itemLabel="Serviços Gerais" />
+                        
+                        </p:selectOneMenu>
+         <h:outputLabel value="Ctps" for="ctps"/>
+         <p:inputText id="ctps" label="Ctps" value="#{funcionariosBean.funcionarios.ctps}"/> 
+         <h:outputLabel value="Renumeracao" for="remnumeracao"/>
+         <p:inputText id="remnumeracao" label="Renumeracao" value="#{funcionariosBean.funcionarios.renumeracao}"/> 
+<h:outputLabel  value="Data Contrato" for="popupCal2"/>
+<p:calendar autocomplete=""  pattern="dd/MM/yyyy" size="10" label="Data Contrato" effect="fade" value="#{funcionariosBean.funcionarios.dataContrato}" id="popupCal2"  >                     
+            <f:convertDateTime dateStyle="medium" pattern="dd/MM/yyyy"/>
+                </p:calendar>
+
+<h:outputLabel  value="Data Dispença" for="popupCal3"/>
+<p:calendar autocomplete=""  pattern="dd/MM/yyyy" size="10" label="Data Dispença" effect="fade" value="#{funcionariosBean.funcionarios.dataDispenca}" id="popupCal3"  >                     
+            <f:convertDateTime dateStyle="medium" pattern="dd/MM/yyyy"/>
+                </p:calendar>
+
+        </p:panelGrid>
+        
+                    <p:commandButton ajax="false" action="#{funcionariosBean.atualizar()}" value="Atualizar" update="growl"/>
+                    <a href="../funcionarios/funcionarios.jsf">
+        <div  class="btn btn-small btn-danger" style="margin-left: 10px"  >Cancelar</div>
+                    </a>
+        </h:form>
+            </p:fieldset>
+            <br/>
+            <br/>
+           
+        </ui:define>
+ 
+     
+
+    </ui:composition>
+</html>

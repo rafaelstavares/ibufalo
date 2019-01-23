@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"    
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="titulo">
+            Listar Fazenda
+        </ui:define>    
+
+        <ui:define name="pagina"/>
+        <ui:define name="norte"/>
+        <ui:define name="centro">
+            <h:form prependId="false">  
+
+                <p:dataTable id="dataTable" var="fun" value="#{funcionariosBean.lista}"  
+                             paginator="true" rows="10"  
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                             rowsPerPageTemplate="5,10" emptyMessage="Nenhum Funiconário Cadastrado">  
+                    <f:facet name="header">  
+                        Lista Funcionário  
+                    </f:facet>  
+                    <p:column filterBy="#{fun.nome}">  
+                        <f:facet name="header">  
+                            <h:outputText value="Nome" />  
+                        </f:facet>  
+                        <h:outputText value="#{fun.nome}" />  
+                    </p:column>  
+                    <p:column >  
+                        <f:facet name="header">  
+                            <h:outputText value="Endereço" />  
+                        </f:facet>  
+                        <h:outputText value="#{fun.endereco}" />  
+                    </p:column>  
+
+                    <p:column >  
+                        <f:facet name="header">  
+                            <h:outputText value="Telefone" />  
+                        </f:facet>  
+                        <h:outputText value="#{fun.telefone}" />  
+                    </p:column>  
+                    <p:column filterBy="#{fun.fazenda.nome}">  
+                        <f:facet name="header">  
+                            <h:outputText value="Fazenda" />  
+                        </f:facet>  
+                         <h:outputText value="#{fun.fazenda.nome}" />  
+                    </p:column>  
+                </p:dataTable>  
+            </h:form>  
+        </ui:define>
+        <ui:define name="rigth"/>
+        <ui:define name="sul"/>
+    </ui:composition>
+</html>
+
+

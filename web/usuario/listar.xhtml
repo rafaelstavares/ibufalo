@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../templates/internal3.xhtml">
+        <ui:define name="titulo">
+            Cadastro Funcionário
+        </ui:define>    
+
+     
+        <ui:define name="conteudo">
+            <div class="span12 well">
+	
+                        <p class="lead">Você está gerenciando a fazenda <strong style="color: yellowgreen">#{contextoBean.fazendaAtiva.nome}</strong>.</p>
+			</div>
+            
+        
+           <div class="box span3">
+					<div class="box-header well">
+						<h2><i class="icon-bullhorn"></i> Alerts</h2>
+						<div class="box-icon">
+							
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content alerts">
+						
+						<div class="alert alert-block ">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<h4 class="alert-heading">Funcionario novo</h4>
+							<p>Para cadastrar um animal clique no botão abaixo.</p>
+						<a href="../funcionarios/funcionarios_cad.jsf"> <div class="btn btn-large btn-primary">Clique Aqui</div></a>
+                                                </div>
+   
+					</div>	
+                              
+				</div><!--/span-->
+<div class="box span3">
+					<div class="box-header well">
+						<h2><i class="icon-bullhorn"></i> Alerts</h2>
+						<div class="box-icon">
+							
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content alerts">
+						
+						<div class="alert alert-success">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<strong>Well done!</strong> You successfully read this important alert message.
+                                                        <a href="../publico/inicio.jsf"> <div class="btn btn-large btn-success">Pagina Inicial</div></a>
+						</div>
+						
+   
+					</div>	
+                              
+				</div><!--/span-->
+                                <div class="box span3">
+					<div class="box-header well">
+						<h2><i class="icon-bullhorn"></i> Alerts</h2>
+						<div class="box-icon">
+
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content alerts">
+						<div class="alert alert-error">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+                                                        <strong>Oh snap!</strong> Change a few things up and try submitting again.<br/>
+						  <a href="../publico/inicio.jsf"> <div class="btn btn-large btn-warning">Pagina Inicial</div></a>
+                                                </div>
+						
+					</div>	
+                              
+				</div>
+            <div class="fluid-row">
+            <div class="span12 well" >
+                <h:inputHidden value="#{usuarioBean.usuario.idUsuario}"/>
+            <h:form id="form2" prependId="false">  
+
+                <p:dataTable id="dataTable" var="fun" value="#{usuarioBean.lista}"  
+                             paginator="true" rows="10"  
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                             rowsPerPageTemplate="5,10" emptyMessage="Nenhum Funcionário Cadastrado">  
+                    <f:facet name="header">  
+                        Lista usuario  
+                    </f:facet>  
+                    <p:column style="text-align: center" filterBy="#{fun.nome}">  
+                        <f:facet name="header">  
+                            <h:outputText value="Nome" />  
+                        </f:facet>  
+                        <h:outputText value="#{fun.nome}" />  
+                    </p:column>  
+                   
+                    <p:column style="text-align: center" > 
+                         <f:facet name="header">  
+                            <h:outputText value="Excluir" />  
+                        </f:facet>  
+                        <p:commandButton  action="#{usuarioBean.excluir}" onclick="if (! confirm('Deseja deletar o Funcionario #{fun.nome}?') ) { return false;}; return true;" icon="ui-icon-circle-close"  title="excluir">
+                     
+                            <f:setPropertyActionListener  target="#{usuarioBean.usuario}" value="#{fun}"/> 
+                       </p:commandButton>
+                      </p:column >
+                      <p:column style="text-align: center"   > 
+                               <f:facet name="header">  
+                            <h:outputText value="Editar" />  
+                        </f:facet>  
+                          <p:commandButton   action="#{usuarioBean.editar}"  icon="ui-icon-pencil" ajax="false"  title="editar">
+                                         <f:setPropertyActionListener value="#{fun}" 
+                                                                      target="#{usuarioBean.usuario}"/>
+                                    </p:commandButton>
+                          </p:column>
+                </p:dataTable>  
+            </h:form>  
+            </div></div>
+        </ui:define>
+
+     
+
+    </ui:composition>
+</html>

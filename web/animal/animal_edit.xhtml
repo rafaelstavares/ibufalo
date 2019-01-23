@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+    <ui:composition template="../templates/template.xhtml">
+        <link href="../resources/app/vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/nouislider/distribute/nouislider.min.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/dropzone/dist/min/dropzone.min.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/farbtastic/farbtastic.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/chosen/chosen.css" rel="stylesheet"/>
+        <link href=".ources/app/vendors/summernote/dist/summernote.css" rel="stylesheet"/>
+        <ui:define name="titulo">
+            Cadastro Animal
+
+        </ui:define>    
+        <ui:define name="conteudo">
+            <div class="container-fluid">
+                <h:form acceptcharset="ISO-8859-1" prependId="false" >
+                    <h:inputHidden value="#{animalBean.animal.idAnimal}"/>
+                    <h:inputHidden value="#{animalBean.destinoSalvar}"/>
+
+                    <p:messages/>
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+                    <div class="col-md-3"/>
+                    <div class="card col-md-6">
+                        <div class="card-header ch-alt">
+                            <h2>Adicionar Animal<small>Cadastro animal</small></h2>
+                        </div>
+
+                        <div class="card-body card-padding">
+
+
+
+                            <div class="form-group fg-float m-b-30">
+                                <div class="fg-line">
+                                    <h:inputText value="#{animalBean.animal.numeroAnimal}" styleClass="form-control input-sm" />
+                                    <label class="fg-label">Identificação Animal</label>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group fg-float m-b-30">
+                                <div class="fg-line">
+                                    <h:inputText value="#{animalBean.animal.nome}" styleClass="form-control input-sm" />
+                                    <label class="fg-label">Nome Animal</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group fg-float m-b-30">
+                                <dl class="dl-horizontal">
+                                    <dt  class="p-t-5">Data Nascimento</dt>
+                                    <dd>
+                                        <p:calendar styleClass="form-control input-mask" mask="99/99/9999"
+                                                    placeholder="23/05/2014" locale="pt_BR"   pattern="dd/MM/yyyy" size="10" label="Data nascimento" effect="fade" value="#{animalBean.animal.dataNascimento}" id="popupCal" required="true" requiredMessage="inserir data do Nascimento" >                     
+                                            <f:convertDateTime dateStyle="medium" pattern="dd/MM/yyyy"/>
+
+                                        </p:calendar>
+                                    </dd>
+                                </dl>
+                            </div>
+
+
+
+
+
+
+                            <div class="form-group fg-float m-b-30">
+                                <div class="fg-line">
+
+                                    <h:selectOneMenu styleClass="form-control"  value="#{animalBean.animal.sexo}">
+                                        <f:selectItem itemValue="" itemLabel="Selecione Sexo"/>
+
+                                        <f:selectItem itemValue="macho" itemLabel="Macho"/>
+                                        <f:selectItem  itemValue="femea" itemLabel="Femea" />
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group fg-float m-b-30">
+                                <div class="fg-line">
+
+
+                                    <h:selectOneMenu styleClass="form-control"  value="#{animalBean.animal.local}"  converter="IndexedConverter" > 
+                                        <f:selectItem itemValue="" itemLabel="Selecione um local"/>
+                                        <f:selectItems  var="la" itemValue="#{la}" value="#{localBean.lista}" itemLabel="#{la.nome}"/> 
+                                    </h:selectOneMenu>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group fg-float m-b-30">
+                                <div class="fg-line">
+
+                                    <h:selectOneMenu styleClass="form-control" id="raca" label="Raça"  value="#{animalBean.animal.raca}"    >
+                                        <f:selectItem itemValue="" itemLabel="Selecione uma Raça"/>
+                                        <f:selectItem  itemValue="Murrah" itemLabel="Murrah" />
+                                        <f:selectItem itemValue="Jafarabadi" itemLabel="Jafarabadi" />
+                                        <f:selectItem itemValue="Mediterrâneo" itemLabel="Mediterrâneo" />
+                                        <f:selectItem itemValue="Carabao" itemLabel="Carabao" />    
+                                    </h:selectOneMenu>
+
+                                </div>
+
+
+                            </div>
+                            <div class="form-group fg-float m-b-30">
+                                <div class="fg-line">
+                                    <h:inputText value="#{animalBean.animal.peso}" styleClass="form-control input-sm"/>
+                                    <label class="fg-label">Peso Animal</label>
+                                </div>
+                            </div>
+                            <button jsf:action="#{animalBean.salvar()}" class="btn btn-info" >Cadastrar</button>
+                            <div onclick="window.location.href = '../animal/animal.jsf'" class="btn btn-danger waves-effect">Cancel</div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3"/>
+
+
+                    <p:commandLink/>
+                </h:form>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    document.getElementById("menu-animal").className = "sub-menu active";
+                });
+
+            </script>
+
+
+        </ui:define>
+
+    </ui:composition>
+</html>
+

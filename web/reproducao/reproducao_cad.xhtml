@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/templates/internal3.xhtml">
+        <ui:define name="titulo">
+            Cadastro Reprodução
+        </ui:define>    
+        
+        <ui:define name="conteudo" >
+       
+                  <div class="span12 well">
+	
+                        <p class="lead">Você está gerenciando a fazenda <strong style="color: yellowgreen">#{contextoBean.fazendaAtiva.nome}</strong>.</p>
+			</div>
+           
+            <p:fieldset legend="Cadastro Reprodução" style="padding-right: 55px">
+                <h:form id="form3" acceptcharset="ISO-8859-1" >
+                    <h:inputHidden value="#{reproducaoBean.reproducao.idReproducao}"/>
+                    <h:inputHidden value="#{reproducaoBean.destinoSalvar}"/>
+                    <p:messages/>
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+                    <p:panelGrid columns="2">
+                        <h:outputLabel value="Pai" for="pai" />
+                        <p:selectOneMenu  value="#{reproducaoBean.reproducao.paiAnimal}" converter="converterAnimal" required="true" requiredMessage="Selecione um pai"> 
+                            <f:selectItem itemValue="" itemLabel="Selecione Pai"/>
+                            <f:selectItems  var="rpai" itemValue="#{rpai}" value="#{animalBean.listaM}" itemLabel="#{rpai.nome}"/> 
+
+                        </p:selectOneMenu>
+
+                        <h:outputLabel value="Mãe" for="mae" />
+                        <p:selectOneMenu  value="#{reproducaoBean.reproducao.maeAnimal}" converter="IndexedConverter" required="true" requiredMessage="Selecione uma Mãe"> 
+                            <f:selectItem itemValue="" itemLabel="Selecione Mãe"/>
+                            <f:selectItems  var="rma" itemValue="#{rma}" value="#{animalBean.listaF}" itemLabel="#{rma.nome}"/> 
+                        </p:selectOneMenu>
+
+
+                        <h:outputLabel value="Data Cruzamento" for="popupCal"/>
+                        <p:calendar pattern="dd/MM/yyyy" size="10" label="Data Cruzamento" effect="fade" value="#{reproducaoBean.reproducao.diaCruzamento}" id="popupCal" required="true" requiredMessage="inserir data do cruzamento" >  
+                              
+            <f:convertDateTime dateStyle="medium" pattern="dd/MM/yyyy"/>
+                </p:calendar>
+                         <h:outputLabel value="Tipo" for="tipo"/>
+                         <p:selectOneMenu id="tipo" label="Sexo" value="#{reproducaoBean.reproducao.tipo}" required="true" requiredMessage="selecione o sexo do animal"  >
+                            <f:selectItem itemValue="" itemLabel="Selecione Método reprodutivo"/>
+                            <f:selectItem  itemValue="Monta Natural" itemLabel="Monta Natural" />
+                            <f:selectItem itemValue="Iseminação Artificial" itemLabel="Iseminação Artificial" />
+                            <f:selectItem itemValue="Iseminação Artificial em tempo fixo" itemLabel="Iseminação Artificial em tempo fixo" />
+                        </p:selectOneMenu>
+                         <h:outputLabel value="Possui inseminador" for="ativador"/>
+                         <p:selectBooleanButton id="ativador" value="#{reproducaoBean.value1}"  onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close">  
+            <p:ajax update="inseminador" />
+            
+        </p:selectBooleanButton>
+                         <h:outputLabel   value="Iseminador" for="iseminador"/>
+                         <h:inputText disabled="#{reproducaoBean.value1}" id="inseminador"  value="#{reproducaoBean.reproducao.inseminador}" />
+
+                    </p:panelGrid>
+                    
+ <br/>
+ <p:commandButton id="ok" ajax="false" action="#{reproducaoBean.salvar}" value="Salvar" update="growl"/>
+<a href="../reproducao/reproducao.jsf">
+        <div  class="btn btn-large btn-danger" style="margin-left: 10px"  >Cancelar</div>
+                    </a>  </h:form>
+            </p:fieldset>
+        </ui:define>
+       
+    </ui:composition>
+</html>
+

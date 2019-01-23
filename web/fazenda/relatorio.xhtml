@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+     <ui:composition template="/template.xhtml">
+
+        <ui:define name="titulo">
+            Relatorio Fazenda
+        </ui:define>    
+
+        <ui:define name="pagina"/>
+        <ui:define name="norte"/>
+        <ui:define name="centro">
+          <p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">  
+    <p:graphicImage value="/resources/imagem/ajax_loader.gif" />  
+</p:dialog> 
+            <h:panelGrid columns="5" cellspacing="10" cellpadding="10" width="300">
+			<h:form id="impressao">
+                            <h:commandLink  onclick="PrimeFaces.monitorDownload(start, stop);" >
+                                   <f:setPropertyActionListener target="#{fazendaBean.tipoRelatorio}"
+						value="1" />
+				<p:fileDownload value="#{fazendaBean.arquivoRetorno}" />
+                                   <p:graphicImage width="40" height="40" 
+                                                   title="Imprimir Pdf" url="../resources/imagem/pdf.jpg" />
+				</h:commandLink>
+                          
+				<h:commandLink>
+                                    <f:setPropertyActionListener target="#{fazendaBean.tipoRelatorio}"
+						value="2" />
+					<p:fileDownload value="#{fazendaBean.arquivoRetorno}" />
+					<h:graphicImage  width="40" height="40" url="../resources/imagem/excel.png"
+						title="Imprimir Excel" />
+				</h:commandLink>
+				<h:commandLink>
+					<f:setPropertyActionListener target="#{fazendaBean.tipoRelatorio}"
+						value="3" />
+					<p:fileDownload value="#{fazendaBean.arquivoRetorno}" />
+					<h:graphicImage width="40" height="40" url="../resources/imagem/html.png"  
+						title="Imprimir HTML" />
+				</h:commandLink>
+				<h:commandLink>
+					<f:setPropertyActionListener target="#{fazendaBean.tipoRelatorio}"
+						value="4" />
+					<p:fileDownload value="#{fazendaBean.arquivoRetorno}" />
+					<h:graphicImage width="40" height="40"  url="../resources/imagem/calc.png"  
+						title="Imprimir Ods" />
+				</h:commandLink>
+                            <h:commandLink target="_blank" value="imprimir relatorio"  action="#{fazendaBean.gerarRelatorio}" >
+                                
+                            </h:commandLink>>
+			</h:form>
+		</h:panelGrid>
+<script type="text/javascript">  
+function start() {  
+    statusDialog.show();  
+}  
+  
+function stop() {  
+    statusDialog.hide();  
+}  
+        </script> 
+         
+        </ui:define>
+        <ui:define name="rigth"/>
+        <ui:define name="sul"/>
+    </ui:composition>
+</html>
+

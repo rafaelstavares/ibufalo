@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <title>Ufra Manager</title>
+
+        <link href="../resources/app/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>        
+
+        <!-- CSS -->
+        <link href="../resources/app/css/app.min.1.css" rel="stylesheet"/>
+        <link href="../resources/app/css/app.min.2.css" rel="stylesheet"/>
+    </h:head>
+    <h:body>
+        <header id="header" class="clearfix" data-current-skin="bluegray">
+            <ul class="header-inner">
+                <li class="logo hidden-xs">
+                    <a href="../publico/inicio.jsf">Buffalo Manager</a>
+                </li>
+
+                <li class="pull-right">
+
+                    <ul class="top-menu">
+
+                        <li class="pull-left">
+                            <a href="../publico/inicio.jsf" class="btn bgm-teal btn-icon waves-effect waves-circle waves-float" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-original-title="Gerenciar Fazendas"><i class="zmdi zmdi-undo"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" href=""><i class="tm-icon zmdi zmdi-more-vert"></i></a>
+                            <ul class="dropdown-menu dm-icon pull-right">
+                                <li class="skin-switch hidden-xs">
+                                    <i class="p-10 zmdi zmdi-pin-account"></i>Olá, #{contextoBean.usuarioLogado.nome}
+                                </li>
+                                <li class="divider hidden-xs"></li>
+                                <li class="hidden-xs">
+                                    <a data-action="fullscreen" href=""><i class="zmdi zmdi-fullscreen"></i> Toggle Fullscreen</a>
+                                </li>
+
+                                <li>
+                                    <a href="../logout"><i class="zmdi zmdi-power-off"></i> Sair</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+
+                </li>
+
+            </ul>
+        </header>
+        <div id="main">
+            <div class="container">
+                <h:form>
+                    <p:dataTable var="fazenda" value="#{fazendaBean.listaAll}">
+                        <f:facet name="header">  
+                            Lista Fazendas  
+                        </f:facet>  
+                        <p:column headerText="Nome">  
+                            <h:outputText value="#{fazenda.nome}" />  
+                        </p:column>  
+                        <p:column headerText="Usuario">  
+                            <h:outputText value="#{fazenda.usuario.nome}" />  
+                        </p:column>  
+                        <p:column headerText="Login">  
+                            <h:outputText value="#{fazenda.usuario.login}" />  
+                        </p:column>  
+                        <p:column headerText="Qtd Animas">  
+                            <h:outputText value="#{animalBean.totalAnimalALL(fazenda)}" />  
+                        </p:column>  
+
+                    </p:dataTable>
+                </h:form>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <h:form prependId="false">  
+
+                    <p:dataTable id="dataTable" var="car" value="#{usuarioBean.lista}"  
+                                 paginator="true" rows="10"  
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                 rowsPerPageTemplate="5,10,20" emptyMessage="Nenhum Animal Cadastrado">  
+                        <f:facet name="header">  
+                            Lista Usuarios  
+                        </f:facet>  
+
+                        <p:column filterBy="#{car.nome}">  
+                            <f:facet name="header">  
+                                <h:outputText value="Nome" />  
+                            </f:facet>  
+                            <h:outputText value="#{car.nome}" />  
+                        </p:column>  
+                        <p:column filterBy="#{car.email}">  
+                            <f:facet name="header">  
+                                <h:outputText value="email" />  
+                            </f:facet>  
+                            <h:outputText value="#{car.email}" />  
+                        </p:column>  
+
+                        <p:column filterBy="#{car.login}">  
+                            <f:facet name="header">  
+                                <h:outputText value="Login" />  
+                            </f:facet>  
+                            <h:outputText value="#{car.login}" />  
+                        </p:column>  
+
+                        <p:column style="text-align: center" > 
+                            <f:facet name="header">  
+                                <h:outputText value="Excluir" />  
+                            </f:facet>  
+                            <p:commandButton  action="#{usuarioBean.excluir}" onclick="if (!confirm('Deseja deletar o Usuario #{car.nome}?')) {
+                                      return false;
+                                  }
+                                  ;
+                                  return true;" icon="ui-icon-circle-close"  title="excluir">
+
+                                <f:setPropertyActionListener  target="#{usuarioBean.usuario}" value="#{car}"/> 
+                            </p:commandButton>
+                        </p:column >
+
+                        <p:column style="text-align: center"   > 
+                            <f:facet name="header">  
+                                <h:outputText value="Editar" />  
+                            </f:facet>  
+                            <p:commandButton   action="#{usuarioBean.editar}"  icon="ui-icon-pencil" ajax="false"  title="editar">
+                                <f:setPropertyActionListener target="#{usuarioBean.usuario}" value="#{car}" />
+                            </p:commandButton>
+                        </p:column>
+
+
+                    </p:dataTable>  <br/>
+                    <h1>ola #{contextoBean.usuarioLogado.nome}</h1>
+
+                </h:form>  
+            </div>
+        </div>
+        <!-- Javascript Libraries -->
+        <script src="../resources/app/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="../resources/app/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <script src="../resources/app/vendors/bower_components/flot/jquery.flot.js"></script>
+        <script src="../resources/app/vendors/bower_components/flot/jquery.flot.resize.js"></script>
+        <script src="../resources/app/vendors/bower_components/flot.curvedlines/curvedLines.js"></script>
+        <script src="../resources/app/vendors/sparklines/jquery.sparkline.min.js"></script>
+        <script src="../resources/app/vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+
+        <script src="../resources/app/vendors/bower_components/moment/min/moment.min.js"></script>
+        <script src="../resources/app/vendors/bower_components/fullcalendar/dist/fullcalendar.min.js "></script>
+        <script src="../resources/app/vendors/bower_components/simpleWeather/jquery.simpleWeather.min.js"></script>
+        <script src="../resources/app/vendors/bower_components/Waves/dist/waves.min.js"></script>
+        <script src="../resources/app/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+        <script src="../resources/app/vendors/bower_components/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="../resources/app/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+
+        <!-- Placeholder for IE9 -->
+        <!--[if IE 9 ]>
+            <script src="vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
+        <![endif]-->
+        <script src="../resources/app/js/functions.js"></script>
+
+
+    </h:body>
+</html>
+

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/templates/internal3.xhtml">
+        <ui:define name="titulo">
+            Cadastro Piquete
+        </ui:define>    
+
+        <ui:define name="conteudo">
+            
+            <p:fieldset legend="Cadastro Piquete" style="padding-right: 55px">
+ 
+                <h:form acceptcharset="ISO-8859-1" >
+            <h:inputHidden value="#{localBean.local.idlocal}"/>
+            <h:inputHidden value="#{localBean.destinoSalvar}"/>
+          <p:messages/>
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+              <p:panelGrid columns="2">
+         <h:outputLabel value="Nome" for="nome"/>
+         <p:inputText id="nome" label="Nome" value="#{localBean.local.nome}" required="true" requiredMessage="insira um nome">
+                     </p:inputText>
+          <h:outputLabel value="Tamanho" for="tamanho"/>
+          <p:inputText id="tamanho" label="Tamanho" value="#{localBean.local.tamanho}">
+              <f:convertNumber maxIntegerDigits="1"/>
+                </p:inputText>
+         
+        </p:panelGrid>
+        
+                    <p:commandButton ajax="false" action="#{localBean.salvar}" value="Salvar" update="growl" />
+        
+        </h:form>
+            </p:fieldset>
+        </ui:define>
+        <ui:define name="rigth"/>
+        <ui:define name="sul"/>
+    </ui:composition>
+</html>
+
+

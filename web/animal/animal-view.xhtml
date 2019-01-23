@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="../templates/template.xhtml">
+            <ui:define name="titulo">Inicio Animal</ui:define>'
+            <ui:define name="conteudo">
+                <div class="container container-alt">
+                    <h:inputHidden value="#{animalBean.animal.idAnimal}"/>
+                    <div class="block-header">
+                        <h2>Resumo 
+                            <small>Dados básico do Animal</small>
+                        </h2>
+                    </div>
+
+                        <div class="card clearfix">
+                            <div class="col-sm-12">
+                                <div role="tabpanel" class="tab">
+                                    <ul class="tab-nav tn-justified hidden-print" role="tablist">
+                                        <li class="active"><a href="#home9" aria-controls="home9" role="tab"
+                                                              data-toggle="tab">Principal</a></li>
+                                        <li role="presentation"><a href="#profile9" aria-controls="profile9"
+                                                                   role="tab" data-toggle="tab">Profile</a></li>
+                                        <li role="presentation"><a href="#messages9" aria-controls="messages9"
+                                                                   role="tab" data-toggle="tab">Messages</a></li>
+                                        <li role="presentation"><a href="#conections" aria-controls="conections"
+                                                                   role="tab" data-toggle="tab">Conections</a></li>
+                                    </ul>
+  <section>
+                                    <div id="profile-main" class="tab-content">
+                                        <div role="tabpanel" class="tab-pane active animated fadeInRight in"
+                                             id="home9">
+
+                                            <div class="pmb-block">
+                                                <div class="pmbb-header">
+                                                    <h2><i class="zmdi zmdi-equalizer m-r-10"></i> Observações</h2>
+
+
+                                                </div>
+                                                <div class="pmbb-body p-l-30">
+                                                    <div class="pmbb-view">
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+                                            <div class="pmb-block">
+                                                <div class="pmbb-header">
+                                                    <h2><i class="zmdi zmdi-account m-r-10"></i> Informações Básicas</h2>
+
+
+                                                </div>
+                                                <div class="pmbb-body p-l-30">
+                                                    <div class="pmbb-view">
+                                                        <dl class="dl-horizontal">
+                                                            <dt>Nome</dt>
+                                                            <dd><h:outputText value="#{animalBean.animal.nome}"/></dd>
+                                                        </dl>
+                                                        <dl class="dl-horizontal">
+                                                            <dt>Sexo</dt>
+                                                            <dd>#{animalBean.animal.sexo}</dd>
+                                                        </dl>
+                                                        <dl class="dl-horizontal">
+                                                            <dt>Data Nascimento</dt>
+                                                            <dd><h:outputText value="#{animalBean.animal.dataNascimento}">
+                                                                
+                                                                <f:convertDateTime dateStyle="medium" pattern="dd/MM/yyyy"/>
+                                                                
+                                                                </h:outputText></dd>
+                                                        </dl>
+                                                           <dl class="dl-horizontal">
+                                                            <dt>Idade</dt>
+                                                            <dd><h:outputText value="#{animalBean.IdadeAnimalAMD(animalBean.animal.dataNascimento)}"/></dd>
+                                                        </dl>
+                                                        <dl class="dl-horizontal">
+                                                            <dt>Martial Status</dt>
+                                                            <dd>Single</dd>
+                                                        </dl>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+                                            <div class="pmb-block">
+                                                <div class="pmbb-header">
+                                                    <h2><i class="zmdi zmdi-phone m-r-10"></i> Contact Information</h2>
+
+
+                                                </div>
+                                                <div class="pmbb-body p-l-30">
+                                                    <div class="pmbb-view">
+                                                        <dl class="dl-horizontal">
+                                                            <dt>Mobile Phone</dt>
+                                                            <dd>00971 12345678 9</dd>
+                                                        </dl>
+                                                        <dl class="dl-horizontal">
+                                                            <dt>Email Address</dt>
+                                                            <dd>malinda.h@gmail.com</dd>
+                                                        </dl>
+                                                        <dl class="dl-horizontal">
+                                                            <dt>Twitter</dt>
+                                                            <dd>@malinda</dd>
+                                                        </dl>
+                                                        <dl class="dl-horizontal">
+                                                            <dt>Skype</dt>
+                                                            <dd>malinda.hollaway</dd>
+                                                        </dl>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane animated fadeInRight" id="profile9">
+                                            <p>Morbi mattis ullamcorper velit. Etiam rhoncus. Phasellus leo dolor,
+                                                tempus non, auctor et, hendrerit quis, nisi. Cras id dui. Curabitur
+                                                turpis.
+                                                Etiam ut purus mattis mauris sodales aliquam. Aenean viverra rhoncus
+                                                pede. Nulla sit amet est. Donec mi odio, faucibus.</p>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane animated fadeInRight" id="messages9">
+                                            <p>Etiam rhoncus. Phasellus leo dolor, tempus non, auctor et, hendrerit
+                                                quis, nisi. Cras id dui. Curabitur turpis.
+                                                Etiam ut purus mattis mauris sodales aliquam. Aenean viverra rhoncus
+                                                pede. Nulla sit amet est. Donec mi odio, faucibus at, scelerisque
+                                                quis, convallis in, nisi. Praesent ac sem eget est egestas
+                                                volutpat.</p>
+                                        </div>
+
+
+                                        <div role="tabpanel" class="tab-pane animated fadeInRight" id="conections">
+                                            <p>Etiam rhoncus. Phasellus leo dolor, tempus non, auctor et, hendrerit
+                                                quis, nisi. Cras id dui. Curabitur turpis.
+                                                Etiam ut purus mattis mauris sodales aliquam. Aenean viverra rhoncus
+                                                pede. Nulla sit amet est. Donec mi odio, faucibus at, scelerisque
+                                                quis, convallis in, nisi. Praesent ac sem eget est egestas
+                                                volutpat.</p>
+                                        </div>
+
+                                    </div>
+          <a class="btn btn-float bgm-red m-btn" data-ma-action="print" href=""><i class="zmdi zmdi-print"></i></a>
+                    </section>
+                                </div>
+                            </div>
+
+                        </div>
+                    
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        document.getElementById("menu-animal").className = "sub-menu active";
+                    });
+                </script>
+                <script src="../resources/js/app.min.js"></script>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+    <h:body>
+        <ui:composition template="../templates/template.xhtml">
+            <ui:define name="titulo">inicio Funcionario</ui:define>'
+            <ui:define name="conteudo">
+                <div class="container-fluid">
+                    <h:form acceptcharset="ISO-8859-1" prependId="false" >
+                        <h:inputHidden value="#{funcionariosBean.funcionarios.idFuncionarios}"/>
+                        <h:inputHidden value="#{funcionariosBean.destinoSalvar}"/>
+
+                        <p:messages/>
+                        <p:growl id="growl" showDetail="true" sticky="true" /> 
+                        <div class="col-md-3"/>
+                        <div class="card col-md-6">
+                            <div class="card-header ch-alt">
+                                <h2>Adicionar Funcionario<small>Pellentesque ac lectus sed elit dictum vehicula</small></h2>
+                            </div>
+
+                            <div class="card-body card-padding">
+                                <div class="form-group fg-float m-b-30">
+                                    <div class="fg-line">
+                                        <h:inputText value="#{funcionariosBean.funcionarios.nome}" styleClass="form-control input-sm" />
+                                        <label class="fg-label">Nome Funcionario</label>
+                                    </div>
+                                </div>
+                          
+
+                                       <div class="form-group fg-float m-b-30">
+                                    <div class="fg-line">        
+                                        <h:selectOneMenu  styleClass="form-control" id="genero" label="Gênero"  value="#{funcionariosBean.funcionarios.estadoCivil}" >
+                            <f:selectItem itemValue="" itemLabel="Selecione Gênero"/>
+                            <f:selectItem  itemValue="Masculino" itemLabel="Masculino" />
+                            <f:selectItem itemValue="Feminino" itemLabel="Feminino" />
+                            <f:selectItem itemValue="Outros" itemLabel="Outros" />
+                                    
+                        </h:selectOneMenu>
+                                    </div>
+                                       </div>
+
+                                <div class="form-group fg-float m-b-30">
+                                    <div class="fg-line">
+                                        <h:inputText  value="#{funcionariosBean.funcionarios.dependentes}" styleClass="form-control input-sm"/>
+                                        <label class="fg-label">Numero Dependentes</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group fg-float m-b-30">
+                                    <div class="fg-line">
+                                        <h:inputText value="#{funcionariosBean.funcionarios.endereco}" styleClass="form-control input-sm"/>
+                                        <label class="fg-label">Endereço</label>
+                                    </div>
+                                </div>
+                                
+<div class="form-group fg-float m-b-30">
+    <dl class="dl-horizontal">
+    <dt  class="p-t-5">Data Nascimento</dt>
+    <dd>
+        <p:calendar styleClass="form-control input-mask" mask="99/99/9999"
+                                               placeholder="23/05/2014" locale="pt_BR"   pattern="dd/MM/yyyy" size="10" label="Data nascimento" effect="fade" value="#{funcionariosBean.funcionarios.dataNascimento}" id="popupCal" required="true" requiredMessage="inserir data do Nascimento" >                     
+            <f:convertDateTime dateStyle="medium" pattern="dd/MM/yyyy"/>
+            
+</p:calendar>
+    </dd>
+    </dl>
+</div>
+                                <div class="form-group fg-float m-b-30">
+                                    <div class="fg-line">
+                                        <h:inputText value="#{funcionariosBean.funcionarios.rg}" maxlength="12" styleClass="form-control input-sm"/>
+                                        <label class="fg-label">Numero Identidade</label>
+                                    </div>
+                                </div>
+                                
+                                 <div class="form-group fg-float m-b-30">
+                                    <div class="fg-line">
+                                        <h:inputText id="cpf"  value="#{funcionariosBean.funcionarios.cpf}" styleClass="form-control input-sm"/>
+                                        
+                                     
+                                        <label class="fg-label">Digite CPF</label>
+                                    </div>
+                                </div>
+
+<h:commandLink id="btn-salvarPiquete" action="#{funcionariosBean.salvar()}"/>
+                                <div onclick="salvarPiquete()" class="btn btn-info waves-effect">Salvar</div>
+                                <div onclick="window.location.href = '../funcionarios/listar.jsf'" class="btn btn-danger waves-effect">Cancelar</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3"/>
+
+
+                        <p:commandLink/>
+                    </h:form>
+                </div>
+
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        document.getElementById("menu-funcionario").className = "sub-menu active";
+                    });
+                    
+                     function salvarPiquete() {
+
+
+                                        var jsfCommandLink = document.getElementById("btn-salvarPiquete");
+                                        jsfCommandLink.click();
+                                    }
+                    $(document).ready(function(){
+$(function(){
+  $("#cpf").mask("999.999.999-99");  
+    
+    
+    
+});
+});
+                </script>
+                        <script  src="../resources/app/vendors/input-mask/input-mask.min.js"/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

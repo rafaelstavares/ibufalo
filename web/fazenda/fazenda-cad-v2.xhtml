@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="titulo">
+            Cadastro Fazenda
+        </ui:define>    
+
+        <ui:define name="pagina"/>
+        <ui:define name="norte"/>
+        <ui:define name="centro">
+            <p:fieldset legend="Cadastro fazenda">
+
+                <h:form acceptcharset="ISO-8859-1" >
+                   
+                    <h:inputHidden valueChangeListener="#{fazendaBean.tornaFavorita()}" value="#{fazendaBean.selecionada.favorita}" />
+                    <p:messages/>
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Nomef" for="nomef" />
+                        <p:inputText id="nomef" label="Nomef" value="#{fazendaBean.selecionada.nome}" required="true"  requiredMessage="Escolha um Nome" >
+                        </p:inputText>
+                        <h:outputLabel value="Endereço" for="endereco"/>
+                        <p:inputText id="endereco" label="Endereço" value="#{fazendaBean.selecionada.endereco}">       
+                        </p:inputText>
+                        <h:outputLabel value="Estado" for="estado"/>
+
+                        <p:selectOneMenu filter="true" value="#{fazendaBean.selecionada.estado}" filterMatchMode="startsWith" required="true" requiredMessage="Escolha um Estado" >
+                            <f:selectItem itemValue="" itemLabel="Selecione um Estado"/>
+                            <f:selectItem  itemValue="acre" itemLabel="Acre" />
+                            <f:selectItem itemValue="alagoas" itemLabel="Alagoas" />
+                            <f:selectItem itemValue="amapa" itemLabel="Amapá" />
+                            <f:selectItem itemValue="amazonas" itemLabel="Amazonas" />
+                            <f:selectItem itemValue="#bahia" itemLabel="Bahia" />
+                            <f:selectItem itemValue="ceara" itemLabel="Ceará" />
+                            <f:selectItem itemValue="distritofederal" itemLabel="Distrito Federal" />
+                            <f:selectItem itemValue="espiritosanto" itemLabel="Espírito Santo" />
+                            <f:selectItem itemValue="goias" itemLabel="Goiás" />
+                            <f:selectItem itemValue="maranhao" itemLabel="Maranhão" />
+                            <f:selectItem itemValue="matogroso" itemLabel="Mato Grosso" />
+                            <f:selectItem itemValue="matogrossodosul" itemLabel="Mato Grosso do Sul" />
+                            <f:selectItem itemValue="minasgerais" itemLabel="Minas Gerais" />
+                            <f:selectItem itemValue="parana" itemLabel="Paraná" />
+                            <f:selectItem itemValue="paraiba" itemLabel="Paraíba" />
+                            <f:selectItem itemValue="para" itemLabel="Pará" />
+                            <f:selectItem itemValue="pernambuco" itemLabel="Pernambuco" />
+                            <f:selectItem itemValue="piaui" itemLabel="Piauí" />
+                            <f:selectItem itemValue="riodejaneiro" itemLabel="Rio Grande do Norte" />
+                            <f:selectItem itemValue="riograndedosul" itemLabel="Rio Grande do Sul" />
+                            <f:selectItem itemValue="rodonia" itemLabel="Rondônia" />
+                            <f:selectItem itemValue="roraima" itemLabel="Roraima" />
+                            <f:selectItem itemValue="santacatarina" itemLabel="Santa Catarina" />
+                            <f:selectItem itemValue="sergipe" itemLabel="Sergipe" />
+                            <f:selectItem itemValue="saopaulo" itemLabel="São Paulo" />
+                            <f:selectItem itemValue="tocantins" itemLabel="Tocantins" />
+                        </p:selectOneMenu>>   
+
+
+                    </h:panelGrid>
+
+                    <h:commandButton  action="#{fazendaBean.salvar}" value="Salvar"  />
+<h:commandButton  action="#{fazendaBean.cancela}" value="Cancela"  />
+                </h:form>
+
+            </p:fieldset>
+        </ui:define>
+        <ui:define name="rigth"/>
+        <ui:define name="sul"/>
+    </ui:composition>
+</html>

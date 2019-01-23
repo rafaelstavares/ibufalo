@@ -1,0 +1,340 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Material Admin</title>
+
+        <link href="../resources/app/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>        
+
+        <!-- CSS -->
+        <link href="../resources/app/css/app.min.1.css" rel="stylesheet"/>
+        <link href="../resources/app/css/app.min.2.css" rel="stylesheet"/>
+        <style type="text/css">
+            .mybutton {
+                margin: 2px;
+                padding: 0;
+                border: none;
+                width: 80px;
+                height: 80px;
+                background-image: url('../resources/imagem/farm.jpg');
+
+
+            }
+
+            .mybutton:hover {
+                background-image: url('../resources/imagem/farm1.jpg');
+            }
+            .notifications .btn {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+        </style>
+    </h:head>
+
+    <h:body >
+
+        <!-- Vendor CSS -->
+        <f:view>'
+
+
+
+            <header id="header" class="clearfix" data-current-skin="blue">
+                <ul class="header-inner">
+                    <li class="logo hidden-xs">
+                        <a href="inicio.jsf">Buffalo Manager</a>
+                    </li>
+                    <li class="pull-right">
+                        <ul class="top-menu">
+
+
+
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" href="">
+                                    <i class="tm-icon zmdi zmdi-notifications"></i>
+                                    <i class="tmn-counts">9</i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-lg pull-right">
+                                    <div class="listview" id="notifications">
+                                        <div class="lv-header">
+                                            Notification
+
+                                            <ul class="actions">
+                                                <li class="dropdown">
+                                                    <a href="" data-clear="notification">
+                                                        <i class="zmdi zmdi-check-all"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="lv-body">
+                                            <a class="lv-item" href="">
+                                                <div class="media">
+                                                    <div class="pull-left">
+                                                        <img class="lv-img-sm" src="../resources/app/img/profile-pics/1.jpg" alt=""/>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <div class="lv-title">David Belle</div>
+                                                        <small class="lv-small">Cum sociis natoque penatibus et magnis dis parturient montes</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="lv-item" href="">
+                                                <div class="media">
+                                                    <div class="pull-left">
+                                                        <img class="lv-img-sm" src="../resources/app/img/profile-pics/2.jpg" alt=""/>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <div class="lv-title">Jonathan Morris</div>
+                                                        <small class="lv-small">Nunc quis diam diamurabitur at dolor elementum, dictum turpis vel</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="lv-item" href="">
+                                                <div class="media">
+                                                    <div class="pull-left">
+                                                        <img class="lv-img-sm" src="../resources/app/img/profile-pics/3.jpg" alt=""/>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <div class="lv-title">Fredric Mitchell Jr.</div>
+                                                        <small class="lv-small">Phasellus a ante et est ornare accumsan at vel magnauis blandit turpis at augue ultricies</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="lv-item" href="">
+                                                <div class="media">
+                                                    <div class="pull-left">
+                                                        <img class="lv-img-sm" src="../resources/app/img/profile-pics/4.jpg" alt=""/>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <div class="lv-title">Glenn Jecobs</div>
+                                                        <small class="lv-small">Ut vitae lacus sem ellentesque maximus, nunc sit amet varius dignissim, dui est consectetur neque</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="lv-item" href="">
+                                                <div class="media">
+                                                    <div class="pull-left">
+                                                        <img class="lv-img-sm" src="../resources/app/img/profile-pics/4.jpg" alt=""/>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <div class="lv-title">Bill Phillips</div>
+                                                        <small class="lv-small">Proin laoreet commodo eros id faucibus. Donec ligula quam, imperdiet vel ante placerat</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <a class="lv-footer" href="">View Previous</a>
+                                    </div>
+
+                                </div>
+                            </li>  
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" href=""><span class="text-uppercase p-10">#{contextoBean.usuarioLogado.nome}</span><i class="tm-icon zmdi zmdi-settings"></i></a>
+                                <ul class="dropdown-menu dm-icon pull-right">
+                                    <li class="skin-switch hidden-xs">
+                                        <span class="ss-skin bgm-lightblue" data-skin="lightblue"></span>
+                                        <span class="ss-skin bgm-bluegray" data-skin="bluegray"></span>
+                                        <span class="ss-skin bgm-cyan" data-skin="cyan"></span>
+                                        <span class="ss-skin bgm-teal" data-skin="teal"></span>
+                                        <span class="ss-skin bgm-orange" data-skin="orange"></span>
+                                        <span class="ss-skin bgm-blue" data-skin="blue"></span>
+                                    </li>
+                                    <li class="divider hidden-xs"></li>
+                                    <li class="hidden-xs">
+                                        <a data-action="fullscreen" href=""><i class="zmdi zmdi-fullscreen"></i> Toggle Fullscreen</a>
+                                    </li>
+                                    <li>
+                                        <a data-action="apagar-fazenda" href=""><i class="zmdi zmdi-delete"></i> Clear Local Storage</a>
+                                    </li>
+                                    <li>
+                                        <a href=""><i class="zmdi zmdi-face"></i> Privacy Settings</a>
+                                    </li>
+                                    <li>
+                                        <a href="../logout"><i class="zmdi zmdi-power-off"></i> Sair</a>
+                                    </li>
+                                </ul>
+                            </li>   
+
+
+                        </ul>
+
+                    </li>
+
+                </ul>
+            </header>
+
+            <section id="main">
+
+
+                <section id="content">
+                    <div class="container">
+
+                        <div class="text-center">
+                            <h2 class="f-400" style="color: #009688">Bem Vindo ao Buffalo Manager!</h2>
+                            <p class="c-gray m-t-20 m-b-20">
+
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                <a href="inicio_1.jsf">
+                                    <div class="btn bgm-cyan waves-effect">ir pagina</div>
+                                </a>
+                            </p>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+
+                        <div class="card">
+                            <div class="card-header ch-alt">
+                                <h:form id="formFazenda" prependId="false">
+
+                                    <h:commandLink id="add" action="#{fazendaBean.novoFazenda}" style="padding-left: 30px;     " >
+
+                                    </h:commandLink>
+
+                                </h:form>
+                                <h2>Gerenciador  de Fazenda<small>Selecione uma fazenda para gerenciar</small></h2>
+                                <div onclick="addFazenda()" title="Adicionar Fazenda" class="btn bgm-red btn-float waves-effect"><i class="zmdi zmdi-plus"></i>
+
+
+
+                                </div>
+                                <div class="card-body card-padding">
+                                    <div class="row m-t-25">
+                                        <h:form  id="form01" prependId="false" >
+                                            <h:inputHidden value="#{usuarioBean.usuario.idUsuario}"/>
+
+                                            <p:dataGrid id="tform"  var="farm"  value="#{fazendaBean.lista}" columns="3" emptyMessage="Não há nenhuma fazenda cadastrada" >  
+
+                                                <p:column>  
+
+                                                    <p:panel id="pnl" header="#{farm.nome}" style="text-align:center"  >  
+                                                        <h:panelGrid id="tFazenda" columns="3" cellpadding="10px"  > 
+                                                            <p:column> 
+                                                                <h:commandLink action="principal" title="entrar"   >
+                                                                    <img class="mybutton"  style="border: none" />
+                                                                    <f:setPropertyActionListener  target="#{contextoBean.ativafazenda}" value="#{farm}"/>                      
+                                                                    <br/>Acessar
+                                                                </h:commandLink>
+                                                            </p:column>
+                                                            <p:column> 
+
+
+                                                                <h:commandLink id="btn04" onclick=""  action="#{fazendaBean.excluir()}"    >
+                                                               
+                                                                    <f:setPropertyActionListener value="#{farm}" 
+                                                                                                 target="#{fazendaBean.selecionada}"/>
+                                                                </h:commandLink>
+                                                                <div  class="btn btn-danger waves-effect bt-sm" onclick="myFunctionDel()"><i class="zmdi zmdi-edit zmdi-hc-fw"></i> Excluir</div>
+
+                                                            </p:column>
+
+
+                                                            <p:column> 
+                                                                <h:commandLink  id="editar" class="m-10"   action="#{fazendaBean.editar}"   title="editar">
+                                                                    <f:setPropertyActionListener value="#{farm}" 
+                                                                                                 target="#{fazendaBean.selecionada}"/>
+                                                                    <div class="btn btn-info waves-effect bt-sm"><i class="zmdi zmdi-edit zmdi-hc-fw"></i> Editar</div>
+                                                                </h:commandLink>
+                                                            </p:column>
+                                                        </h:panelGrid>  
+                                                    </p:panel>  
+                                                    <p:draggable for="pnl" revert="true" opacity="0.3"  />
+
+                                                </p:column>
+
+                                            </p:dataGrid>    
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+            </section>
+
+            <fooder id="fooder">
+                <center>Copyright &copy; 2016  -  <a href="http://www.ufra.edu.br" target="_blank">UFRA</a> - <i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Bacharelado em Sistema de Informação</center>
+            </fooder>
+
+
+
+
+            <!-- Javascript Libraries -->
+            <script src="../resources/app/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+            <script src="../resources/app/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+            <script src="../resources/app/vendors/bower_components/Waves/dist/waves.min.js"></script>
+            <script src="../resources/app/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+            <script src="../resources/app/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js"></script>
+
+            <!-- Placeholder for IE9 -->
+            <!--[if IE 9 ]>
+                <script src="../resources/app/vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
+            <![endif]-->
+
+            <script src="../resources/app/js/functions.js"></script>
+            <script src="../resources/app/js/demo.js"></script>
+
+
+            <script type="text/javascript">
+                function myFunctionDel() {
+        $('td').click(function(){
+  var col = $(this).parent().children().index($(this));
+  var row = $(this).parent().parent().children().index($(this).parent());
+  alert(row);
+        });
+    }
+                                        /*
+                                         * Notifications
+                                        
+                                        $('td').click(function(){
+  var col = $(this).parent().children().index($(this));
+  var row = $(this).parent().parent().children().index($(this).parent());
+  
+  swal({   title: "Are you sure?",   
+      text: "You will not be able to recover this imaginary file!",   
+      type: "warning",   
+      showCancelButton: true,   
+      confirmButtonColor: "#DD6B55",   
+      confirmButtonText: "Yes, delete it!",   
+      closeOnConfirm: false }, 
+  function(){   
+      swal("Deleted!", "Your imaginary file has been deleted.", "success"); 
+  
+    
+ 
+ 
+alert(row);
+           
+    });
+      
+
+}); */
+
+
+   
+     
+
+                                        function addFazenda() {
+
+                                            var jsfCommandLink = document.getElementById("add");
+                                            jsfCommandLink.click();
+
+                                        }
+
+            </script>
+        </f:view>
+    </h:body>
+</html>

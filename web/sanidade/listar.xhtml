@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"    
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="titulo">
+            Lista Sanidade
+        </ui:define>    
+
+        <ui:define name="pagina"/>
+        <ui:define name="norte"/>
+        <ui:define name="centro">
+            <h:form prependId="false">  
+
+                <p:dataTable id="dataTable" var="san" value="#{sanidadeBean.lista}"  
+                             paginator="true" rows="10"  
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                             rowsPerPageTemplate="5,10" emptyMessage="Nenhum Sanidade Cadastrada">  
+                    <f:facet name="header">  
+                        Listar Sanidade  
+                    </f:facet>  
+                    <p:column filterBy="#{san.animal.nome}">  
+                        <f:facet name="header">  
+                            <h:outputText value="Animal" />  
+                        </f:facet>  
+                        <h:outputText value="#{san.animal.nome}" />  
+                    </p:column> 
+                    <p:column filterBy="#{san.local.nome}">  
+                        <f:facet name="header">  
+                            <h:outputText value="Local" />  
+                        </f:facet>  
+                        <h:outputText value="#{san.local.nome}" />  
+                    </p:column>  
+                    <p:column >  
+                        <f:facet name="header">  
+                            <h:outputText value="Vacina" />  
+                        </f:facet>  
+                        <h:outputText value="#{san.vacina}" >
+                        </h:outputText>
+                    </p:column> 
+                    <p:column filterBy="#{san.vermefugo}">  
+                        <f:facet name="header">  
+                            <h:outputText value="Vermefugo" />  
+                        </f:facet>  
+                        <h:outputText value="#{san.vermefugo}" />  
+                    </p:column> 
+                </p:dataTable>  
+            </h:form>  
+        </ui:define>
+        <ui:define name="rigth"/>
+        <ui:define name="sul"/>
+    </ui:composition>
+</html>
+

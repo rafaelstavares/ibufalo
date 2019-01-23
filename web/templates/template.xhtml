@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:sec="http://www.springframework.org/security/facelets/tags">
+
+    <h:head> 
+
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <title><ui:insert name="titulo">iBufalo</ui:insert></title>
+
+        <link href="../resources/app/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>        
+
+        <!-- CSS -->
+        <link href="../resources/app/css/app.min.1.css" rel="stylesheet"/>
+        <link href="../resources/app/css/app.min.2.css" rel="stylesheet"/>
+        <!-- <link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'/>
+        <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'/>
+        --><link href="../resources/app/vendors/bootgrid/jquery.bootgrid.min.css" rel="stylesheet"/>
+        <style type="text/css">
+            @-webkit-keyframes content {
+                0% { opacity: 0; }
+                100% { opacity: 1; } 
+            }
+            @-moz-keyframes content {
+                0% { opacity: 0;}
+                100% { opacity: 1; }
+            }
+            @-o-keyframes content {
+                0% { opacity: 0; }
+                100% { opacity: 1; }
+            }
+            @keyframes content {
+                0% { opacity: 0; }
+                100% { opacity: 1; }
+            }
+            #content {
+                -webkit-animation: fadeIn 3s ease-in-out;
+                -moz-animation: fadeIn 3s ease-in-out;
+                -o-animation: fadeIn 3s ease-in-out;
+                animation: fadeIn 3s ease-in-out;
+            }
+
+            #lost{
+               
+                border-radius: 10px;
+
+            }
+
+
+        </style>
+    </h:head> 
+    <f:view>
+        <h:body>
+            <section id="main" data-layout="layout-1">
+
+                <div id="header">
+                    <ui:insert name="header" > 
+                        <ui:include src="/templates/header.xhtml" />
+                    </ui:insert> 
+                </div> 
+                <div id="sidebar-left"> 
+                    <ui:insert name="sidebar-left" > 
+                        <ui:include src="/templates/sidebar-left.xhtml" /> 
+                    </ui:insert> 
+                </div> 
+
+                <section id="content">
+                    <ui:insert name="conteudo" > 
+                        <ui:include src="/templates/conteudo.xhtml" /> 
+                    </ui:insert> 
+
+                </section>
+
+
+
+                <div id="footer"> 
+                    <ui:insert name="footer" > 
+                        <ui:include src="/templates/footer.xhtml" /> 
+                    </ui:insert>
+                </div> 
+                <p:inputText type="hidden"/>
+            </section>
+            <!-- Javascript Libraries -->
+            <script src="../resources/app/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+            <script src="../resources/app/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+            <script src="../resources/app/vendors/bower_components/Waves/dist/waves.min.js"></script>
+            <script src="../resources/app/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+            <script src="../resources/app/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js"></script>
+            <script src="../resources/app/vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+            <script src="../resources/app/vendors/sparklines/jquery.sparkline.min.js"></script>
+            <script src="../resources/app/vendors/bootgrid/jquery.bootgrid.updated.min.js"></script>
+            <!-- Placeholder for IE9 -->
+            <!--[if IE 9 ]>
+                <script src="../resources/app/vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
+            <![endif]-->
+            <script src="../resources/app/js/charts.js"></script>
+            <script src="../resources/app/js/functions.js"></script>
+
+            <script src="../resources/js/locale-primefaces.js"></script>
+        </h:body>
+
+    </f:view>
+</html>

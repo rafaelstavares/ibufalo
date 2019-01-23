@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"    
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="titulo">
+            Listar Bezerro
+        </ui:define>    
+
+        <ui:define name="pagina"/>
+        <ui:define name="norte"/>
+        <ui:define name="centro">
+            <h:form prependId="false">  
+
+                <p:dataTable id="dataTable" var="ber" value="#{bezerroBean.lista}"  
+                             paginator="true" rows="10"  
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                             rowsPerPageTemplate="5,10,20" emptyMessage="Nenhum Bezerro Cadastrado">  
+                    <f:facet name="header">  
+                        Lista Bezerros  
+                    </f:facet>  
+
+                    <p:column filterBy="#{ber.nome}">  
+                        <f:facet name="header">  
+                            <h:outputText value="Nome" />  
+                        </f:facet>  
+                        <h:outputText value="#{ber.nome}" />  
+                    </p:column>  
+
+                    <p:column filterBy="#{ber.maeAnimal.nome}">  
+                        <f:facet name="header">  
+                            <h:outputText value="Mãe" />  
+                        </f:facet>  
+                        <h:outputText value="#{ber.maeAnimal.nome}" />  
+                    </p:column>  
+
+                    <p:column filterBy="#{ber.paiAnimal.nome}">  
+                        <f:facet name="header">  
+                            <h:outputText value="Pai" />  
+                        </f:facet>  
+                        <h:outputText value="#{ber.paiAnimal.nome}" />  
+                    </p:column>  
+
+                    <p:column >  
+                        <f:facet name="header">  
+                            <h:outputText value="Peso" />  
+                        </f:facet>  
+                        <h:outputText value="#{ber.peso}" />  
+                    </p:column>  
+                    <p:column >  
+                        <f:facet name="header">  
+                            <h:outputText value="Nacimento" />  
+                        </f:facet>  
+                        <h:outputText value="#{ber.datanascimento}" > 
+                            <f:convertDateTime pattern="dd/MM/yy" dateStyle="medium"/>
+                        </h:outputText> 
+                    </p:column>  
+                </p:dataTable>  
+
+            </h:form>  
+        </ui:define>
+        <ui:define name="rigth"/>
+        <ui:define name="sul"/>
+    </ui:composition>
+</html>

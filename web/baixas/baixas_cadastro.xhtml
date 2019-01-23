@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../templates/internal3.xhtml">
+    
+        <ui:define name="titulo">
+            Animal
+        </ui:define>    
+     
+        <ui:define name="conteudo">
+            
+               <p class="lead">Você está gerenciando a fazenda <strong style="color: yellowgreen">#{contextoBean.fazendaAtiva.nome}</strong>.</p>
+			
+ <p:fieldset legend="Cadastro Animal" style="padding-right: 55px">
+       <h:form acceptcharset="ISO-8859-1" >
+       
+           <h:inputHidden value="#{animalBean.animal.idAnimal}"/>
+             <h:inputHidden value="#{animalBean.animal.sexo}"/>
+             <h:inputHidden value="#{animalBean.animal.local}" converter="IndexedConverter"/>
+               <h:inputHidden value="#{animalBean.animal.raca}" />
+               <h:inputHidden value="#{animalBean.animal.dataNascimento}">
+               <f:convertDateTime dateStyle="medium" pattern="dd/MM/yyyy"/>
+               </h:inputHidden>
+               <h:inputHidden value="#{animalBean.animal.numeroAnimal}"/>
+               <h:inputHidden value="#{animalBean.animal.peso}"/>
+               <h:inputHidden value="#{animalBean.animal.nomeAvo}"/>
+               <h:inputHidden value="#{animalBean.animal.nomeMae}"/>
+                <h:inputHidden value="#{animalBean.animal.nomePai}"/>
+                <h:inputHidden value="#{animalBean.animal.nome}"/>
+              <p:messages/>
+              <p:growl id="growl" showDetail="true" sticky="true" /> 
+              <p:panelGrid columns="2">
+                   <h:outputLabel value="Numero" for="numero" />
+                   <p:inputText id="numero" readonly="true" label="Numero" value="#{animalBean.animal.numeroAnimal}" >
+                     </p:inputText>
+         <h:outputLabel value="Nome" for="nome" />
+         <p:inputText id="nome" label="Nome" readonly="true" value="#{animalBean.animal.nome}" >
+                     </p:inputText>
+          <h:outputLabel value="ipo Baixa" for="tipobaixa" />
+         <p:selectOneMenu id="tipobaixa" label="Tipo Baixa"  value="#{animalBean.animal.tipoBaixa}"    >
+                            <f:selectItem itemValue="" itemLabel="Selecione um tipo de baixa"/>
+                            <f:selectItem  itemValue="venda" itemLabel="venda" />
+                            <f:selectItem itemValue="consumo" itemLabel="consumo" />
+                            <f:selectItem itemValue="afogamento" itemLabel="afogamento" />
+                                  <f:selectItem itemValue="queimando" itemLabel="queimando" />    
+                        </p:selectOneMenu>
+   <h:outputLabel value="Descrição" for="desc" />
+   <p:inputTextarea id="desc" label="Descrição"  value="#{animalBean.animal.descricao}" >
+   </p:inputTextarea>
+        </p:panelGrid>
+        
+              <p:commandButton ajax="false" action="#{animalBean.salvarBaixa}" value="Fazer baixa" update="growl" />
+ 
+        </h:form>
+                    </p:fieldset>
+       
+        </ui:define>
+    </ui:composition>
+</html>

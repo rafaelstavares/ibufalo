@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+  
+    <ui:composition template="/publico/inicio.xhtml">
+       
+       <ui:define name="titulo">
+            titulo teste 02
+        </ui:define>    
+        
+        <ui:define name="pagina"/>
+            <ui:define name="norte"/>
+            <ui:define name="rigth"/>
+            <ui:define name="centro">
+                <h:form>
+            <h:inputHidden value="#{producaoBean.producao.idProducao}"/>
+            <h:inputHidden value="#{producaoBean.destinoSalvar}"/>
+              <h:messages/>
+              <h:panelGrid columns="2">
+     
+            <h:outputLabel value="Animal" for="animal" />
+            <h:selectOneMenu  value="#{producaoBean.producao.animal}" converter="IndexedConverter" required="true" requiredMessage="Escolha uma Fazenda"> 
+             <f:selectItem itemValue="" itemLabel="Selecione Animal"/>
+             <f:selectItems  var="an" itemValue="#{an}" value="#{animalBean.lista}" itemLabel="#{an.nome}"/> 
+           
+         </h:selectOneMenu>
+            <h:outputLabel value="Funcipnário" for="funcionario" />
+            <h:selectOneMenu  value="#{producaoBean.producao.funcionarios}" converter="IndexedConverter" required="true" requiredMessage="Escolha um Local"> 
+             <f:selectItem itemValue="" itemLabel="Selecione um local"/>
+             <f:selectItems  var="fupro" itemValue="#{fupro}" value="#{funcionariosBean.lista}" itemLabel="#{fupro.nome}"/> 
+         </h:selectOneMenu>
+           
+        <h:outputLabel value="Data Produção" for="data"/>
+        <h:inputText id="data" label="Data Produção" value="#{producaoBean.producao.diaProducao}"
+                             size="10" maxlength="10" required="true" >
+                    <f:convertDateTime dateStyle="medium"/>
+                </h:inputText>
+          <h:outputLabel value="Quantidade" for="quantidade"/>
+          <h:inputText id="quantidade" label="Quantidade" value="#{producaoBean.producao.quantidade}">       
+                </h:inputText>
+        </h:panelGrid>
+        
+              <h:commandButton action="#{producaoBean.salvar}" value="Salvar"/>
+        
+              </h:form>
+            </ui:define>
+              <ui:define name="sul"/>
+    </ui:composition>
+
+</html>
+

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body> 
+        <div style="width: 600px;padding-top: 150px;padding-left: 60px">
+            <h:form>
+                <p:dataTable var="local" value="#{localBean.lista}">
+            <p:column headerText="Nome">  
+                <h:outputText value="#{local.nome}" />  
+        </p:column>  
+        <p:column headerText="Tamanho">  
+            <h:outputText value="#{local.tamanho}" />  
+          </p:column> 
+         <p:column headerText="fazenda">  
+             <h:outputText value="#{local.fazenda.nome}" />  
+        </p:column>  
+   
+        </p:dataTable>
+        </h:form>
+            </div>
+    </h:body>
+</html>
+

@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>iBufalo</title>
+
+        <link href="../resources/app/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>        
+
+        <!-- CSS -->
+        <link href="../resources/app/css/app.min.1.css" rel="stylesheet"/>
+        <link href="../resources/app/css/app.min.2.css" rel="stylesheet"/>
+        <script>
+$(document).ready(function(){
+$(function(){
+    $("#celular").mask("(99)9999-99999");
+    
+    
+});
+});
+
+        </script>
+    </h:head>
+
+    <h:body >
+
+        <!-- Vendor CSS -->
+        <f:view>'
+
+
+
+            <header id="header" class="clearfix" data-current-skin="blue">
+                <ul class="header-inner">
+                    <li class="logo hidden-xs">
+                        <a href="../publico/inicio.jsf">iBufalo Gerenciamento de Bubalino</a>
+                    </li>
+                    <li class="pull-right">
+                        <ul class="top-menu">
+
+
+
+
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" href=""><span class="text-uppercase p-10">#{contextoBean.usuarioLogado.nome}</span><i class="tm-icon zmdi zmdi-settings"></i></a>
+                                <ul class="dropdown-menu dm-icon pull-right">
+                                    <li class="skin-switch hidden-xs">
+                                        <span class="ss-skin bgm-lightblue" data-skin="lightblue"></span>
+                                        <span class="ss-skin bgm-bluegray" data-skin="bluegray"></span>
+                                        <span class="ss-skin bgm-cyan" data-skin="cyan"></span>
+                                        <span class="ss-skin bgm-teal" data-skin="teal"></span>
+                                        <span class="ss-skin bgm-orange" data-skin="orange"></span>
+                                        <span class="ss-skin bgm-blue" data-skin="blue"></span>
+                                    </li>
+                                    <li class="divider hidden-xs"></li>
+                                    <li class="hidden-xs">
+                                        <a data-action="fullscreen" href=""><i class="zmdi zmdi-fullscreen"></i> Toggle Fullscreen</a>
+                                    </li>
+                                    <li>
+                                        <a data-action="apagar-fazenda" href=""><i class="zmdi zmdi-delete"></i> Clear Local Storage</a>
+                                    </li>
+                                    <li>
+                                        <a href=""><i class="zmdi zmdi-face"></i> Privacy Settings</a>
+                                    </li>
+                                    <li>
+                                        <a href="../logout"><i class="zmdi zmdi-power-off"></i> Sair</a>
+                                    </li>
+                                </ul>
+                            </li>   
+
+
+                        </ul>
+
+                    </li>
+
+                </ul>
+            </header>
+
+            <div id="main">
+
+
+
+                <div class="container-fluid">
+                    <h:form acceptcharset="ISO-8859-1" prependId="false" >
+
+                        <h:inputHidden valueChangeListener="#{fazendaBean.tornaFavorita()}" value="#{fazendaBean.selecionada.favorita}" />
+                        <p:messages/>
+                        <p:growl id="growl" showDetail="true" sticky="true" /> 
+                        <div class="col-md-3"/>
+                        <div class="card col-md-6">
+                            <div class="card-header ch-alt">
+                                <h2>Cadastro Fazenda <small>Preencha dados básicos da sua fazenda</small></h2>
+                            </div>
+
+                            <div class="card-body card-padding">
+                                <div class="form-group fg-float m-b-30">
+                                    <div class="fg-line">
+                                        <h:inputText value="#{fazendaBean.selecionada.nome}" class="form-control input-sm" required="true" />
+                                        <label class="fg-label">Nome Fazenda</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group fg-float m-b-30">
+                                    <div class="fg-line">
+                                        <h:inputText  h:value="#{fazendaBean.selecionada.email}" class="form-control input-sm"/>
+                                        <label class="fg-label">Endereço Email</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group fg-float m-b-30">
+                                    <div class="fg-line">
+                                        <h:inputText id="celular" value="#{fazendaBean.selecionada.telefone}" class="form-control input-sm" />
+                                        <label class="fg-label">Número Contato</label>
+                                    </div>
+                                </div>
+
+
+
+                                <h:commandLink id="btn-salvarFazenda" action="#{fazendaBean.salvar}"/>
+                                <div onclick="salvarfazenda()" class="btn btn-info waves-effect">adicionar</div>
+                                <div onclick="window.location.href = '../publico/inicio.jsf'" class="btn btn-danger waves-effect">Cancelar</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3"/>
+
+
+                        <p:commandLink/>
+                    </h:form>
+                </div>
+
+
+            </div>
+
+            <fooder id="fooder">
+                <center>Copyright &copy; 2018  -  <a href="http://www.ufra.edu.br" target="_blank">UFRA</a> - <i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Bacharelado em Sistema de Informação</center>
+            </fooder>
+
+
+
+
+            <!-- Javascript Libraries -->
+            <script src="../resources/app/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"/>
+            <script src="../resources/app/vendors/bower_components/autosize/dist/autosize.min.js"/>
+            <script src="../resources/app/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"/>
+            <script src="../resources/app/vendors/bower_components/Waves/dist/waves.min.js"/>
+            <script src="../resources/app/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+            <script src="../resources/app/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js"></script>
+            <script src="../resources/app/vendors/input-mask/input-mask.min.js"></script>
+
+
+            <script src="../resources/app/js/functions.js"></script>
+            <script src="../resources/app/js/demo.js"></script>
+
+            <script type="text/javascript">
+
+                                    function salvarfazenda() {
+
+
+                                        var jsfCommandLink = document.getElementById("btn-salvarFazenda");
+                                        jsfCommandLink.click();
+                                    }
+
+            </script>
+
+
+
+        </f:view>
+    </h:body>
+</html>

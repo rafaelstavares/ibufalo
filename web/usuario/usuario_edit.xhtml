@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+ <title>Gerenciamento &middot; Bubalino</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <!-- Le styles -->
+    <link href="../resources/assets/css/bootstrap.css" rel="stylesheet"></link>
+    <style type="text/css">
+        body {
+          background-image: url("../resources/imagem/fundo.JPG");
+         background-size: 100% , 100%;
+         background-repeat: no-repeat;
+          background-attachment: fixed;
+         padding-top: 20px;
+        
+ 
+      }
+      
+      .rodape{
+          color: white;
+          padding-left: 420px;   
+          padding-bottom: 120px;
+          z-index: -6;
+      }
+     
+.form-signin {
+        max-width: 600px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+      
+
+    </style>
+     
+    <link href="../resources/assets/css/bootstrap-responsive.css" rel="stylesheet"></link>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../resources/assets/ico/apple-touch-icon-144-precomposed.png"></link>
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../resources/assets/ico/apple-touch-icon-114-precomposed.png"></link>
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../resources/assets/ico/apple-touch-icon-72-precomposed.png"></link>
+    <link rel="apple-touch-icon-precomposed" href="../resources/assets/ico/apple-touch-icon-57-precomposed.png"></link>
+                        <link rel="shortcut icon" href="../resources/assets/ico/favicon.png"></link>
+                                   
+  </h:head>
+    <h:body class="body">
+        <f:view  >
+<div class="container">
+<input type="hidden" value="#{internacionalizacao.mudarIdioma()}"/>
+      <div class="masthead">
+          <ul class="nav nav-pills pull-right">
+              <li class="active"><a href="../index.jsf"><i class="icon-home"/>&thinsp;&thinsp;#{msg.Inicio}</a></li>
+              <li class="active"><a href="../sobre.jsf"><i class="icon-globe"/>&thinsp;&thinsp;#{msg.Sobre}</a></li>
+              <li class="active"><a href="../equipe.jsf"><i class="icon-pencil"/>&thinsp;&thinsp;#{msg.Equipe}</a></li>
+          </ul>
+          <a href="index.jsf">
+          <img class="img-rounded" src="../resources/imagem/logo_oficial.jpg" height="80" width="150" />
+          </a>
+      </div>     
+    
+<h:inputHidden value="#{usuarioBean.usuario.idUsuario}" />
+
+<h:form id="cad" class="form-signin"  >
+ <h2 class="form-signin-heading">editar</h2>
+    <p:messages/>
+        
+                <h:panelGrid columns="2" cellspacing="3">
+                    <p:outputLabel value="Nome" for="nome"/>
+                    <p:inputText id="nome" label="Nome" value="#{usuarioBean.usuario.nome}"
+                                 size="30" maxlength="30" required="true" requiredMessage="Você não tem nome?">
+                        <f:validateLength minimum="10" maximum="30"/>
+                    </p:inputText>
+
+                    <h:outputLabel value="Data Nascimento" for="data"/>
+                    <p:calendar locale="pt_BR" id="data" pattern="dd/MM/yyyy" label="Data Nascimento" value="#{usuarioBean.usuario.nascimento}"
+                                 size="13" maxlength="10" required="true" >
+                        <f:convertDateTime dateStyle="medium" pattern="dd/MM/yyyy" />
+                    </p:calendar>
+
+                    <h:outputLabel value="Celular" for="celular"/>
+                    <p:inputMask id="celular" label="Celular"  mask="(99)9999-9999" value="#{usuarioBean.usuario.celular}"
+                                 size="13" />
+ <h:outputLabel value="Email" for="email"/>
+                   
+                    <h:panelGroup>
+                        <p:inputText id="email"  label="E-Mail"
+                                     value="#{usuarioBean.usuario.email}"
+                                     size="30" maxlength="50" required="true"
+                                     validatorMessage="e-Mail inválido">
+                            <f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_.]+"/>
+                        </p:inputText>
+                        <h:message for="email"/>
+                    </h:panelGroup>
+                    <h:outputLabel value="Login" for="login"/>
+                    <p:inputText id="login"
+                                 label="Login" value="#{usuarioBean.usuario.login}"
+                                 size="13" maxlength="13" required="true"
+                                 validatorMessage="Login deve ter no minimo 5 e no máximo 
+                                 15 caracteres e só pode ter simbolos '.' e '_'">
+
+                        <f:validateRegex pattern="([a-z]|[0-9]|[.]|[_]){5,15}"/>
+                    </p:inputText>
+                    <h:outputLabel value="Senha" for="senha"/>
+                    <p:password id="senha" label="Senha" value="#{usuarioBean.usuario.senha}" size="13"
+                                   maxlength="10" rendered="true" redisplay="true"/>
+
+                    <h:outputLabel value="Confirma Senha" for="confirmaSenha"/>
+                    <p:password id="confirmaSenha" label="Confirma Senha" value="#{usuarioBean.confirmaSenha}" size="13"
+                                   maxlength="10" rendered="true" redisplay="true"/>
+
+                </h:panelGrid>
+                <h:commandButton class="btn btn-large btn-primary" action="#{usuarioBean.salvar}" value="Enviar"/>
+                  
+
+      </h:form>
+
+  <div class="rodape">
+       
+        <p>&copy; 2013 UFRA</p>
+      
+</div>
+
+
+    </div> <!-- /container -->
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  <h:outputScript name="locale-primefaces.js" library="js" />
+    <script src="resources/assets/js/bootstrap-transition.js"></script>
+    <script src="resources/assets/js/bootstrap-alert.js"></script>
+    <script src="resources/assets/js/bootstrap-modal.js"></script>
+    <script src="resources/assets/js/bootstrap-dropdown.js"></script>
+    <script src="resources/assets/js/bootstrap-scrollspy.js"></script>
+    <script src="resources/assets/js/bootstrap-tab.js"></script>
+    <script src="resources/assets/js/bootstrap-tooltip.js"></script>
+    <script src="resources/assets/js/bootstrap-popover.js"></script>
+    <script src="resources/assets/js/bootstrap-button.js"></script>
+    <script src="resources/assets/js/bootstrap-collapse.js"></script>
+    <script src="resources/assets/js/bootstrap-carousel.js"></script>
+    <script src="resources/assets/js/bootstrap-typeahead.js"></script>
+    </f:view>
+    </h:body>
+</html>
+

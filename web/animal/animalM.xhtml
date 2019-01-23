@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="../templates/template.xhtml">
+            <ui:define name="titulo">Inicio Animal</ui:define>'
+            <ui:define name="conteudo">
+                <div class="container">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Listagem de Animais <small>Lista de todos animais Machoscadastrados na fazenda.</small></h2>
+                        </div>
+                        <h:form prependId="false">  
+
+                            <p:dataTable id="listAnimal" var="car" value="#{animalBean.listaM}"  
+                                         paginator="true" rows="10"  
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                         rowsPerPageTemplate="5,10,20" emptyMessage="Nenhum Animal Cadastrado"  >  
+                                <f:facet name="header">  
+                                    Lista Animais  
+                                </f:facet>  
+
+                                <p:column filterBy="#{car.nome}"  >  
+                                    <f:facet name="header">  
+                                        <h:outputText value="Nome" />  
+                                    </f:facet>  
+                                    <h:outputText value="#{car.nome}" />  
+                                </p:column>  
+
+                                <p:column>  
+                                    <f:facet name="header">  
+                                        <h:outputText value="Peso" />  
+                                    </f:facet>  
+                                    <h:outputText value="#{car.peso}" />  
+                                </p:column>  
+
+                                <p:column filterBy="#{car.dataNascimento}">  
+                                    <f:facet name="header">  
+                                        <h:outputText value="Nascimento" />  
+                                    </f:facet>  
+                                    <h:outputText  value="#{car.dataNascimento}" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                </p:column>  
+                                <p:column style="text-align: center" >  
+                                    <f:facet name="header">  
+                                        <h:outputText value="Perfil" />  
+                                    </f:facet>  
+                                    <p:commandButton   action="#{animalBean.editar}"  icon="ui-icon-search" ajax="false"  title="editar">
+                                        <f:setPropertyActionListener value="#{car}" 
+                                                                     target="#{animalBean.animal}"/>
+                                    </p:commandButton>
+                                    
+                                    
+                                </p:column> 
+                                <p:column style="text-align: center" > 
+                                    <f:facet name="header">  
+                                        <h:outputText value="Excluir" />  
+                                    </f:facet>  
+                                    <p:commandButton  action="#{animalBean.excluir}" onclick="if (!confirm('Deseja deletar o Animal #{car.nome}?')) {
+                                      return false;
+                                  }
+                                  ;
+                                  return true;" icon="ui-icon-circle-close"  title="excluir">
+
+                                        <f:setPropertyActionListener  target="#{animalBean.animal}" value="#{car}"/> 
+                                    </p:commandButton>
+                                </p:column >
+                                <p:column style="text-align: center"   > 
+                                    <f:facet name="header">  
+                                        <h:outputText value="Editar" />  
+                                    </f:facet>  
+                                    <p:commandButton   action="#{animalBean.editar}"  icon="zmdi zmdi-search" ajax="false"  title="Visualizar">
+                                        <f:setPropertyActionListener value="#{car}" 
+                                                                     target="#{animalBean.animal}"/>
+                                    </p:commandButton>
+                                </p:column>
+
+
+
+                            </p:dataTable>  
+
+                        </h:form> 
+                    </div>
+
+
+                </div>
+                <script type="text/javascript">
+                     $(document).ready(function () {
+                        document.getElementById("relatorio").className = "sub-menu active";
+                        document.getElementById("relatorio-animal").className = "sub-menu active";
+                    });
+
+                    function salvarAnimal() {
+
+
+                        var jsfCommandLink = document.getElementById("btn-salvarAnimal");
+                        jsfCommandLink.click();
+                    }
+                    $(document).ready(function () {
+                        //Basic Example
+                        $("#data-table-basic").bootgrid({
+                            css: {
+                                icon: 'zmdi icon',
+                                iconColumns: 'zmdi-view-module',
+                                iconDown: 'zmdi-expand-more',
+                                iconRefresh: 'zmdi-refresh',
+                                iconUp: 'zmdi-expand-less'
+                            },
+                        });
+
+                        //Selection
+
+
+                        //Command Buttons
+                        $("#data-table-command").bootgrid({
+                            css: {
+                                icon: 'zmdi icon',
+                                iconColumns: 'zmdi-view-module',
+                                iconDown: 'zmdi-expand-more',
+                                iconRefresh: 'zmdi-refresh',
+                                iconUp: 'zmdi-expand-less'
+                            },
+                        });
+
+                    });
+                    function myFunctionDel() {
+                        $('td').click(function () {
+                            var col = $(this).parent().children().index($(this));
+                            var row = $(this).parent().parent().children().index($(this).parent());
+                            //$('listFazenda:'+(row)+':btnDel').click();
+                            var oi = document.getElementById('listAnimal' + (row) + ':btnDel');
+                            swal({title: "O que você deseja fazer",
+                                text: "Ao confirmar clicando sim, você irá apagar todos os dados do Animal!",
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                cancelButtonColor: "#03A9F4",
+                                confirmButtonText: "Sim, Deletar Animal!",
+                                cancelButtonText: "Não, Cancelar ação!",
+                                closeOnConfirm: false,
+                                closeOnCancel: false},
+                                    function (isConfirm) {
+                                        if (isConfirm === true) {
+                                            swal("Deletados!", "Seus dados foram deletados.", "success");
+                                            oi.click();
+
+                                            addTable();
+
+                                        } else {
+                                            swal("Ufa, Cancelado", "Você ainda tem seus dados :)", "error");
+                                        }
+
+                                    });
+
+                        });
+
+                    }
+                    function addTable() {
+
+                        setTimeout(function () {
+                            location.reload(true);
+
+                        }, 1000);
+
+
+
+                    }
+
+                </script>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

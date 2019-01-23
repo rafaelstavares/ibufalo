@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+
+        <ui:composition template="../templates/template.xhtml">
+            <ui:define name="conteudo">
+                <div class="container">
+                    <br/>
+                    <br/>
+                    <div class="row">
+                        <div id="lost" class="card-body bgm-bluegray p-10">
+                            <h1 style="color: #FF9800" >Bem vindo, <span style="font-family: 'Righteous', cursive;" class="c-white text-uppercase">#{contextoBean.usuarioLogado.nome}</span></h1>
+                            <br/>
+                            <h2 style="color: #FF9800" >Você está gerenciando a Fazenda, <span style="font-family: 'Righteous', cursive;" class="c-white text-uppercase">#{contextoBean.fazendaAtiva.nome}</span></h2>
+                        </div>
+
+                        <div class="clearfix"/>
+                        <br/>
+
+                        <div class="col-sm-3">
+                            <div class="epc-item bgm-lightblue">
+                                <div class="easy-pie main-pie" data-percent="${(100*animalBean.totalMacho())/animalBean.totalAnimal()}">
+                                    <div class="percent">${(100*animalBean.totalMacho())/animalBean.totalAnimal()}</div>
+                                    <div class="pie-title">Total Bufalos #{animalBean.totalMacho()}</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>Estatistica Fazenda<small>Um Breve Historico da Fazenda <span class="text-info">#{contextoBean.fazendaAtiva.nome}</span></small></h2>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>Total Produção leite</td>
+                                                <td class="text-right"><h4 class="m-0">76 litros</h4></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total de Reprodução</td>
+                                                <td class="text-right"><h4 class="m-0">23 bezerros</h4></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total de @rroba</td>
+                                                <td class="text-right"><h4 class="m-0">2039 @</h4></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="epc-item bgm-deeporange">
+                                <div class="easy-pie main-pie" data-percent="${(100*animalBean.totalFemea())/animalBean.totalAnimal()}">
+                                    <div class="percent">${(100*animalBean.totalFemea())/animalBean.totalAnimal()}</div>
+                                    <div class="pie-title">Total de bufalas #{animalBean.totalFemea()}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dash-widgets">
+                            <div class="row">
+
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div id="pie-charts" class="dw-item bgm-green c-white">
+
+                                        <div class="dw-item">
+                                            <div class="dwi-header">
+                                                <div class="dwih-title">Estatistica de Femea</div>
+                                            </div>
+
+                                            <div class="clearfix"></div>
+
+                                            <div class="text-center p-20 m-t-25">
+                                                <div class="easy-pie main-pie" data-percent="${(100*animalBean.totalFemea())/animalBean.totalAnimal()}">
+                                                    <div class="percent">${(100*animalBean.totalFemea())/animalBean.totalAnimal()}</div>
+                                                    <div class="pie-title">Porcentagem no Rebanho</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="p-t-25 p-b-20 text-center">
+                                                <div class="easy-pie sub-pie-1" data-percent="56">
+                                                    <div class="percent">56</div>
+                                                    <div class="pie-title">No CIO</div>
+                                                </div>
+                                                <div class="easy-pie sub-pie-2" data-percent="84">
+                                                    <div class="percent">84</div>
+                                                    <div class="pie-title">PRENHA</div>
+                                                </div>
+                                                <div class="easy-pie sub-pie-2" data-percent="21">
+                                                    <div class="percent">21</div>
+                                                    <div class="pie-title">PRODUÇÃO</div>
+                                                </div>
+                                                <div class="easy-pie sub-pie-2" data-percent="21">
+                                                    <div class="percent">21</div>
+                                                    <div class="pie-title">PRODUÇÃO</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <!-- Recent Items -->
+                                    <div class="card">
+
+                                        <div class="card-body m-t-0">
+                                            <div class="table-responsive">
+                                                <h:form>
+                                                <h:dataTable id="data-table-basic" class="table table-striped"  var="car" value="#{animalBean.listaAnimaisProducao}" rows="8" >  
+                                                    <f:facet name="header">  
+                                                        Lista Animais mais pesados!!! 
+                                                    </f:facet>  
+
+                                                    <p:column filterBy="#{car.nome}">  
+                                                        <f:facet name="header">  
+                                                            <h:outputText value="Nome" />  
+                                                        </f:facet>  
+                                                        <h:outputText value="#{car.nome}" />  
+                                                    </p:column>  
+
+                                                    <p:column>  
+                                                        <f:facet name="header">  
+                                                            <h:outputText value="Peso" />  
+                                                        </f:facet>  
+                                                        <h:outputText value="#{car.peso}" />  
+                                                    </p:column>  
+
+                                                    <p:column filterBy="#{car.sexo}">  
+                                                        <f:facet name="header">  
+                                                            <h:outputText value="Sexo" />  
+                                                        </f:facet>  
+                                                        <h:outputText value="#{car.sexo}" />  
+                                                    </p:column>  
+                                                    <p:column style="text-align: center" >  
+                                                        <f:facet name="header">  
+                                                            <h:outputText value="Perfil" />  
+                                                        </f:facet>  
+                                                        <p:commandButton   action="#{animalBean.visualizar}" icon="ui-icon-search"  ajax="false"  title="editar">
+                                                            <f:setPropertyActionListener value="#{car}" 
+                                                                                         target="#{animalBean.animal}"/>
+                                                        </p:commandButton>
+
+
+                                                    </p:column> 
+
+
+                                                </h:dataTable>
+                                            </h:form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+
+                        document.getElementById("menu-home").className = "active";
+
+                    });
+                </script>
+            </ui:define>  
+        </ui:composition>
+    </h:body>
+</html>

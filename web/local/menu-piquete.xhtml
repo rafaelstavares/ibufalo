@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="../templates/template.xhtml">
+            <ui:define name="titulo">inicio Piquete</ui:define>'
+            <ui:define name="conteudo">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-header">
+
+                            <h2>Listagem de Piquete <small>Lista todos piquetes cadastrados e quantidades de animais que localizados respectivamente</small></h2>
+                        </div>
+                        <h:form prependId="false">  
+
+
+                            <p:dataTable  editable="true" editMode="cell" id="listAnimal" var="car" value="#{animalBean.lista}"  
+                                          paginator="true" rows="10"  
+                                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                          rowsPerPageTemplate="5,10,20" emptyMessage="Nenhum Animal Cadastrado"  >  
+                                <f:facet name="header">  
+                                    Lista Animais  
+                                </f:facet>  
+
+                                <p:column filterBy="#{car.nome}"  >  
+                                    <f:facet name="header">  
+                                        <h:outputText value="Nome" />  
+                                    </f:facet>  
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{car.nome}" /></f:facet>
+                                        <f:facet name="input"><p:inputText id="modelInput" value="#{car.nome}" style="width:100%"/></f:facet>
+                                    </p:cellEditor> 
+                                </p:column>  
+
+
+                                <p:column filterBy="#{car.dataNascimento}">  
+                                    <f:facet name="header">  
+                                        <h:outputText value="Nascimento" />  
+                                    </f:facet>  
+                                    <h:outputText  value="#{car.dataNascimento}" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                </p:column> 
+                                <p:column headerText="Local">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{car.local.nome}" /></f:facet>
+                                        <f:facet name="input">
+                                            <h:selectOneMenu  value="#{car.local}" style="width:100%">
+                                                <f:selectItems value="#{localBean.lista}" var="man" itemLabel="#{man.nome}" itemValue="#{man}" />
+                                            </h:selectOneMenu>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column style="text-align: center" >  
+                                    <f:facet name="header">  
+                                        <h:outputText value="Perfil" />  
+                                    </f:facet>  
+                                    <p:commandButton   action="#{animalBean.editar}"  icon="ui-icon-search" ajax="false"  title="editar">
+                                        <f:setPropertyActionListener value="#{car}" 
+                                                                     target="#{animalBean.animal}"/>
+                                    </p:commandButton>
+
+
+                                </p:column> 
+
+
+
+                            </p:dataTable>          
+
+                        </h:form>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        document.getElementById("menu-piquete").className = "sub-menu active";
+                    });
+
+                    function salvarPiquete() {
+
+
+                        var jsfCommandLink = document.getElementById("btn-salvarPiquete");
+                        jsfCommandLink.click();
+                    }
+                    $(document).ready(function () {
+                        //Basic Example
+                        $("#data-table-basic").bootgrid({
+                            css: {
+                                icon: 'zmdi icon',
+                                iconColumns: 'zmdi-view-module',
+                                iconDown: 'zmdi-expand-more',
+                                iconRefresh: 'zmdi-refresh',
+                                iconUp: 'zmdi-expand-less'
+                            },
+                        });
+
+                        //Selection
+
+
+                        //Command Buttons
+                        $("#data-table-command").bootgrid({
+                            css: {
+                                icon: 'zmdi icon',
+                                iconColumns: 'zmdi-view-module',
+                                iconDown: 'zmdi-expand-more',
+                                iconRefresh: 'zmdi-refresh',
+                                iconUp: 'zmdi-expand-less'
+                            },
+                        });
+
+                    });
+                    function myFunctionDel() {
+                        $('td').click(function () {
+                            var col = $(this).parent().children().index($(this));
+                            var row = $(this).parent().parent().children().index($(this).parent());
+                            //$('listFazenda:'+(row)+':btnDel').click();
+                            var oi = document.getElementById('listLocal:' + (row) + ':btnDel');
+                            swal({title: "O que você deseja fazer",
+                                text: "Ao confirmar clicando sim, você irá apagar todos os dados da Local!",
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                cancelButtonColor: "#03A9F4",
+                                confirmButtonText: "Sim, Deletar Local!",
+                                cancelButtonText: "Não, Cancelar ação!",
+                                closeOnConfirm: false,
+                                closeOnCancel: false},
+                                    function (isConfirm) {
+                                        if (isConfirm === true) {
+                                            swal("Deletados!", "Seus dados foram deletados.", "success");
+                                            oi.click();
+
+                                            addTable();
+
+                                        } else {
+                                            swal("Ufa, Cancelado", "Você ainda tem seus dados :)", "error");
+                                        }
+
+                                    });
+
+                        });
+
+                    }
+                    function addTable() {
+
+                        setTimeout(function () {
+                            location.reload(true);
+
+                        }, 1000);
+
+
+
+                    }
+
+                </script>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

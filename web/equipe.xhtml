@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+ <title>Gerenciamento &middot; Bubalino</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <!-- Le styles -->
+    <link href="resources/assets/css/bootstrap.css" rel="stylesheet"></link>
+    <style type="text/css">
+      body {
+          background-image: url("resources/imagem/fundo.JPG");
+         background-size: 100% , 100%;
+         background-repeat: no-repeat;
+          background-attachment: fixed;
+         padding-top: 20px;
+        
+ 
+      }
+
+      /* Custom container */
+      .container-narrow {
+          background: #ffffff;
+         
+          opacity:0.9;
+        margin: 0 auto;
+        max-width: 900px;
+        padding: 15px;
+       
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+   
+
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        margin: 60px 0;
+        text-align: center;
+      }
+      .jumbotron h1 {
+        font-size: 72px;
+        line-height: 1;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 60px 0;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+    </style>
+     
+    <link href="resources/assets/css/bootstrap-responsive.css" rel="stylesheet"></link>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="resources/assets/ico/apple-touch-icon-144-precomposed.png"></link>
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="resources/assets/ico/apple-touch-icon-114-precomposed.png"></link>
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="resources/assets/ico/apple-touch-icon-72-precomposed.png"></link>
+    <link rel="apple-touch-icon-precomposed" href="resources/assets/ico/apple-touch-icon-57-precomposed.png"></link>
+                        <link rel="shortcut icon" href="resources/assets/ico/favicon.png"></link>
+                                   
+  </h:head>
+    <h:body class="body">
+    <f:view >
+<div class="container-narrow">
+<input type="hidden" value="#{internacionalizacao.mudarIdioma()}"/>
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+            <li ><a href="index.jsf"><i class="icon-home"/>&thinsp;&thinsp;#{msg.Inicio}</a></li>
+          <li><a href="sobre.jsf"><i class="icon-globe"/>&thinsp;&thinsp;Sobre</a></li>
+          <li class="active"><a href="#"><i class="icon-pencil icon-white"/>&thinsp;&thinsp;#{msg.Equipe}</a></li>
+          <li ><a class="btn btn-small btn" href="publico/inicio.jsf"><i class="icon-user"></i>&thinsp;&thinsp;#{msg.Entrar}</a></li>
+          
+        </ul>
+          <a href="index.jsf">
+          <img class="img-rounded" src="resources/imagem/logo_oficial.jpg" height="80" width="150" />
+          </a>
+      </div>      <hr/>
+
+      <div class="jumbotron">
+          <h1 >#{msg.Titulo}</h1>
+        <p class="lead">#{msg.descricao}</p>
+        <a class="btn btn-large btn-success" href="publico/inicio.jsf">#{msg.inscreva}</a>
+      </div>
+
+      <hr/>
+
+  <div class="row-fluid marketing">
+        <div class="span6">
+       
+           <div class="media">
+              <div class="pull-left" href="#">
+                  <img class="media-object" src="resources/imagem/buffalo.png"/>
+              </div>
+              <div class="media-body">
+                  <h4 class="media-heading">#{msg.Rebanho}</h4>
+               #{msg.desrebanho}
+              </div>
+            </div>
+
+           <div class="media">
+              <div class="pull-left" href="#">
+                  <img class="media-object" src="resources/imagem/foto05.jpg"/>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">#{msg.Manejo}</h4>
+               #{msg.desmanejo}
+              </div>
+            </div>
+          
+          
+           <div class="media">
+              <div class="pull-left" href="#">
+                  <img class="media-object" src="resources/imagem/foto06.jpg"/>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">#{msg.vacinas}</h4>
+                #{msg.desvacinas}
+              </div>
+            </div>
+          
+        </div>
+
+        <div class="span6">
+          
+             <div class="media">
+              <div class="pull-left" href="#">
+                  <img class="media-object" src="resources/imagem/foto04.jpg"/>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">#{msg.producao}</h4>
+#{msg.desproducao}
+              </div>
+            </div>
+          
+           <div class="media">
+              <div class="pull-left" href="#">
+                  <img class="media-object" src="resources/imagem/foto08.jpg"/>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">#{msg.reproducao}</h4>
+#{msg.desreproducao}
+              </div>
+            </div>
+          
+            <div class="media">
+              <div class="pull-left" >
+                  <img class="media-object" src="resources/imagem/foto07.jpg"/>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">#{msg.relatorio}</h4>
+#{msg.desrelatorio}
+              </div>
+            </div>
+          
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="footer">
+          <p>&copy; Ufra 2013</p>
+      </div>
+
+    </div> <!-- /container -->
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="resources/assets/js/jquery.js"></script>
+    <script src="resources/assets/js/bootstrap-transition.js"></script>
+    <script src="resources/assets/js/bootstrap-alert.js"></script>
+    <script src="resources/assets/js/bootstrap-modal.js"></script>
+    <script src="resources/assets/js/bootstrap-dropdown.js"></script>
+    <script src="resources/assets/js/bootstrap-scrollspy.js"></script>
+    <script src="resources/assets/js/bootstrap-tab.js"></script>
+    <script src="resources/assets/js/bootstrap-tooltip.js"></script>
+    <script src="resources/assets/js/bootstrap-popover.js"></script>
+    <script src="resources/assets/js/bootstrap-button.js"></script>
+    <script src="resources/assets/js/bootstrap-collapse.js"></script>
+    <script src="resources/assets/js/bootstrap-carousel.js"></script>
+    <script src="resources/assets/js/bootstrap-typeahead.js"></script>
+    </f:view>
+    </h:body>
+</html>
+

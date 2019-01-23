@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+  <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Bufalo Inicio</title>
+        
+ <!-- Vendor CSS -->
+        <link href="resources/app/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet"/>
+        <link href="resources/app/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet"/>
+            
+        <!-- CSS -->
+        <link href="resources/app/css/app.min.1.css" rel="stylesheet"/>
+        <link href="resources/app/css/app.min.2.css" rel="stylesheet"/>
+                                   
+  </h:head>
+    <h:body class="container">
+        <f:view > 
+            <div class="card-body card-padding">
+     
+               
+                <div class="block-header"></div>
+            <div class="jumbotron">
+                <h1>Buffalo Manager!</h1>
+                <p>É um sistema de apoio de gerenciamento de rebanho na bubalino cultura. Desenvolvido para ajudar os produtores a tomarem decisões com base em relatórios e que venham a contribuir na qualidade dos produtos e no menor custo de produção.</p>
+                <p><a class="btn btn-primary btn-lg" href="publico/inicio.jsf" role="button">Entre no Sistema</a></p>
+            </div>
+                 <h:form>
+                        <p:outputLabel for="estado" value="Estado " />
+                        <p:selectOneMenu id="estado" filter="true"  value="#{estadoBean.estado}" style="width:150px" converter="IndexedConverter">
+                           
+                <f:selectItem itemLabel="Selecione Estado" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{estadoBean.lista}"  var="estado" itemLabel="#{estado.nome}"  />
+            </p:selectOneMenu>
+  <p:outputLabel for="city" value="Cidade: " />
+  
+  <p:selectOneMenu id="city" value="#{cidadeBean.cidade}" style="width:150px">
+                <f:selectItem itemLabel="Selecione Cidade" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{cidadeBean.listaCidades}" var="cidade" itemValue="#{cidade.nome}" />
+            </p:selectOneMenu>
+         <p:outputLabel for="estado1" value="Estado1 " />
+         <p:outputLabel id="estado1" value="#{estadoBean.estado.nome}"/>
+                    </h:form>
+                   
+                    <br/><br/>
+                    <h:form prependId="false">  
+                        <p:dataTable   var="piq" class="table table-striped" value="#{cidadeBean.listaCidades}"  
+                             paginator="true" rows="10"  
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                             rowsPerPageTemplate="5,10" emptyMessage="Nenhum Local Cadastrado">  
+                    <f:facet name="header">  
+                        Lista Cidades  
+                    </f:facet>  
+                            <p:column style="text-align: center" filterBy="#{piq.nome}">  
+                        <f:facet name="header">  
+                            <h:outputText value="Nome" />  
+                        </f:facet>  
+                                <h:outputText value="#{piq.nome}" />  
+                    </p:column>
+                            <p:column style="text-align: center" filterBy="#{piq.estados_cod_estados.nome}">
+                        <f:facet name="header">  
+                            <h:outputText value="Estados" />  
+                        </f:facet>  
+                                <h:outputText value="#{piq.estados_cod_estados.nome}" />  
+                    </p:column>  
+                   
+                   
+                        </p:dataTable>  
+               
+            </h:form> 
+                <fooder><center>Copyright &copy; 2016  -  <a href="http://www.ufra.edu.br" target="_blank">UFRA</a> - <i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Bacharelado em Sistema de Informação</center></fooder>
+            
+        </div>
+          
+            
+        </f:view>
+    </h:body>
+</html>

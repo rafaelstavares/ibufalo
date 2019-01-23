@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+   <ui:composition template="../templates/internal3.xhtml">
+    
+        <ui:define name="titulo">
+            Animal cadastro
+        </ui:define>    
+     
+       <ui:define name="conteudo"> 
+       
+                  <p class="lead">Você está gerenciando a fazenda <strong style="color: yellowgreen">#{contextoBean.fazendaAtiva.nome}</strong>.</p>
+			
+ <p:fieldset legend="Cadastro Animal" style="padding-right: 55px">
+       <h:form acceptcharset="ISO-8859-1" >
+       
+            <h:inputHidden value="#{animalBean.animal.idAnimal}"/>
+            <h:inputHidden value="#{animalBean.destinoSalvar}"/>
+            <h:inputHidden value="#{animalBean.animal.ativaFemea}"/>
+              <p:messages/>
+              <p:growl id="growl" showDetail="true" sticky="true" /> 
+              <p:panelGrid columns="2">
+                   <h:outputLabel value="Numero" for="numero" />
+                   <h:inputText id="numero" label="Numero" value="#{animalBean.animal.numeroAnimal}" >
+                     </h:inputText>
+         <h:outputLabel value="Nome" for="nome" />
+         <h:inputText id="nome" label="Nome" value="#{animalBean.animal.nome}" required="true" requiredMessage="Insira um nome">
+                     </h:inputText>
+         <h:outputLabel value="Raça" for="raca" />
+         <p:selectOneMenu id="raca" label="Raça"  value="#{animalBean.animal.raca}"    >
+                            <f:selectItem itemValue="" itemLabel="Selecione uma Raça"/>
+                            <f:selectItem  itemValue="Murrah" itemLabel="Murrah" />
+                            <f:selectItem itemValue="Jafarabadi" itemLabel="Jafarabadi" />
+                            <f:selectItem itemValue="Mediterrâneo" itemLabel="Mediterrâneo" />
+                                  <f:selectItem itemValue="Carabao" itemLabel="Carabao" />    
+                        </p:selectOneMenu>
+         <h:outputLabel  value="Data Nascimento" for="popupCal"/>
+         <p:calendar   maxlength="10" autocomplete=""  pattern="dd/MM/yyyy" size="10" label="Data nascimento" effect="fade" value="#{animalBean.animal.dataNascimento}" id="popupCal" required="true" requiredMessage="inserir data do Nascimento" >                     
+            <f:convertDateTime dateStyle="medium" pattern="dd/MM/yyyy"/>
+                </p:calendar>
+          <h:outputLabel value="Sexo" for="sexo"/>
+          <p:selectOneMenu id="sexo" label="Sexo" value="#{animalBean.animal.sexo}" required="true" requiredMessage="selecione o sexo do animal"  >
+                            <f:selectItem itemValue="" itemLabel="Selecione Sexo do Animal"/>
+                            <f:selectItem  itemValue="macho" itemLabel="Macho" />
+                            <f:selectItem itemValue="femea" itemLabel="Fêmea" />
+                        </p:selectOneMenu>
+                   <h:outputLabel value="Nome do Pai" for="nomeP" />
+                   <h:inputText id="nomeP" label="Nome do Pai" value="#{animalBean.animal.nomePai}" >
+                     </h:inputText>
+                   <h:outputLabel value="Nome do Mãe" for="nomeM" />
+                   <h:inputText id="nomeM" label="Nome do Mãe" value="#{animalBean.animal.nomeMae}" >
+                     </h:inputText>
+                   <h:outputLabel value="Nome do Avô" for="nomeA" />
+                   <h:inputText id="nomeA" label="Nome do Avô" value="#{animalBean.animal.nomeAvo}" >
+                     </h:inputText>
+            <h:outputLabel value="Peso" for="peso"/>
+            <h:inputText id="peso" label="Peso" value="#{animalBean.animal.peso}" converterMessage="Campo Peso é Numérico." >
+                <f:convertNumber type="number"  minIntegerDigits="1" minFractionDigits="3"   />
+                <f:validateDoubleRange maximum="900" />
+               
+                </h:inputText>
+           
+            <h:outputLabel value="Local" for="local" />
+            <p:selectOneMenu  value="#{animalBean.animal.local}"    effect="fold"  converter="IndexedConverter" required="true" requiredMessage="Escolha um Local" > 
+             <f:selectItem itemValue="" itemLabel="Selecione um local"/>
+             <f:selectItems  var="la" itemValue="#{la}" value="#{localBean.lista}" itemLabel="#{la.nome}"/> 
+         </p:selectOneMenu>
+   
+        </p:panelGrid>
+        
+              <p:commandButton ajax="false" action="#{animalBean.salvar}" value="Salvar" update="growl" />
+        
+        </h:form>
+                    </p:fieldset>
+       
+       </ui:define>
+ 
+
+   </ui:composition>
+</html>
+

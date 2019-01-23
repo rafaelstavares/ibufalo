@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/templates/internal3.xhtml">
+        <ui:define name="titulo">
+            Cadastro Reprodução
+        </ui:define>    
+        
+        <ui:define name="conteudo" >
+                  <div class="span12 well">
+	
+                        <p class="lead">Você está gerenciando a fazenda <strong style="color: yellowgreen">#{contextoBean.fazendaAtiva.nome}</strong>.</p>
+			</div>
+         
+            
+			
+           
+             <div class="sortable row-fluid">
+                <a data-rel="tooltip" title="#{animalBean.totalMacho()} Machos." class="well span3 top-block" href="../animal/total_animais.jsf">
+                    <span class="icon32 icon-red icon-user"></span>
+                    <div>Total Macho</div>
+                    <div>#{animalBean.totalMacho()}</div>
+                    <span class="notification">#{animalBean.totalMacho()}</span>
+                </a>
+
+                <a data-rel="tooltip" title="2 Femeas Ativas." class="well span3 top-block" href="../animal/total_animais.jsf">
+                    <span class="icon32 active icon-user"></span>
+                    <div>Total Femeas</div>
+                    <div>#{animalBean.totalFemea()}</div>
+                    <span class="notification green">2</span>
+                </a>
+<!-- 
+                <a data-rel="tooltip" title="34 não vacinadas." class="well span3 top-block" href="#">
+                    <span class="icon32 icon-color icon-cart"></span>
+                    <div>Vacina Total</div>
+                    <div>13320</div>
+                    <span class="notification yellow">34</span>
+                </a>
+
+                <a data-rel="tooltip" title="12 novas mensagens" class="well span3 top-block" href="#">
+                    <span class="icon32 icon-color icon-envelope-closed"></span>
+                    <div>Mensagem</div>
+                    <div>25</div>
+                    <span class="notification red">10</span>
+                </a>--></div>
+                   <div class="row-fluid">
+            <div class="span12 well">
+                <div class="span2"><h:form><p:commandButton ajax="false" action="../reproducao/reproducao_cad.jsf" icon="ui-icon-plusthick" value="Cadastro" title="Cadastrar Reprodução" /></h:form>
+                </div>
+            </div>
+             </div>
+            
+            <div class="fluid-row">
+            <div class="span12 well" >
+             <h:form prependId="false">  
+
+                <p:dataTable id="dataTable" var="rep" value="#{reproducaoBean.lista}"  
+                             paginator="true" rows="10"  
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                             rowsPerPageTemplate="5,10" emptyMessage="Nenhum Cruzamento Cadastrado">  
+                    <f:facet name="header">  
+                        Listar Cruzamento  
+                    </f:facet>  
+                    <p:column filterBy="#{rep.paiAnimal.nome}">  
+                        <f:facet name="header">  
+                            <h:outputText value="Pai" />  
+                        </f:facet>  
+                        <h:outputText value="#{rep.paiAnimal.nome}" />  
+                    </p:column> 
+                    <p:column filterBy="#{rep.maeAnimal.nome}">  
+                        <f:facet name="header">  
+                            <h:outputText value="Mãe" />  
+                        </f:facet>  
+                        <h:outputText value="#{rep.maeAnimal.nome}" />  
+                    </p:column>  
+                    <p:column >  
+                        <f:facet name="header">  
+                            <h:outputText value="Dia Cruzamento" />  
+                        </f:facet>  
+                        <h:outputText value="#{rep.diaCruzamento}" >  
+                        <f:convertDateTime pattern="dd/MM/yy" dateStyle="medium"/>
+                        </h:outputText>
+                    </p:column> 
+                    <p:column filterBy="#{rep.tipo}">  
+                        <f:facet name="header">  
+                            <h:outputText value="Tipo de Cruzamento" />  
+                        </f:facet>  
+                        <h:outputText value="#{rep.tipo}" />  
+                    </p:column> 
+                     <p:column style="text-align: center" > 
+                         <f:facet name="header">  
+                            <h:outputText value="Excluir" />  
+                        </f:facet>  
+                         <p:commandButton  action="#{reproducaoBean.excluir}" onclick="if (! confirm('Deseja deletar o Funcionario #{rep.id}?') ) { return false;}; return true;" icon="ui-icon-circle-close"  title="excluir">
+                     
+                             <f:setPropertyActionListener  target="#{reproducaoBean.reproducao}" value="#{rep}"/> 
+                       </p:commandButton>
+                      </p:column >
+                      <p:column style="text-align: center"   > 
+                               <f:facet name="header">  
+                            <h:outputText value="Editar" />  
+                        </f:facet>  
+                          <p:commandButton   action="#{reproducaoBean.editar}"  icon="ui-icon-pencil" ajax="false"  title="editar">
+                              <f:setPropertyActionListener value="#{rep}" 
+                                                                      target="#{reproducaoBean.reproducao}"/>
+                                    </p:commandButton>
+                          </p:column>
+                </p:dataTable>  
+            </h:form>
+            </div>
+            </div>
+        </ui:define>
+       
+    </ui:composition>
+</html>
+

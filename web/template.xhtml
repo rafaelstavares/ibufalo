@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:sec="http://www.springframework.org/security/facelets/tags">
+
+    <f:view contentType="text/html" >
+        <h:head>
+            <f:facet name="first">
+                <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+                <title><ui:insert name="titulo">Pagina inicial</ui:insert></title>
+            </f:facet>
+            <style type="text/css">
+                .ui-layout-north {
+               z-index:10 !important;
+                    overflow:visible !important;;
+                }
+
+                .ui-layout-north .ui-layout-unit-content {
+                    overflow:visible !important;
+                }
+                #pag{
+                    position: relative;
+                }
+                
+            </style>
+        </h:head>
+
+        <h:body>
+            <p:layout id="pagina" fullPage="true" >
+                <ui:insert name="pagina"/>
+                <p:layoutUnit id="norte" header="GERENCIAMENTO BUBALINO"  position="north" visible="true"   collapsible="true">
+                    <ui:insert name="norte"/>
+                  
+                     <sec:ifAnyGranted roles="ROLE_ADMIN" >
+                         VOCÊ POSSUI privilegios de administrador
+                     </sec:ifAnyGranted> 
+                     <p/>
+                    
+                     <br/>
+                     <input type="hidden" value="#{internacionalizacao.mudarIdioma()}"/>
+                     Bem vindo #{contextoBean.usuarioLogado.nome}
+                    <h:form>
+                    <p:menubar >
+                        <p:menuitem value="#{msg.Inicio}" url="/publico/inicio.jsf"  icon="ui-icon-note" />
+                        <p:submenu label="Animal" icon="ui-icon-document">  
+                            <p:menuitem value="Cadastro" action="#{animalBean.novo}"  icon="ui-icon-document" />  
+                            <p:menuitem value="Listar" url="/animal/listar.jsf" icon="ui-icon-document"/>  
+                        </p:submenu>  
+
+                        <p:submenu label="Manejo" icon="ui-icon-pencil">  
+                            <p:submenu label="Fazenda" icon="ui-icon-pencil">  
+                                <p:menuitem value="Cadastro" action="#{fazendaBean.novo}" icon="ui-icon-document" />  
+                                <p:menuitem value="Listar" url="/fazenda/listar.jsf" icon="ui-icon-document" />  
+                            </p:submenu>
+                            <p:submenu label="Local" icon="ui-icon-pencil">  
+                                <p:menuitem value="Cadastro" action="#{localBean.novo}" icon="ui-icon-document" />  
+                                <p:menuitem value="Listar" url="/local/listar.jsf" icon="ui-icon-document" />  
+                            </p:submenu>  
+                         <p:submenu label="Funcionário" icon="ui-icon-pencil">  
+                             <p:menuitem value="Cadastro" action="#{funcionariosBean.novo}" icon="ui-icon-document" />  
+                                <p:menuitem value="Listar" url="/funcionarios/listar.jsf" icon="ui-icon-document" />  
+                            </p:submenu>  
+                        </p:submenu>  
+                        <p:submenu label="Sanidade" icon="ui-icon-pencil">  
+                            <p:menuitem value="Cadastro" action="#{sanidadeBean.novo}" icon="ui-icon-document" />  
+                            <p:menuitem value="Listar" url="/sanidade/listar.jsf" icon="ui-icon-document" />  
+                        </p:submenu>  
+                         <p:submenu label="Produção" icon="ui-icon-document">  
+                             <p:menuitem value="Cadastro" action="#{producaoBean.novo}" icon="ui-icon-document" />  
+                            <p:menuitem value="Listar" url="/producao/listar.jsf" icon="ui-icon-document"/>  
+                        </p:submenu> 
+                        <p:submenu label="Reprodução" icon="ui-icon-pencil">  
+                            <p:submenu label="Cruzamento" icon="ui-icon-pencil">  
+                                <p:menuitem value="Cadastro" action="#{reproducaoBean.novo}" icon="ui-icon-document" />  
+                                <p:menuitem value="Listar" url="/reproducao/listar.jsf" icon="ui-icon-document" />  
+                            </p:submenu> 
+                            <p:submenu label="Bezerro" icon="ui-icon-pencil">  
+                                <p:menuitem value="Cadastro" action="#{bezerroBean.novo}" icon="ui-icon-document" />  
+                                <p:menuitem value="Listar" url="/bezerro/listar.jsf" icon="ui-icon-document" />  
+                            </p:submenu> 
+                            <p:submenu label="Precocidade" icon="ui-icon-pencil">  
+                                <p:menuitem value="Cadastro" action="#{precocidadeBean.novo}" icon="ui-icon-document" />  
+                                <p:menuitem value="Listar" url="/precocidade/listar.jsf" icon="ui-icon-document" />  
+                            </p:submenu> 
+                        </p:submenu>               
+                        <p:submenu label="Relatórios" icon="ui-icon-pencil">  
+                            <p:submenu label="Fazenda" icon="ui-icon-pencil">  
+                                <p:menuitem value="Relatório X" url="/fazenda/relatorio.jsf" icon="ui-icon-document" />  
+                                <p:menuitem value="Listar" url="#" icon="ui-icon-document" />  
+                            </p:submenu>
+                            <p:submenu label="Animais" icon="ui-icon-pencil">  
+                                <p:menuitem value="Relatório X" url="#" icon="ui-icon-document" />  
+                                <p:menuitem value="Listar" url="#" icon="ui-icon-document" />  
+                            </p:submenu> 
+                            <p:submenu label="Reprodução" icon="ui-icon-pencil">  
+                                <p:menuitem value="Relatório X" url="#" icon="ui-icon-document" />  
+                                <p:menuitem value="Listar" url="#" icon="ui-icon-document" />  
+                            </p:submenu> 
+                            <p:submenu label="Produção" icon="ui-icon-pencil">  
+                                <p:menuitem value="Relatório X" url="#" icon="ui-icon-document" />  
+                                <p:menuitem value="Listar" url="#" icon="ui-icon-document" />  
+                            </p:submenu> 
+                            
+                        </p:submenu> 
+                          <p:menuitem value="Sair" url="../logout" icon="ui-icon-power" /> 
+                          <sec:ifAnyGranted roles="ROLE_ADMIN" >
+                            <p:menuitem value="admin" url="admin" icon="ui-icon-person" />   
+                          </sec:ifAnyGranted>
+                          
+                    </p:menubar>
+                        </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit id="sul" position="south" size="200" closable="true" collapsible="true">
+                    <ui:insert name="sul"/>
+                  
+                </p:layoutUnit>
+
+
+                <p:layoutUnit id="centro" position="center">
+                    <ui:insert name="centro"/>
+                </p:layoutUnit>
+                <p:layoutUnit id="right" position="east" size="250" header="Lembrete" resizable="true" closable="true" collapsible="true"
+                              style="text-align:center">
+                    <ui:insert name="right"/>
+                </p:layoutUnit>
+
+                <p:layoutUnit id="left" position="west" size="300" resizable="true" collapsible="true" header="Resumo" minSize="250">
+                    <p:accordionPanel>
+                        <p:tab title="Fazenda">
+                           <h:outputText value="Menu 1 Content" />
+                        </p:tab>
+
+                        <p:tab title="Animais">
+                            <h:outputText value="Menu 2 Content" />
+                        </p:tab>
+
+                        <p:tab title="Reprodução">
+                            <h:outputText value="Menu 3 Content" />
+                        </p:tab>
+                         <p:tab title="Sanidade">
+                            <h:outputText value="Menu 4 Content" />
+                        </p:tab>
+                    </p:accordionPanel>
+                </p:layoutUnit>
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>

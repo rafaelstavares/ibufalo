@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:sec="http://www.springframework.org/security/facelets/tags">
+
+
+
+
+    <body>
+        <ui:composition>
+
+            <aside id="sidebar" class="sidebar c-overflow">
+                <div class="profile-menu">
+                    <a href="">
+                        <div class="profile-pic">
+                            <img src="../resources/app/img/profile-pics/1.jpg" alt=""/>
+                        </div>
+
+                        <div class="profile-info">
+                            #{contextoBean.usuarioLogado.nome}
+
+                            <i class="zmdi zmdi-caret-down"></i>
+                        </div>
+                    </a>
+
+                    <ul class="main-menu">
+                        <li>
+                            <a href="profile-about.html"><i class="zmdi zmdi-account"></i> View Profile</a>
+                        </li>
+                        <li>
+                            <a href=""><i class="zmdi zmdi-input-antenna"></i> Privacy Settings</a>
+                        </li>
+                        <li>
+                            <a href=""><i class="zmdi zmdi-settings"></i> Settings</a>
+                        </li>
+                        <li>
+                            <a href="../logout"><i class="zmdi zmdi-time-restore"></i> Logout</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <ul class="main-menu">
+                    <li id="menu-home"  >
+                        <a href="../publico/principal.jsf"><i class="zmdi zmdi-home"></i> Home</a>
+                    </li>
+                    <li id="menu-piquete" class="sub-menu" >
+                        <a  href="../local/local1.jsf"><i class="zmdi zmdi-pin"></i> Piquete</a>
+                        <ul>
+                            <li><a href="../local/local1.jsf"><i class="zmdi zmdi-plus-circle-o"/>&emsp;Adicionar Piquete</a></li>
+                            <li><a href="../local/listar.jsf"><i class="zmdi zmdi-storage"/>&emsp;Listar Piquete</a></li>
+                            <li><a href="../local/menu-piquete.jsf"><i class="zmdi zmdi-roller"/>&emsp;Menu Piquete</a></li>
+
+                        </ul>
+                    </li>
+                    <li id="menu-animal" class="sub-menu" >
+                        <a  href="../animal/animal_cad.jsf"><i class="zmdi zmdi-evernote"></i> Animal</a>
+                        <ul>
+                            <li><a href="../animal/animal_cad.jsf"><i class="zmdi zmdi-plus-circle-o"/>&emsp;Adicionar Animal</a></li>
+
+                        </ul>
+                    </li>
+                    <li id="menu-producao" >
+                        <a  href="#"><i class="zmdi zmdi-format-color-fill"></i> Produção</a>
+                    </li>
+                    <li id="menu-funcionario" class="sub-menu" >
+                        <a  href="../funcionarios/funcionarios1.jsf"><i class="zmdi zmdi-accounts-outline"></i> Funcionario</a>
+                        <ul>
+                            <li><a href="../funcionarios/funcionarios1.jsf"><i class="zmdi zmdi-plus-circle-o"/>&emsp;Adicionar Funcionario</a></li>
+                            <li><a href="../funcionarios/listar.jsf"><i class="zmdi zmdi-storage"/>&emsp;Listar Funcionario</a></li>
+                        </ul>
+                    </li>
+                    <li id="relatorio" class="sub-menu">
+                        <a href=""><i class="zmdi zmdi-assignment"></i> Relatórios</a>
+                        <ul>
+                            <li id="relatorio-animal" class="sub-menu"><a href="#"  data-ma-action="submenu-toggle" ><i   class="zmdi zmdi-assignment"/> Animal</a>
+                                <ul>
+                                    <li><a href="../animal/animal.jsf"><i class="zmdi zmdi-storage"/>&emsp;Todos Animais</a></li>
+                                    <li><a href="../animal/animalM.jsf"><i class="zmdi zmdi-storage"/>&emsp;Animais Machos</a></li>
+                                    <li><a href="../animal/animalF.jsf"><i class="zmdi zmdi-storage"/>&emsp;Animais Femeas</a></li>
+                                </ul>
+                            </li>
+
+                            <li  >
+                                <a  href="#"><i class="zmdi zmdi-format-color-fill"></i> Produção</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li id="menu-baixas" >
+                        <a  href="#"><i class="zmdi zmdi-hospital-alt"></i> Baixas</a>
+                    </li>
+
+
+                </ul>
+            </aside>
+
+
+
+
+
+
+
+
+
+
+        </ui:composition>
+
+
+    </body>
+
+</html>
+

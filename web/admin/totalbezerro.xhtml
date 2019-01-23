@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+          <div style="width: 600px;padding-top: 150px;padding-left: 60px">
+            <h:form>
+                <p:dataTable var="bezerro" value="#{bezerroBean.lista}">
+            <p:column headerText="id">  
+                <h:outputText value="#{bezerro.idBezerro}" />  
+        </p:column>  
+        <p:column headerText="nome">  
+            <h:outputText value="#{bezerro.nome}" />  
+          </p:column> 
+         <p:column headerText="Nome Pai">  
+             <h:outputText value="#{bezerro.paiAnimal.nome}" />  
+        </p:column>  
+   
+        </p:dataTable>
+        </h:form>
+            </div>
+    </h:body>
+</html>
+

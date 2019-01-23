@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="titulo">
+            Cadastro Sanidade
+        </ui:define>    
+        <ui:define name="pagina"/>
+        <ui:define name="norte"/>
+        <ui:define name="centro">
+            <p:fieldset legend="Cadastro Sanidade">
+                <h:form >
+                    <h:inputHidden value="#{sanidadeBean.sanidade.idSanidade}"/>
+                    <h:inputHidden value="#{sanidadeBean.destinoSalvar}"/>
+                    <p:messages/>
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+                    <p:panelGrid columns="2">
+
+                        <h:outputLabel value="Animal" for="animal" />
+                        <p:selectOneMenu  value="#{sanidadeBean.sanidade.animal}" converter="IndexedConverter" required="true" requiredMessage="Escolha um animal"> 
+                            <f:selectItem itemValue="" itemLabel="Selecione Animal"/>
+                            <f:selectItems  var="ani" itemValue="#{ani}" value="#{animalBean.lista}" itemLabel="#{ani.nome}"/> 
+
+                        </p:selectOneMenu>
+                        <h:outputLabel value="Local" for="local" />
+                        <p:selectOneMenu  value="#{sanidadeBean.sanidade.local}" converter="IndexedConverter" required="true" requiredMessage="Escolha um Local"> 
+                            <f:selectItem itemValue="" itemLabel="Selecione um local"/>
+                            <f:selectItems  var="locsan" itemValue="#{locsan}" value="#{localBean.lista}" itemLabel="#{locsan.nome}"/> 
+                        </p:selectOneMenu>
+
+
+                        <h:outputLabel value="Vacina" for="vacina"/>
+                        <p:inputText id="vacina" label="Vacina" value="#{sanidadeBean.sanidade.vacina}">       
+                        </p:inputText>
+                        <h:outputLabel value="Vermefugo" for="vermefugo"/>
+                        <p:inputText id="vermefugo" label="Vermefugo" value="#{sanidadeBean.sanidade.vermefugo}">       
+                        </p:inputText>
+
+                    </p:panelGrid>
+
+                    <p:commandButton ajax="false" action="#{sanidadeBean.salvar}" value="Salvar" update="growl"/>
+
+                </h:form>
+            </p:fieldset>
+        </ui:define>
+        <ui:define name="rigth"/>
+        <ui:define name="sul"/>
+    </ui:composition>
+</html>
+

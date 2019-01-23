@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/templates/internal3.xhtml">
+        <ui:define name="titulo">
+            Cadastro Produção
+        </ui:define>    
+
+
+        <ui:define name="conteudo">
+            <p:fieldset legend="Cadastro Produção">
+                <h:form >
+                    <h:inputHidden value="#{animalBean.animal.idAnimal}"/>
+                    <h:inputHidden value="#{producaoBean.producao.idProducao}"/>
+                    <h:inputHidden value="#{producaoBean.destinoSalvar}"/>
+                    <p:messages/>
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+                    <p:panelGrid columns="2">
+
+                        <h:outputLabel value="Animal" for="animal" />
+                        <p:selectOneMenu  value="#{producaoBean.producao.animal}" converter="converterAnimal" required="true" requiredMessage="Escolha uma Fazenda"> 
+                            <f:selectItem itemValue="" itemLabel="Selecione Animal"/>
+                            <f:selectItems  var="an" itemValue="#{an}" value="#{animalBean.lista}" itemLabel="#{an.nome}"/> 
+
+                        </p:selectOneMenu>
+                        <h:outputLabel value="Funcipnário" for="funcionario" />
+                        <p:selectOneMenu  value="#{producaoBean.producao.funcionarios}" converter="IndexedConverter" required="true" requiredMessage="Escolha um Local"> 
+                            <f:selectItem itemValue="" itemLabel="Selecione um local"/>
+                            <f:selectItems  var="fupro" itemValue="#{fupro}" value="#{funcionariosBean.lista}" itemLabel="#{fupro.nome}"/> 
+                        </p:selectOneMenu>
+
+                        <h:outputLabel value="Data Produção" for="data"/>
+                        <p:calendar pattern="dd/MM/yy" size="10" label="Data Precocidade" effect="fade" value="#{producaoBean.producao.diaProducao}" id="popupCal" >  
+                              
+            <f:convertDateTime dateStyle="medium" pattern="dd/MM/yy"/>
+                </p:calendar>
+                        <h:outputLabel value="Quantidade" for="quantidade"/>
+                        <p:inputText id="quantidade" label="Quantidade" value="#{producaoBean.producao.quantidade}">       
+                        </p:inputText>
+                    </p:panelGrid>
+
+                    <p:commandButton ajax="false" action="#{producaoBean.salvar}" value="Atualizar" update="growl"/>
+
+                </h:form>
+            </p:fieldset>
+        </ui:define>
+        <ui:define name="rigth"/>
+        <ui:define name="sul"/>
+    </ui:composition>
+</html>

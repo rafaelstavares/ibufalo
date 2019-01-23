@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head >
+     <meta http-equiv="content-Type" content="text/html; charset=iso-8859-1" />
+
+        <title>Total fazenda</title>
+                  <style type="text/css">
+        html, body {
+width: 100%;
+height: 100%;
+font-family: "Helvetica Neue", Helvetica, sans-serif;
+color: #444;
+-webkit-font-smoothing: antialiased;
+background: #f0f0f0;
+ 
+}
+
+            </style>
+    </h:head>
+    <h:body>
+        <h:form>
+        <p:dataTable var="fazenda" value="#{fazendaBean.lista}">
+            <p:column headerText="Nome">  
+                <h:outputText value="#{fazenda.nome}" />  
+        </p:column>  
+        <p:column headerText="endereço">  
+            <h:outputText value="#{fazenda.endereco}" />  
+        </p:column>  
+  
+        <p:column headerText="Estado">  
+            <h:outputText value="#{fazenda.estado}" />  
+        </p:column>  
+   
+        </p:dataTable>
+        </h:form>
+    </h:body>
+</html>
+

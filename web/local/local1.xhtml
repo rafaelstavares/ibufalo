@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="../templates/template.xhtml">
+            <ui:define name="titulo">inicio Piquete</ui:define>'
+            <ui:define name="conteudo">
+                <div class="container-fluid">
+                    <h:form acceptcharset="ISO-8859-1" prependId="false" >
+                        <h:inputHidden value="#{localBean.local.idlocal}"/>
+                        <h:inputHidden value="#{localBean.destinoSalvar}"/>
+
+                        <p:messages/>
+                        <p:growl id="growl" showDetail="true" sticky="true" /> 
+                        <div class="col-md-3"/>
+                        <div class="card col-md-6">
+                            <div class="card-header ch-alt">
+                                <h2>Adicionar Piquete<small>Pellentesque ac lectus sed elit dictum vehicula</small></h2>
+                            </div>
+
+                            <div class="card-body card-padding">
+                                <div class="form-group fg-float m-b-30">
+                                    <div class="fg-line">
+                                        <h:inputText value="#{localBean.local.numeroLocal}" class="form-control input-sm" />
+                                        <label class="fg-label">Número Local</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group fg-float m-b-30">
+                                    <div class="fg-line">
+                                        <h:inputText  value="#{localBean.local.nome}" class="form-control input-sm"/>
+                                        <label class="fg-label">Nome Piquete</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group fg-float m-b-30">
+                                    <div class="fg-line">
+                                        <h:inputText value="#{localBean.local.tamanho}" class="form-control input-sm"/>
+                                        <label class="fg-label">Tamanho Piquete</label>
+                                    </div>
+                                </div>
+                                <div class="form-group fg-float m-b-30">
+                                    <div class="fg-line">
+                                        <h:inputText value="#{localBean.local.forragem}" class="form-control input-sm"/>
+                                        <label class="fg-label">Forragem</label>
+                                    </div>
+                                </div>
+
+                                <h:commandLink id="btn-salvarPiquete" action="#{localBean.salvar}"/>
+                                <div onclick="salvarPiquete()" class="btn btn-info waves-effect">Salvar</div>
+                                <div onclick="window.location.href = '../local/listar.jsf'" class="btn btn-danger waves-effect">Cancelar</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3"/>
+
+
+                        <p:commandLink/>
+                    </h:form>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        document.getElementById("menu-piquete").className = "sub-menu active";
+                    });
+                    
+                     function salvarPiquete() {
+
+
+                                        var jsfCommandLink = document.getElementById("btn-salvarPiquete");
+                                        jsfCommandLink.click();
+                                    }
+                    
+                </script>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
