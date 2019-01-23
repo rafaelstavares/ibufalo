@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../templates/internal3.xhtml">
+    
+        <ui:define name="titulo">
+            Página em Branco
+        </ui:define>    
+ 
+        <ui:define name="conteudo">
+            
+               <div class="fluid-row">
+          <div class="span12">
+                <h:form prependId="false"> 
+                    <p:dataTable id="dataTable"  var="car" value="#{reproducaoBean.listarA_7_10gestacao}"  
+                 paginator="true" rows="10"  
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                 rowsPerPageTemplate="5,10,20" emptyMessage="Nenhum Animal Cadastrado">  
+        <f:facet name="header">  
+              Lista Animais Femeas para parir
+        </f:facet>  
+  
+                      <p:column >  
+            <f:facet name="header">  
+                <h:outputText value="Nome" />  
+            </f:facet>  
+                          <h:outputText value="#{car.maeAnimal.nome}" />  
+        </p:column>  
+                     <p:column >  
+            <f:facet name="header">  
+                <h:outputText value="Data da concepção" />  
+            </f:facet>  
+                         <h:outputText value="#{car.diaCruzamento}" ><f:convertDateTime dateStyle="medium"/></h:outputText>  
+        </p:column>  
+              </p:dataTable> </h:form> </div></div>
+        </ui:define>
+        
+        
+    </ui:composition>
+</html>

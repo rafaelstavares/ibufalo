@@ -1,0 +1,285 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:sec="http://www.springframework.org/security/facelets/tags">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <title>Ufra Manager</title>
+
+        <link href="../resources/app/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet"/>
+        <link href="../resources/app/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>        
+
+        <!-- CSS -->
+        <link href="../resources/app/css/app.min.1.css" rel="stylesheet"/>
+        <link href="../resources/app/css/app.min.2.css" rel="stylesheet"/>
+        <style type="text/css">
+            table{
+                border-collapse: collapse;
+                display: table;
+                color: #009688;
+            }
+            #conteudo{
+                position: relative;
+                left: 25%;
+                top: 50%;
+            }
+            #cap{
+                position: relative;
+                left: 25%;
+                top: 50%;
+                direction: inherit;
+            }
+        </style>
+    </h:head>
+
+    <h:body >
+
+        <!-- Vendor CSS -->
+        <f:view>
+<header id="header" class="clearfix" data-current-skin="blue">
+                <ul class="header-inner">
+                    <li class="logo hidden-xs">
+                        <a href="inicio.jsf">Buffalo Manager</a>
+                    </li>
+                    
+                    <li class="pull-right">
+                        
+                        <ul class="top-menu">
+                             <sec:ifAnyGranted roles="ROLE_ADMIN" >
+                          <li class="pull-left">
+                                <a href="../admin/inicio-admin.jsf"><i class="tm-icon zmdi zmdi-pin-account"></i></a>
+                            </li>
+                     </sec:ifAnyGranted> 
+                           
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" href=""><span class="text-uppercase p-10">#{contextoBean.usuarioLogado.nome}</span><i class="tm-icon zmdi zmdi-settings"></i></a>
+                                <ul class="dropdown-menu dm-icon pull-right">
+                                    <li class="skin-switch hidden-xs">
+                                        <span class="ss-skin bgm-lightblue" data-skin="lightblue"></span>
+                                        <span class="ss-skin bgm-bluegray" data-skin="bluegray"></span>
+                                        <span class="ss-skin bgm-cyan" data-skin="cyan"></span>
+                                        <span class="ss-skin bgm-teal" data-skin="teal"></span>
+                                        <span class="ss-skin bgm-orange" data-skin="orange"></span>
+                                        <span class="ss-skin bgm-blue" data-skin="blue"></span>
+                                    </li>
+                                    <li class="divider hidden-xs"></li>
+                                    <li class="hidden-xs">
+                                        <a href="../usuario/usuario_edit.jsf"><i class="zmdi zmdi-account"></i> Editar Usuário</a>
+                                        
+                                    </li>
+                                    <li class="hidden-xs">
+                                        <a data-action="fullscreen" href=""><i class="zmdi zmdi-fullscreen"></i> Toggle Fullscreen</a>
+                                    </li>
+                                    <li>
+                                        <a href="../logout"><i class="zmdi zmdi-power-off"></i> Sair</a>
+                                    </li>
+                                </ul>
+                            </li>   
+
+
+                        </ul>
+
+                    </li>
+
+                </ul>
+            </header>
+
+            <div id="main">
+
+
+             
+                    <div class="container">
+
+                        <div class="text-center">
+                            <h2 class="f-400" style="color: #009688">Bem Vindo ao Buffalo Manager!</h2>
+                            <p class="c-gray m-t-10 m-b-10">
+
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    
+                            </p>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+
+                        <div id="conteudo" class="card col-md-7">
+                            <div class="card-header">
+                                
+                                <h:form id="formFazenda" prependId="false">
+
+                                    <h:commandLink id="add" action="#{fazendaBean.novoFazenda}" style="padding-left: 30px;     " >
+
+                                    </h:commandLink>
+
+                                </h:form>
+                                <h2>Gerenciador  de Fazenda<small>Selecione uma fazenda para gerenciar</small></h2>
+                                <div onclick="addFazenda()" title="Adicionar Fazenda" class="btn bgm-green btn-float waves-effect"><i class="zmdi zmdi-plus"></i>
+                                </div>
+                                <div class="card-body card-padding">
+                                    <div class="row m-t-25">
+                                        <h:form id="form01" rendered="#{not empty fazendaBean.lista}" prependId="false">
+                                            <h:inputHidden value="#{usuarioBean.usuario.idUsuario}"/>
+                                            <h:dataTable columnClasses="card card-padding" id="listFazenda"  value="#{fazendaBean.lista}" var="farm">
+                                                <div class="card">
+                                                    <h:column id="cap"  >
+                                                        <div class="card-header bgm-amber m-b-20">
+                                                            <h2 class="text-uppercase">#{farm.nome}<small class="text-capitalize">Gerencie sua fazenda: acesso, edição rápida e excluir </small></h2>
+                                                            <h:commandLink id="entrar" action="principal"   >
+                                                                <f:setPropertyActionListener  target="#{contextoBean.ativafazenda}" value="#{farm}"/>                      
+                                                            </h:commandLink>
+                                                            <div title="Gerenciar Fazenda: #{farm.nome}" onclick="entrarFazenda()" class="btn bgm-cyan btn-float waves-effect"><i class="zmdi zmdi-mail-send"></i></div>
+                                                        </div></h:column>
+                                                    <h:column >
+                                                        <div class="card-body card-padding">
+                                                            <h:commandLink id="btnEdit" action="#{fazendaBean.editar}" >
+                                                                <f:setPropertyActionListener value="#{farm}" target="#{fazendaBean.selecionada}"/>
+                                                            </h:commandLink>
+                                                            <div id="btn123" title="Editar #{farm.nome}" class="btn bgm-gray btn-lg btn-icon-text waves-effect" onclick="editarFazenda()" ><i class="zmdi zmdi-edit c-white"/>  Editar</div>
+                                                        </div>
+
+                                                    </h:column>
+                                                    <h:column>
+                                                        <div class="card-body card-padding">
+                                                            <p:commandLink id="btnDel"   action="#{fazendaBean.excluir}" >
+                                                                <f:setPropertyActionListener value="#{farm}" target="#{fazendaBean.selecionada}"/>
+                                                            </p:commandLink>
+                                                            <div id="btn123" title="Excluir #{farm.nome}" class="btn btn-danger btn-lg btn-icon-text waves-effect" onclick="myFunctionDel()" ><i class="zmdi zmdi-delete c-white"/> deletar</div>
+                                                        </div>
+                                                    </h:column>
+                                                </div>
+
+
+                                            </h:dataTable>
+
+                                        </h:form>
+
+
+
+
+
+                                        <h:panelGroup rendered="#{empty fazendaBean.lista}">
+                                            <p>não há fazendas cadastradas.</p>
+                                        </h:panelGroup>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+         
+            </div>
+
+            <fooder id="fooder">
+                <center>Copyright &copy; 2016  -  <a href="http://www.ufra.edu.br" target="_blank">UFRA</a> - <i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Bacharelado em Sistema de Informação</center>
+            </fooder>
+
+            <div id="carregando" class="preloader pl-xl" style="display:none">
+                <svg class="pl-circular" viewBox="25 25 50 50">
+                    <circle class="plc-path" cx="50" cy="50" r="20"></circle>
+                </svg>
+            </div>
+
+
+
+
+            <!-- Javascript Libraries -->
+            <script src="../resources/app/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+            <script src="../resources/app/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+            <script src="../resources/app/vendors/bower_components/Waves/dist/waves.min.js"></script>
+            <script src="../resources/app/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+            <script src="../resources/app/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js"></script>
+
+            <!-- Placeholder for IE9 -->
+            <!--[if IE 9 ]>
+                <script src="../resources/app/vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
+            <![endif]-->
+
+            <script src="../resources/app/js/functions.js"></script>
+            <script src="../resources/app/js/demo.js"></script>
+
+            <script type="text/javascript">
+                                                                /*
+                                                                 * Notifications
+                                                                 */
+                                                                function myFunctionDel() {
+                                                                    $('td').click(function () {
+                                                                        var col = $(this).parent().children().index($(this));
+                                                                        var row = $(this).parent().parent().children().index($(this).parent());
+                                                                        //$('listFazenda:'+(row)+':btnDel').click();
+                                                                        var oi = document.getElementById('listFazenda:' + (row) + ':btnDel');
+                                                                        swal({title: "O que você deseja fazer",
+                                                                            text: "Ao confirmar clicando sim, você irá apagar todos os dados da Fazenda!",
+                                                                            type: "warning",
+                                                                            showCancelButton: true,
+                                                                            confirmButtonColor: "#DD6B55",
+                                                                            cancelButtonColor: "#03A9F4",
+                                                                            confirmButtonText: "Sim, Deletar Fazenda!",
+                                                                            cancelButtonText: "Não, Cancelar ação!",
+                                                                            closeOnConfirm: false,
+                                                                            closeOnCancel: false},
+                                                                                function (isConfirm) {
+                                                                                    if (isConfirm === true) {
+                                                                                        swal("Deletados!", "Seus dados foram deletados.", "success");
+                                                                                        oi.click();
+
+                                                                                        addTable();
+
+                                                                                    } else {
+                                                                                        swal("Ufa, Cancelado", "Você ainda tem seus dados :)", "error");
+                                                                                    }
+
+                                                                                });
+
+                                                                    });
+
+                                                                }
+
+                                                                function addTable() {
+
+                                                                    setTimeout(function () {
+                                                                        location.reload(true);
+
+                                                                    }, 1000);
+
+
+
+                                                                }
+                                                                function addFazenda() {
+
+                                                                    var jsfCommandLink = document.getElementById("add");
+                                                                    jsfCommandLink.click();
+
+                                                                }
+                                                                function editarFazenda() {
+                                                                    $('td').click(function () {
+                                                                        var row = $(this).parent().parent().children().index($(this).parent());
+                                                                        var oi2 = document.getElementById('listFazenda:' + (row) + ':btnEdit');
+                                                                        oi2.click();
+                                                                    });
+                                                                }
+                                                                function entrarFazenda() {
+                                                                    $('td').click(function () {
+                                                                        var row = $(this).parent().parent().children().index($(this).parent());
+                                                                        var oi3 = document.getElementById('listFazenda:' + (row) + ':entrar');
+                                                                        oi3.click();
+                                                                    });
+                                                                }
+                                                                function editarUsuario() {
+                                                                    var jsfCommandLink = document.getElementById("editarUsusario");
+                                                                    jsfCommandLink.click();
+                                                                }
+
+
+            </script>
+        </f:view>
+    </h:body>
+</html>
