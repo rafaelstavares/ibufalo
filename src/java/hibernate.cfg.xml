@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+    <!-- <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/financeiro</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">root</property>-->
+     <property name="connection.datasource">java:/comp/env/jdbc/tcc</property>
+ <property name="current_session_context_class">thread</property>
+    <!--  --> <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property> 
+     <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="show_sql">true</property>
+    <property name="format_sql">true</property>
+   <!--  <property name="hibernate.connection.useUnicode">true</property>
+    <property name="hibernate.connection.charSet">UTF-8</property>-->
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <mapping class="fazenda.Fazenda"/>
+    <mapping class="local.Local"/>
+    <mapping class="funcionarios.Funcionarios"/>
+    <mapping class="animal.Animal"/>
+    <mapping class="producao.Producao"/>
+    <mapping class="sanidade.Sanidade"/>
+    <mapping class="reproducao.Reproducao"/>
+    <mapping class="bezerro.Bezerro"/>
+    <mapping class="precocidade.Precocidade"/>
+    <mapping class="usuario.Usuario"/>
+    <mapping class="estado.Estados"/>
+    <mapping class="cidade.Cidades"/>
+  </session-factory>
+</hibernate-configuration>
