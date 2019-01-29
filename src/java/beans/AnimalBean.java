@@ -7,6 +7,7 @@ package beans;
 import animal.Animal;
 import animal.AnimalRn;
 import fazenda.Fazenda;
+import fazenda.FazendaRn;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -44,6 +45,8 @@ public class AnimalBean {
     private String destinoSalvar;
     private String sexo;
     private boolean value1;
+    AnimalRn animalRnE = new AnimalRn();
+    ContextoBean coEDi = new ContextoBean();
 
     public boolean isValue1() {
         return value1;
@@ -55,7 +58,7 @@ public class AnimalBean {
 
     public String novo() {
         this.destinoSalvar = "listar";
-        this.animal = new Animal();
+        animal = new Animal();
 
         return "/animal/animal";
     }
@@ -103,11 +106,21 @@ public class AnimalBean {
     }
 
     public String editar() {
-        AnimalRn animalRn = new AnimalRn();
-        ContextoBean co = new ContextoBean();
-        animalRn.carregar(co.getUsuarioLogado().getIdUsuario());
+        animalRnE = new AnimalRn();
+        coEDi = new ContextoBean();
+        animalRnE.carregar(coEDi.getUsuarioLogado().getIdUsuario());
         return "/animal/animal_edit";
 
+    }
+
+    public String Atualizar() {
+        Integer idAnimal = animal.getIdAnimal();
+        if (idAnimal == null || idAnimal == 0) {
+            this.animalRnE.salvar(animal);
+        } else {
+            this.animalRnE.atualizar(animal);
+        }
+        return "/animal/animal?faces-redirect=true";
     }
 
     public String visualizar() {
@@ -121,7 +134,7 @@ public class AnimalBean {
     public String editarBaixa() {
         AnimalRn animalRn = new AnimalRn();
         ContextoBean co = new ContextoBean();
-        animalRn.carregar(co.getUsuarioLogado().getIdUsuario());
+        animalRn.carregar(co.getFazendaAtiva().getIdfazenda());
         return "/baixas/baixas_cadastro";
 
     }
@@ -130,6 +143,7 @@ public class AnimalBean {
         AnimalRn animalRn = new AnimalRn();
         animalRn.excluir(animal);
         this.lista = null;
+        animal = new Animal();
 
         return null;
     }
@@ -144,11 +158,11 @@ public class AnimalBean {
 
     public String salvar() {
         ContextoBean contextoBean = ContextoUtil.getContextoBean();
-        this.animal.setFazenda(contextoBean.getFazendaAtiva());
-        this.animal.setAtivaFemea(true);
+        animal.setFazenda(contextoBean.getFazendaAtiva());
+        animal.setAtivaFemea(true);
         AnimalRn animalRN = new AnimalRn();
 
-        animalRN.salvar(this.animal);
+        animalRN.salvar(animal);
 
         return "/animal/animal?faces-redirect=true";
     }
@@ -174,7 +188,7 @@ public class AnimalBean {
         try {
             NumberFormat formatarFloat = new DecimalFormat("0.00");
             nu = (100 * totalFemea()) / totalAnimal();
-             String nu2 = formatarFloat.format(nu);
+            String nu2 = formatarFloat.format(nu);
             nu2 = nu2.replace(',', '.');
             nu = Float.parseFloat(nu2);
             return nu;
@@ -198,18 +212,6 @@ public class AnimalBean {
         }
 
         return nu;
-    }
-
-    public String Atualizar() {
-        ContextoBean contextoBean = ContextoUtil.getContextoBean();
-        this.animal.setFazenda(contextoBean.getFazendaAtiva());
-        this.animal.setAtivaFemea(true);
-        AnimalRn animalRN = new AnimalRn();
-
-        animalRN.atualizar(this.animal);
-
-        animal = new Animal();
-        return "/animal/animal_1?faces-redirect=true";
     }
 
     public void AtivaFema() {
