@@ -4,8 +4,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:jsf="http://xmlns.jcp.org/jsf">
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="../templates/template.xhtml">
         <link href="../resources/app/vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet"/>
@@ -24,7 +23,7 @@
                 <h:form acceptcharset="ISO-8859-1" prependId="false" >
                     <h:inputHidden value="#{animalBean.animal.idAnimal}"/>
                     <h:inputHidden value="#{animalBean.destinoSalvar}"/>
-
+                    <h:inputHidden value="#{contextoBean.usuarioLogado.idUsuario}"/>
                     <p:messages/>
                     <p:growl id="growl" showDetail="true" sticky="true" /> 
                     <div class="col-md-3"/>
@@ -116,7 +115,8 @@
                                     <label class="fg-label">Peso Animal</label>
                                 </div>
                             </div>
-                            <button jsf:action="#{animalBean.salvar()}" class="btn btn-info" >Cadastrar</button>
+                            <h:commandLink id="btn-editarAnimal" action="#{animalBean.salvar()}"/>
+                            <div onclick="editarAnimal()" class="btn btn-info waves-effect">Salvar</div>
                             <div onclick="window.location.href = '../animal/animal.jsf'" class="btn btn-danger waves-effect">Cancel</div>
 
                         </div>
@@ -124,15 +124,18 @@
 
                     <div class="col-md-3"/>
 
-
-                    <p:commandLink/>
                 </h:form>
             </div>
             <script type="text/javascript">
                 $(document).ready(function () {
                     document.getElementById("menu-animal").className = "sub-menu active";
                 });
+                function editarAnimal() {
 
+
+                    var jsfCommandLink = document.getElementById("btn-editarAnimal");
+                    jsfCommandLink.click();
+                }
             </script>
 
 
