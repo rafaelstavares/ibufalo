@@ -20,5 +20,5 @@ public interface FazendaDAO {
     public Fazenda carregar (Integer idfazenda);
     public List<Fazenda> listar(Usuario usuario);
     public List<Fazenda> listarAll();
-    public Fazenda buscarFazendafavorita(Usuario usuario);
+
 }

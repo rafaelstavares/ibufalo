@@ -51,10 +51,5 @@ public class FazendaDAOHibernate implements FazendaDAO {
      public List<Fazenda> listarAll() {
         return this.session.createCriteria(Fazenda.class).list();
     }
-    public Fazenda buscarFazendafavorita(Usuario usuario){
-    Criteria criteria = this.session.createCriteria(Fazenda.class);
-    criteria.add(Restrictions.eq("usuario", usuario));
-    criteria.add(Restrictions.eq("usuario", true));
-    return (Fazenda) criteria.uniqueResult();
-    }
+
 }

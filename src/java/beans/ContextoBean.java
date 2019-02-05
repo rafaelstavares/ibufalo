@@ -20,27 +20,25 @@ import usuario.UsuarioRn;
  *
  * @author Rafael
  */
-
 @ManagedBean(name = "contextoBean")
 @SessionScoped
 public class ContextoBean {
 
     private Usuario usuarioLogado = null;
     private Fazenda fazendaAtiva = null;
-  private Animal animalAtivo = null;
+    private Animal animalAtivo = null;
 
     public Animal getAnimalAtivo() {
-
+        AnimalRn animalRn = new AnimalRn();
+        animalRn.carregar(animalAtivo.getIdAnimal());
         return animalAtivo;
     }
 
     public void setAnimalAtivo(ValueChangeEvent event) {
-        Integer animal = (Integer)event.getNewValue();
+        Integer animal = (Integer) event.getNewValue();
         AnimalRn animalRn = new AnimalRn();
-        this.animalAtivo =  animalRn.carregar(animal);
+        animalAtivo = animalRn.carregar(animal);
     }
-
-
 
     public Usuario getUsuarioLogado() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -64,7 +62,6 @@ public class ContextoBean {
         if (this.fazendaAtiva == null) {
             Usuario usuario = this.getUsuarioLogado();
             FazendaRn fazendaRn = new FazendaRn();
-            this.fazendaAtiva = fazendaRn.buscarfavorita(usuario);
             if (this.fazendaAtiva == null) {
                 List<Fazenda> fazendas = fazendaRn.listar(usuario);
                 if (fazendas != null) {
@@ -77,23 +74,22 @@ public class ContextoBean {
         }
         return fazendaAtiva;
     }
-public void ativafazenda(){
-   FacesContext fc = FacesContext.getCurrentInstance();
-HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-
-session.setAttribute("ID_USUARIO", this.fazendaAtiva.getNome());
-                
-     
-}
+          
 
 
- public void setAtivafazenda(Fazenda fazendaAtiva) {
+    public void ativafazenda() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+
+        session.setAttribute("ID_USUARIO", this.fazendaAtiva.getNome());
+
+    }
+
+    public void setAtivafazenda(Fazenda fazendaAtiva) {
         this.fazendaAtiva = fazendaAtiva;
     }
 
-
-
-    public void setFazendaAtiva(ValueChangeEvent event) {                                                                                                                                                                                                                                                                                                                                         
+    public void setFazendaAtiva(ValueChangeEvent event) {
         Integer fazenda = (Integer) event.getNewValue();
         FazendaRn fazendaRn = new FazendaRn();
         this.fazendaAtiva = fazendaRn.carregar(fazenda);

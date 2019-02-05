@@ -40,4 +40,5 @@ public interface AnimalDAO {
     public List<Animal> listarNegativa( Fazenda fazenda);
 
     public List<Animal> listarSexoNegativa(String sexo, Fazenda fazenda);
+
 }

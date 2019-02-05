@@ -157,11 +157,7 @@ private String destinoSalvar = null;
         return "/publico/inicio";
     }
 
-public void tornaFavorita() {
-        FazendaRn fazendaRn = new FazendaRn();
-        fazendaRn.tonarfavorita(this.selecionada);
-        this.selecionada = new Fazenda();
-    }
+
 
     public Fazenda getSelecionada() {
         return selecionada;

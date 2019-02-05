@@ -33,15 +33,6 @@ public class FazendaRn {
             this.fazendaDao.atualizar(fazenda);
         }
     }
-    public void tonarfavorita (Fazenda fazendaFavorita){
-    Fazenda fazenda = this.buscarfavorita(fazendaFavorita.getUsuario());
-        if (fazenda!=null) {
-            fazenda.setFavorita(false);
-            this.fazendaDao.salvar(fazenda);
-        }
-        fazenda.setFavorita(true);
-            this.fazendaDao.salvar(fazenda);
-    }
     
     public void excluir(Fazenda fazenda){
          this.fazendaDao.excluir(fazenda);
@@ -56,7 +47,5 @@ public class FazendaRn {
      public List<Fazenda> listarAll(){ 
         return this.fazendaDao.listarAll();
     }
-    public  Fazenda buscarfavorita(Usuario usuario){
-    return this.fazendaDao.buscarFazendafavorita(usuario);   
-    }
+
 }
