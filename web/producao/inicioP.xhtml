@@ -35,10 +35,10 @@
                                 </div>
                                 <div class="modal-body">
                                     <h:form acceptcharset="ISO-8859-1" prependId="false" >
-                                        <h:inputHidden value="#{animalBean.animal.idAnimal}"/>
-                                        <h:inputHidden value="#{animalBean.destinoSalvar}"/>
+                                        <h:inputHidden value="#{contextoBean.fazendaAtiva.idfazenda}"/>
                                         <h:inputHidden value="#{contextoBean.usuarioLogado.idUsuario}"/>
-
+                                        <h:inputHidden value="#{producaoBean.producao.idProducao}"/>
+                                        <h:inputHidden value="#{producaoBean.destinoSalvar}"/>
 
 
 
@@ -48,7 +48,7 @@
                                             <div class="form-group fg-float m-b-30">
                                                 <div class="fg-line">
 
-                                                    <h:selectOneMenu  styleClass="form-control chosen"  value="#{producaoBean.producao.animal}">
+                                                    <h:selectOneMenu  styleClass="form-control chosen" converter="IndexedConverter" value="#{producaoBean.producao.animal}">
                                                         <f:selectItem itemValue="" itemLabel="Selecione Bufala"/>
 
                                                         <f:selectItems  var="produAnimal" itemValue="#{produAnimal}" value="#{animalBean.listaF}" itemLabel="#{produAnimal.nome}"/>
@@ -66,7 +66,9 @@
                                                         <div class="input-group form-group">
                                                             <span class="input-group-addon"><i class="zmdi zmdi-calendar"></i></span>
                                                             <div class="dtp-container fg-line">
-                                                                <input type='text' class="form-control date-picker" placeholder="Click here..."/>
+                                                                <h:inputText value="#{producaoBean.producao.diaProducao}"   label="click aqui" class="form-control date-picker" >
+                                                                    <f:convertDateTime pattern="dd/MM/yyyy"/>  
+                                                                </h:inputText>
                                                             </div>
                                                         </div>
                                                     </dd>
@@ -81,7 +83,7 @@
                                             <div class="form-group fg-float m-b-30">
                                                 <div class="fg-line">
 
-                                                    <h:selectOneMenu styleClass="form-control"  value="#{producaoBean.producao.funcionarios}">
+                                                    <h:selectOneMenu styleClass="form-control" converter="IndexedConverter"  value="#{producaoBean.producao.funcionarios}">
                                                         <f:selectItem itemValue="" itemLabel="Selecione Funcionário"/>
 
                                                         <f:selectItems var="fupro" itemValue="#{fupro}" value="#{funcionariosBean.lista}" itemLabel="#{fupro.nome}"/>
@@ -97,7 +99,7 @@
                                                     <label class="fg-label">Quantidade Produção</label>
                                                 </div>
                                             </div>
-                                            <h:commandLink id="btn-salvarProducao" action="#{producaoBean.salvar()}"/>
+                                            <h:commandLink id="btn-salvarProducao" action="#{producaoBean.salvar}"/>
                                             <div onclick="salvarProducao()" class="btn btn-info waves-effect">Salvar</div>
                                             <div onclick="window.location.href = '../producao/inicioP.jsf'" class="btn btn-danger waves-effect">Cancel</div>
 
@@ -117,21 +119,30 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-4 col-xs-6 ">
-                            <div class="bs-item z-depth-3 bgm-lightblue c-white">
-                                .z-depth-1 / .z-depth(1)
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="card pt-inner z-depth-3">
+                                <div class="pti-header bgm-amber">
+                                    <h2>60 <small>| litros</small></h2>
+                                    <div class="ptih-title">Produção dia</div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-sm-4 col-xs-6 ">
-                            <div class="bs-item z-depth-3 bgm-green">
-                                .z-depth-2 / .z-depth(2)
+                        <div class="col-sm-4 col-xs-12 ">
+                            <div class="card pt-inner z-depth-3">
+                                <div class="pti-header bgm-green">
+                                    <h2>980 <small>| litros</small></h2>
+                                    <div class="ptih-title">Produção mês</div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-sm-4 col-xs-6">
-                            <div class="bs-item z-depth-3 bgm-amber">
-                                .z-depth-3 / .z-depth(3)
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="card pt-inner z-depth-3">
+                                <div class="pti-header bgm-cyan">
+                                    <h2>89 <small>| litros</small></h2>
+                                    <div class="ptih-title">Maior pico de produção</div>
+                                </div>
                             </div>
                         </div>
 
@@ -139,65 +150,41 @@
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <h2>Picos de produção <small>Lista das bufalas mais produtivas</small></h2>
-                        <ul class="actions">
-                            <li class="dropdown">
-                                <a href="" data-toggle="dropdown">
-                                    <i class="zmdi zmdi-more-vert"></i>
-                                </a>
+                        <h2>Lista de registros de produção <small>Lista das bufalas mais produtivas</small></h2>
 
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li>
-                                        <a href="">Refresh</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Settings</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Other Settings</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
                     </div>
 
-                    <div class="card-body m-t-0">
-                        <table class="table table-inner table-vmiddle">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th style="width: 60px">Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="f-500 c-cyan">2569</td>
-                                    <td>Samsung Galaxy Mega</td>
-                                    <td class="f-500 c-cyan">$521</td>
-                                </tr>
-                                <tr>
-                                    <td class="f-500 c-cyan">9658</td>
-                                    <td>Huawei Ascend P6</td>
-                                    <td class="f-500 c-cyan">$440</td>
-                                </tr>
-                                <tr>
-                                    <td class="f-500 c-cyan">1101</td>
-                                    <td>HTC One M8</td>
-                                    <td class="f-500 c-cyan">$680</td>
-                                </tr>
-                                <tr>
-                                    <td class="f-500 c-cyan">6598</td>
-                                    <td>Samsung Galaxy Alpha</td>
-                                    <td class="f-500 c-cyan">$870</td>
-                                </tr>
-                                <tr>
-                                    <td class="f-500 c-cyan">4562</td>
-                                    <td>LG G3</td>
-                                    <td class="f-500 c-cyan">$690</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="card-body table-responsive">
+
+                        <h:form>
+                            <h:dataTable id="data-table-basic" class="table table-striped"  var="car" value="#{producaoBean.listaAnimais}" rows="8" >  
+                                <p:column filterBy="#{car.diaProducao}">  
+                                    <f:facet name="header">  
+                                        <h:outputText value="Data Produção" />  
+                                    </f:facet>  
+                                    <h:outputText value="#{car.diaProducao}" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                </p:column>  
+
+                                <p:column>  
+                                    <f:facet name="header">  
+                                        <h:outputText value="Nome" />  
+                                    </f:facet>  
+                                    <h:outputText value="#{car.animal.nome}" />  
+                                </p:column>  
+
+                                <p:column filterBy="#{car.quantidade}">  
+                                    <f:facet name="header">  
+                                        <h:outputText value="quantidade" />  
+                                    </f:facet>  
+                                    <h:outputText value="#{car.quantidade}" />  
+                                </p:column>  
+
+
+                            </h:dataTable>
+                        </h:form>
+
                     </div>
                     <div id="recent-items-chart" class="flot-chart"></div>
                 </div>
@@ -225,12 +212,12 @@
                     jsfCommandLink.click();
                 }
 
-       $(function () {
-                $('#date-picker').datetimepicker({
-                    locale: 'pt-bt'
+                $(function () {
+                    $('#date-picker').datetimepicker({
+                        locale: 'pt-bt'
+                    });
                 });
-            });
-   
+
 
             </script>
             <style type="text/css">
@@ -254,7 +241,7 @@
                     z-index: 0; 
                     background: rgba(0,0,0,0.1);
                 }
-             
+
 
             </style>
         </ui:define>
