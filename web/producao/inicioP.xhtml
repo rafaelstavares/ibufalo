@@ -9,125 +9,231 @@
     <ui:composition template="../templates/template.xhtml">
         <ui:define name="titulo">
             Cadastro Produção
-         
+
         </ui:define>    
 
         <ui:define name="conteudo">
-           
-                <div class="container">
 
-                    <!-- Top & Bottom -->
-                    <div class="m-b-30">
-                        <div class="block-header">
-                            <h2>Gereciamento Produção</h2>
+            <div class="container">
+
+                <!-- Top & Bottom -->
+                <div class="m-b-30">
+                    <div class="block-header">
+                        <h2>Gereciamento Produção</h2>
                         <br/><br/>
-<button class="btn btn-default btn-icon-text bgm-blue z-depth-5"><i class="zmdi zmdi-account-add"></i> Adicionar Animal</button>  
-<button class="btn btn-default btn-icon-text bgm-cyan z-depth-5"><i class="zmdi zmdi-account-add"></i> Adicionar Taque</button>  
-                        </div>
+                        <button href="#preventClick" data-toggle="modal"  class="btn btn-default btn-icon-text bgm-blue z-depth-5"><i class="zmdi zmdi-account-add"></i> Adicionar Animal</button>  
+                        <a data-toggle="modal" href="#preventClick" class="btn btn-default btn-icon-text bgm-cyan z-depth-5"><i class="zmdi zmdi-account-add"></i> Adicionar Taque</a>
 
-                        <div class="row">
-                            <div class="col-sm-4 col-xs-6 ">
-                                <div class="bs-item z-depth-3 bgm-lightblue c-white">
-                                    .z-depth-1 / .z-depth(1)
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4 col-xs-6 ">
-                                <div class="bs-item z-depth-3 bgm-green">
-                                    .z-depth-2 / .z-depth(2)
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4 col-xs-6">
-                                <div class="bs-item z-depth-3 bgm-amber">
-                                    .z-depth-3 / .z-depth(3)
-                                </div>
-                            </div>
-
+                        <div class="btn-demo">
                         </div>
                     </div>
-   <div class="card">
-                                <div class="card-header">
-                                    <h2>Picos de produção <small>Lista das bufalas mais produtivas</small></h2>
-                                    <ul class="actions">
-                                        <li class="dropdown">
-                                            <a href="" data-toggle="dropdown">
-                                                <i class="zmdi zmdi-more-vert"></i>
-                                            </a>
-                                            
-                                            <ul class="dropdown-menu dropdown-menu-right">
-                                                <li>
-                                                    <a href="">Refresh</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Settings</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Other Settings</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                    <div class="modal fade" id="preventClick" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Cadastro Produção</h4>
                                 </div>
-                                
-                                <div class="card-body m-t-0">
-                                    <table class="table table-inner table-vmiddle">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th style="width: 60px">Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="f-500 c-cyan">2569</td>
-                                                <td>Samsung Galaxy Mega</td>
-                                                <td class="f-500 c-cyan">$521</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="f-500 c-cyan">9658</td>
-                                                <td>Huawei Ascend P6</td>
-                                                <td class="f-500 c-cyan">$440</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="f-500 c-cyan">1101</td>
-                                                <td>HTC One M8</td>
-                                                <td class="f-500 c-cyan">$680</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="f-500 c-cyan">6598</td>
-                                                <td>Samsung Galaxy Alpha</td>
-                                                <td class="f-500 c-cyan">$870</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="f-500 c-cyan">4562</td>
-                                                <td>LG G3</td>
-                                                <td class="f-500 c-cyan">$690</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="modal-body">
+                                    <h:form acceptcharset="ISO-8859-1" prependId="false" >
+                                        <h:inputHidden value="#{animalBean.animal.idAnimal}"/>
+                                        <h:inputHidden value="#{animalBean.destinoSalvar}"/>
+                                        <h:inputHidden value="#{contextoBean.usuarioLogado.idUsuario}"/>
+
+
+
+
+
+                                        <div class="card-body card-padding">
+
+                                            <div class="form-group fg-float m-b-30">
+                                                <div class="fg-line">
+
+                                                    <h:selectOneMenu  styleClass="form-control chosen"  value="#{producaoBean.producao.animal}">
+                                                        <f:selectItem itemValue="" itemLabel="Selecione Bufala"/>
+
+                                                        <f:selectItems  var="produAnimal" itemValue="#{produAnimal}" value="#{animalBean.listaF}" itemLabel="#{produAnimal.nome}"/>
+
+                                                    </h:selectOneMenu>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="form-group fg-float m-b-30">
+                                                <dl class="dl-horizontal">
+                                                    <dt  class="p-t-5">Data Produção</dt>
+                                                    <dd>
+                                                        <div class="input-group form-group">
+                                                            <span class="input-group-addon"><i class="zmdi zmdi-calendar"></i></span>
+                                                            <div class="dtp-container fg-line">
+                                                                <input type='text' class="form-control date-picker" placeholder="Click here..."/>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </dl>
+                                            </div>
+
+
+
+
+
+
+                                            <div class="form-group fg-float m-b-30">
+                                                <div class="fg-line">
+
+                                                    <h:selectOneMenu styleClass="form-control"  value="#{producaoBean.producao.funcionarios}">
+                                                        <f:selectItem itemValue="" itemLabel="Selecione Funcionário"/>
+
+                                                        <f:selectItems var="fupro" itemValue="#{fupro}" value="#{funcionariosBean.lista}" itemLabel="#{fupro.nome}"/>
+
+                                                    </h:selectOneMenu>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group fg-float m-b-30">
+                                                <div class="fg-line">
+                                                    <h:inputText value="#{producaoBean.producao.quantidade}" styleClass="form-control input-sm"/>
+                                                    <label class="fg-label">Quantidade Produção</label>
+                                                </div>
+                                            </div>
+                                            <h:commandLink id="btn-salvarProducao" action="#{producaoBean.salvar()}"/>
+                                            <div onclick="salvarProducao()" class="btn btn-info waves-effect">Salvar</div>
+                                            <div onclick="window.location.href = '../producao/inicioP.jsf'" class="btn btn-danger waves-effect">Cancel</div>
+
+                                        </div>
+
+
+
+
+
+
+                                    </h:form>
+
                                 </div>
-                                <div id="recent-items-chart" class="flot-chart"></div>
+
                             </div>
-                    <!-- Top Only -->
-                    
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-6 ">
+                            <div class="bs-item z-depth-3 bgm-lightblue c-white">
+                                .z-depth-1 / .z-depth(1)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 col-xs-6 ">
+                            <div class="bs-item z-depth-3 bgm-green">
+                                .z-depth-2 / .z-depth(2)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 col-xs-6">
+                            <div class="bs-item z-depth-3 bgm-amber">
+                                .z-depth-3 / .z-depth(3)
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-         
- <script type="text/javascript">
-                    $(document).ready(function () {
-                        document.getElementById("menu-producao").className = "active";
-                    });
-                    
-                     function salvarPiquete() {
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Picos de produção <small>Lista das bufalas mais produtivas</small></h2>
+                        <ul class="actions">
+                            <li class="dropdown">
+                                <a href="" data-toggle="dropdown">
+                                    <i class="zmdi zmdi-more-vert"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a href="">Refresh</a>
+                                    </li>
+                                    <li>
+                                        <a href="">Settings</a>
+                                    </li>
+                                    <li>
+                                        <a href="">Other Settings</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card-body m-t-0">
+                        <table class="table table-inner table-vmiddle">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th style="width: 60px">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="f-500 c-cyan">2569</td>
+                                    <td>Samsung Galaxy Mega</td>
+                                    <td class="f-500 c-cyan">$521</td>
+                                </tr>
+                                <tr>
+                                    <td class="f-500 c-cyan">9658</td>
+                                    <td>Huawei Ascend P6</td>
+                                    <td class="f-500 c-cyan">$440</td>
+                                </tr>
+                                <tr>
+                                    <td class="f-500 c-cyan">1101</td>
+                                    <td>HTC One M8</td>
+                                    <td class="f-500 c-cyan">$680</td>
+                                </tr>
+                                <tr>
+                                    <td class="f-500 c-cyan">6598</td>
+                                    <td>Samsung Galaxy Alpha</td>
+                                    <td class="f-500 c-cyan">$870</td>
+                                </tr>
+                                <tr>
+                                    <td class="f-500 c-cyan">4562</td>
+                                    <td>LG G3</td>
+                                    <td class="f-500 c-cyan">$690</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="recent-items-chart" class="flot-chart"></div>
+                </div>
+                <!-- Top Only -->
+
+            </div>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    document.getElementById("menu-producao").className = "active";
+                });
+
+                function salvarPiquete() {
 
 
-                                        var jsfCommandLink = document.getElementById("btn-salvarPiquete");
-                                        jsfCommandLink.click();
-                                    }
-                    
-                </script>
-  <style type="text/css">
+                    var jsfCommandLink = document.getElementById("btn-salvarPiquete");
+                    jsfCommandLink.click();
+                }
+
+
+                function salvarProducao() {
+
+
+                    var jsfCommandLink = document.getElementById("btn-salvarProducao");
+                    jsfCommandLink.click();
+                }
+
+       $(function () {
+                $('#date-picker').datetimepicker({
+                    locale: 'pt-bt'
+                });
+            });
+   
+
+            </script>
+            <style type="text/css">
                 .bs-item {
                     background: #fff;
                     margin-bottom: 30px;
@@ -137,6 +243,19 @@
                     font-size: 14px;
                     border-radius: 2px;
                 }
+                .dropdown-btn-demo .dropdown, .dropdown-btn-demo .btn-group, .btn-demo .btn {
+                    display: inline-block;
+                    margin: 0 5px 7px 0;
+                }
+
+                .modal-preview-demo .modal {
+                    position: relative; 
+                    display: block; 
+                    z-index: 0; 
+                    background: rgba(0,0,0,0.1);
+                }
+             
+
             </style>
         </ui:define>
 

@@ -43,12 +43,13 @@ public class ProducaoBean {
     }
 
     public String salvar() {
+      
         ContextoBean contextoBean = ContextoUtil.getContextoBean();
         this.producao.setFazenda(contextoBean.getFazendaAtiva());
         ProducaoRn producaoRN = new ProducaoRn();
         producaoRN.salvar(this.producao);
 
-        return "/producao/producao";
+        return "/producao/inicioP?faces-redirect=true";
     }
 
     public String excluir() {

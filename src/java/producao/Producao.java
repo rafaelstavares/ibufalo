@@ -28,7 +28,7 @@ public class Producao implements Serializable {
     @JoinColumn(name = "Animal_idAnimal", nullable = false)
     private Animal animal;
     @ManyToOne
-    @JoinColumn(name = "Funcionarios_idFuncionarios", nullable = false)
+    @JoinColumn(name = "Funcionarios_idFuncionarios", nullable = true)
     private Funcionarios funcionarios;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date diaProducao;

@@ -36,7 +36,7 @@
 
                         </p:selectOneMenu>
                         <h:outputLabel value="Funcionário" for="funcionario" />
-                        <p:selectOneMenu  value="#{producaoBean.producao.funcionarios}" converter="IndexedConverter" required="true" requiredMessage="Escolha um Funcionário"> 
+                        <p:selectOneMenu  value="#{producaoBean.producao.funcionarios}" converter="IndexedConverter" required="false" requiredMessage="Escolha um Funcionário"> 
                             <f:selectItem itemValue="" itemLabel="Selecione um Funcionário"/>
                             <f:selectItems  var="fupro" itemValue="#{fupro}" value="#{funcionariosBean.lista}" itemLabel="#{fupro.nome}"/> 
                         </p:selectOneMenu>

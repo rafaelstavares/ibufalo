@@ -549,6 +549,15 @@ $(document).ready(function(){
     if ($('.date-picker')[0]) {
     	$('.date-picker').datetimepicker({
     	    format: 'DD/MM/YYYY'
+              
+    	});
+    }
+     
+  
+  if ($('.date-picker')[0]) {
+    	$('.date-picker').datetimepicker({
+    	   locale: 'pt-br'
+          
     	});
     }
 
