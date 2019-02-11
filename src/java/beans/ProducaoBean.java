@@ -32,22 +32,23 @@ public class ProducaoBean {
 
         return "/producao/producao";
     }
- public String teste() {
-       
+
+    public String teste() {
 
         return "/producao/producao_teste_1";
     }
+
     public String editar() {
 
         return "/producao/producao_cad";
     }
 
     public String salvar() {
-      
+
         ContextoBean contextoBean = ContextoUtil.getContextoBean();
-        this.producao.setFazenda(contextoBean.getFazendaAtiva());
+        producao.setFazenda(contextoBean.getFazendaAtiva());
         ProducaoRn producaoRN = new ProducaoRn();
-        producaoRN.salvar(this.producao);
+        producaoRN.salvar(producao);
 
         return "/producao/inicioP?faces-redirect=true";
     }
@@ -60,25 +61,25 @@ public class ProducaoBean {
 
         return null;
     }
-    
-    public float somaProducao(){
-    Float resultado;
-    ContextoBean contextoBean = ContextoUtil.getContextoBean();
-    ProducaoRn producaoRn = new ProducaoRn();
-    resultado = producaoRn.totalProducao(contextoBean.getFazendaAtiva());
-    return resultado;
-    
+
+    public float somaProducao() {
+        Float resultado;
+        ContextoBean contextoBean = ContextoUtil.getContextoBean();
+        ProducaoRn producaoRn = new ProducaoRn();
+        resultado = producaoRn.totalProducao(contextoBean.getFazendaAtiva());
+        return resultado;
+
     }
-    public float somaProducaoAnimal(){
-    Float resultado;
-this.animal = getAnimal();
-    ContextoBean contextoBean = ContextoUtil.getContextoBean();
-    ProducaoRn producaoRn = new ProducaoRn();
-    resultado = producaoRn.totalProducaoAnimal(contextoBean.getFazendaAtiva(), animal);
-    return resultado;
-    
+
+    public float somaProducaoAnimal() {
+        Float resultado;
+        this.animal = getAnimal();
+        ContextoBean contextoBean = ContextoUtil.getContextoBean();
+        ProducaoRn producaoRn = new ProducaoRn();
+        resultado = producaoRn.totalProducaoAnimal(contextoBean.getFazendaAtiva(), animal);
+        return resultado;
+
     }
-    
 
     public Animal getAnimal() {
         return animal;
@@ -108,13 +109,12 @@ this.animal = getAnimal();
     }
 
     public List<Producao> getListaAnimais() {
-        
+
         ContextoBean contextoBean = ContextoUtil.getContextoBean();
 
-            ProducaoRn producaoRn = new ProducaoRn();
-            this.listaAnimais = producaoRn.listarAnimal(contextoBean.getFazendaAtiva(), animal);
-        
-        
+        ProducaoRn producaoRn = new ProducaoRn();
+        this.listaAnimais = producaoRn.listarAnimal(contextoBean.getFazendaAtiva(), animal);
+
         return listaAnimais;
     }
 
