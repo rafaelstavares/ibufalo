@@ -6,6 +6,7 @@ package producao;
 
 import animal.Animal;
 import fazenda.Fazenda;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,7 +28,10 @@ public interface ProducaoDAO {
     public List<Producao> listar(Fazenda fazenda);
 
     public List<Producao> listarAnimal(Fazenda fazenda, Animal animal);
+
+    public double totalProducao(Fazenda fazenda);
     
-     public float totalProducao(Fazenda fazenda) ;
-      public float totalProducaoAnimal(Fazenda fazenda, Animal animal) ;
+    public double totalProducaoAno(Fazenda fazenda, Date in, Date fim);
+
+    public double totalProducaoAnimal(Fazenda fazenda, Animal animal);
 }

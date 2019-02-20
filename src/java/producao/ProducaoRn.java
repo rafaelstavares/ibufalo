@@ -6,6 +6,8 @@ package producao;
 
 import animal.Animal;
 import fazenda.Fazenda;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import util.DAOFactory;
 
@@ -50,12 +52,25 @@ public class ProducaoRn {
         return this.producaoRn.listarAnimal(fazenda, animal);
     }
 
-    public float totalProducao(Fazenda fazenda) {
+    public double totalProducao(Fazenda fazenda) {
 
         return this.producaoRn.totalProducao(fazenda);
     }
 
-    public float totalProducaoAnimal(Fazenda fazenda, Animal animal) {
+    public double totalProducaoAno(Fazenda fazenda) {
+        Calendar anoSel = Calendar.getInstance();
+        anoSel.set(Calendar.MONTH, 0);
+        anoSel.set(Calendar.DAY_OF_MONTH, 1);
+        Date data1 = anoSel.getTime();
+        Calendar anoSe2 = Calendar.getInstance();
+        anoSe2.set(Calendar.MONTH, 12);
+        anoSe2.set(Calendar.DAY_OF_MONTH, 0);
+        Date data2 = anoSe2.getTime();
+        System.out.println("" + anoSel);
+        return this.producaoRn.totalProducaoAno(fazenda,data1,data2);
+    }
+
+    public double totalProducaoAnimal(Fazenda fazenda, Animal animal) {
 
         return this.producaoRn.totalProducaoAnimal(fazenda, animal);
     }

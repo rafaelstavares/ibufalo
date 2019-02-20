@@ -29,9 +29,20 @@ public class ContextoBean {
     private Animal animalAtivo = null;
 
     public Animal getAnimalAtivo() {
-        AnimalRn animalRn = new AnimalRn();
-        animalRn.carregar(animalAtivo.getIdAnimal());
-        return animalAtivo;
+         if (this.animalAtivo == null) {
+            Fazenda fazenda = this.getFazendaAtiva();
+            AnimalRn animalRn = new AnimalRn();
+            if (this.animalAtivo == null) {
+                List<Animal> animais = animalRn.listar(fazenda);
+                if (animais != null) {
+                    for (Animal animal : animais) {
+                        this.animalAtivo = animal;
+                        break;
+                    }
+                }
+            }
+        }
+        return this.animalAtivo;
     }
 
     public void setAnimalAtivo(ValueChangeEvent event) {

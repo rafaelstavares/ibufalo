@@ -5,6 +5,10 @@
 package beans;
 
 import animal.Animal;
+import animal.AnimalRn;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Calendar;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -53,6 +57,11 @@ public class ProducaoBean {
         return "/producao/inicioP?faces-redirect=true";
     }
 
+    public String anoAtual() {
+        Calendar anoAtual = Calendar.getInstance();
+        return "" + anoAtual.get(Calendar.YEAR);
+    }
+
     public String excluir() {
         ProducaoRn producaoRn = new ProducaoRn();
         producaoRn.excluir(producao);
@@ -62,23 +71,50 @@ public class ProducaoBean {
         return null;
     }
 
-    public float somaProducao() {
-        Float resultado;
+    public double somaProducao() {
+        Double resultado;
+
         ContextoBean contextoBean = ContextoUtil.getContextoBean();
         ProducaoRn producaoRn = new ProducaoRn();
         resultado = producaoRn.totalProducao(contextoBean.getFazendaAtiva());
-        return resultado;
 
+        return resultado;
     }
 
-    public float somaProducaoAnimal() {
-        Float resultado;
-        this.animal = getAnimal();
+    public double somaProducaoAno() {
+
+        Double resultado;
+
         ContextoBean contextoBean = ContextoUtil.getContextoBean();
         ProducaoRn producaoRn = new ProducaoRn();
-        resultado = producaoRn.totalProducaoAnimal(contextoBean.getFazendaAtiva(), animal);
-        return resultado;
+        resultado = producaoRn.totalProducaoAno(contextoBean.getFazendaAtiva());
 
+        return resultado;
+    }
+
+    public String somaProducaoAnimal(int id) {
+        String msg = "não possui produção";
+        Double resultado;
+        AnimalRn ani = new AnimalRn();
+        animal = ani.carregar(id);
+        try {
+            ContextoBean contextoBean = ContextoUtil.getContextoBean();
+            ProducaoRn producaoRn = new ProducaoRn();
+            resultado = producaoRn.totalProducaoAnimal(contextoBean.getFazendaAtiva(), this.animal);
+            if (resultado != null) {
+                NumberFormat formatarFloat = new DecimalFormat("0.00");
+                String nu = formatarFloat.format(resultado);
+
+                return nu;
+            } else {
+
+                msg = "não possui produção";
+                return msg;
+            }
+        } catch (Exception e) {
+        }
+
+        return msg;
     }
 
     public Animal getAnimal() {
